@@ -45,7 +45,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(15.sp),
                         child: GlassBox(
-
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: SizedBox(
