@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:relaks_media/screens/otp_screen.dart';
 
 import '../utils/glass_box.dart';
 
 class ForgotPass extends StatefulWidget {
+  static const String routeName='/forgetpassword';
 
 
   const ForgotPass({super.key});
@@ -140,12 +142,17 @@ class _ForgotPassState extends State<ForgotPass> {
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 80.0.sp,
                                                     vertical: 6.0.sp),
-                                                child: Text(
-                                                  'Submit',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16.0.sp,
-                                                    fontWeight: FontWeight.bold,
+                                                child: TextButton(
+                                                  onPressed: (){
+                                                    Navigator.pushNamed(context, OtpScreen.routeName);
+                                                  },
+                                                  child: Text(
+                                                    'Submit',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 16.0.sp,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
                                                   ),
                                                 ),
                                               ),

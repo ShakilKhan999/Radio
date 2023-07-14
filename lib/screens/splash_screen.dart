@@ -2,10 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:relaks_media/screens/bottomnevigation.dart';
+import 'package:relaks_media/screens/login_screen.dart';
+import 'package:relaks_media/screens/signup_screen.dart';
 
 import '../utils/glass_box.dart';
 
 class SplashScreen extends StatelessWidget {
+  static const String routeName='/';
 
 
   const SplashScreen({Key? key}) : super(key: key);
@@ -54,17 +58,22 @@ class SplashScreen extends StatelessWidget {
                       SizedBox(
                         width: 5.w,
                       ),
-                      Text(
-                        "Create an account",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.combine([
-                            TextDecoration.underline,
-                          ]),
-                          decorationColor: Colors.grey,
-                          decorationThickness: 3.0.sp,
+                      TextButton(
+                        onPressed:(){
+                          Navigator.pushNamed(context,SignupScreen.routeName);
+                        },
+                        child: Text(
+                          "Create an account",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.combine([
+                              TextDecoration.underline,
+                            ]),
+                            decorationColor: Colors.grey,
+                            decorationThickness: 3.0.sp,
+                          ),
                         ),
                       ),
                     ],
@@ -85,7 +94,9 @@ class SplashScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(9.0),
                     ),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         elevation: 0,
@@ -113,7 +124,9 @@ class SplashScreen extends StatelessWidget {
                     ),
                     child: ElevatedButton(
 
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, BottomNavigation.routeName);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         elevation: 0,

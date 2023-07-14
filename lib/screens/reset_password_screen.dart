@@ -2,10 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:relaks_media/screens/bottomnevigation.dart';
 
 import '../utils/glass_box.dart';
 
 class ResetPassword extends StatefulWidget {
+  static const String routeName='/resetpassword';
 
 
   ResetPassword({Key? key,}) : super(key: key);
@@ -214,7 +216,9 @@ class _ResetPasswordState extends State<ResetPassword> {
                                                   BorderRadius.circular(9.0),
                                             ),
                                             child: ElevatedButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                Navigator.pushReplacementNamed(context, BottomNavigation.routeName);
+                                              },
                                               style: ElevatedButton.styleFrom(
                                                 backgroundColor:
                                                     Colors.transparent,
