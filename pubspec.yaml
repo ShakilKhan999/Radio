@@ -39,6 +39,7 @@ dependencies:
   pin_code_fields: ^7.3.0
   curved_navigation_bar: ^1.0.3
   carousel_slider:
+  dropdown_button2: ^2.3.4
 
 
 dev_dependencies:

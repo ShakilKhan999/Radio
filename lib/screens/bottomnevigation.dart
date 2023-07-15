@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:relaks_media/screens/chat_screen.dart';
+import 'package:relaks_media/screens/fund_raising.dart';
 import 'package:relaks_media/screens/home_screen.dart';
 import 'package:relaks_media/screens/news_screen.dart';
 
@@ -18,7 +19,7 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   int pageIndex = 0;
 
-  List<Widget> widgetList = const [HomeScreen(), NewsScreen(), ChatScreen(),MyStoreScreen()];
+  List<Widget> widgetList = [FundRaising(), NewsScreen(), ChatScreen(),MyStoreScreen()];
 
   @override
   Widget build(BuildContext context) {
