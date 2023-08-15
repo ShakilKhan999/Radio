@@ -2,10 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:relaks_media/screens/bottomnevigation.dart';
+import 'package:relaks_media/screens/login_screen.dart';
+import 'package:relaks_media/screens/signup_screen.dart';
 
 import '../utils/glass_box.dart';
 
 class SplashScreen extends StatelessWidget {
+  static const String routeName='/';
 
 
   const SplashScreen({Key? key}) : super(key: key);
@@ -32,60 +36,77 @@ class SplashScreen extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(15.sp),
                         child: GlassBox(
-                          child: SizedBox(
+                          child: Container(
+                            color: Colors.black.withOpacity(0.6),
                               height: 150.h,
-                              child: Image.asset('images/logo.png')),
+
+                              child: Padding(
+                                padding:  EdgeInsets.all(24.0.sp),
+                                child: Image.asset('images/logo.png',),
+                              )),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 32.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Don't have an account?",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width-60,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't have an account?",
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontFamily: 'Poppins',
+                            fontSize: 13.sp,
+
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 5.w,
-                      ),
-                      Text(
-                        "Create an account",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.combine([
-                            TextDecoration.underline,
-                          ]),
-                          decorationColor: Colors.grey,
-                          decorationThickness: 3.0.sp,
+
+                        TextButton(
+                          onPressed:(){
+                            Navigator.pushNamed(context,SignupScreen.routeName);
+                          },
+                          child: Text(
+                            "Create an account",
+                            style: TextStyle(
+                              fontFamily: 'Poppins',
+                              color: Colors.white,
+                              fontSize: 15.sp,
+
+                              decoration: TextDecoration.combine([
+                                TextDecoration.underline,
+                              ]),
+                              decorationColor: Colors.grey,
+                              decorationThickness: 3.0.sp,
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 20.h),
+
                   Container(
+                    height: 50.h,
+                    width: 220.w,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          Colors.grey.shade500,
+                          Colors.grey.shade700,
                           // Adjust the gray shade as desired
                           Colors.black,
                         ],
-                        stops: [0.3, 1.0],
+
+                        stops: [0.4, 1.0],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(9.0),
                     ),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         elevation: 0,
@@ -97,7 +118,8 @@ class SplashScreen extends StatelessWidget {
                           'Login',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16.0.sp,
+                            fontFamily: 'Poppins',
+                            fontSize: 18.0.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -106,6 +128,8 @@ class SplashScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 16.0.h),
                   Container(
+                    height: 50.h,
+                    width: 220.w,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                       color: Colors.transparent,
@@ -113,7 +137,9 @@ class SplashScreen extends StatelessWidget {
                     ),
                     child: ElevatedButton(
 
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, BottomNavigation.routeName);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         elevation: 0,
@@ -124,9 +150,10 @@ class SplashScreen extends StatelessWidget {
                         child: Text(
                           'Skip',
                           style: TextStyle(
-                            color: Colors.white,
+                            fontFamily: 'Poppins',
+                            color: Colors.grey,
                             fontSize: 16.0.sp,
-                            fontWeight: FontWeight.bold,
+
                           ),
                         ),
                       ),
