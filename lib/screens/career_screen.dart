@@ -42,7 +42,14 @@ class _CareerScreenState extends State<CareerScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height: 10.h,),
-                Text('Apply to be a Career',style: TextStyle(color: Colors.white,fontSize: 25.sp,fontWeight: FontWeight.bold),),
+                Row(
+                  children: [
+                    SizedBox(width: 10.w,),
+                    IconButton( onPressed: () {  }, icon: Icon(Icons.arrow_back,color: Colors.white,)),
+                    SizedBox(width: 75.w,),
+                    Text('Apply to be a Career',style: TextStyle(color: Colors.white,fontSize: 25.sp,fontWeight: FontWeight.bold),),
+                  ],
+                ),
                 SizedBox(height: 15.h,),
                 Stack(
                   children: [
@@ -52,8 +59,8 @@ class _CareerScreenState extends State<CareerScreen> {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: SizedBox(
-                              height: MediaQuery.of(context).size.height,
-                              width: MediaQuery.of(context).size.width - 80,
+
+                              width: MediaQuery.of(context).size.width - 80.w,
                               child: Column(
                                 children: [
                                   Column(
@@ -450,19 +457,18 @@ class _CareerScreenState extends State<CareerScreen> {
                                       ),
                                     ],
                                   ),
-                                  Expanded(
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width-120,
-                                      decoration: BoxDecoration(border: Border.all(),borderRadius: BorderRadius.circular(20)),
-                                      child: ElevatedButton(onPressed: (){},
-                                          style: ElevatedButton.styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(15),
-                                              ),
-                                              backgroundColor: Color(0xffffEA1C24)
-                                          ),
-                                          child: Text('Apply',style: TextStyle(color: Colors.white,fontSize: 20.sp),)),
-                                    ),
+                                  Container(
+                                    height: 40.h,
+                                    width: MediaQuery.of(context).size.width-120.w,
+                                    decoration: BoxDecoration(border: Border.all(),borderRadius: BorderRadius.circular(20)),
+                                    child: ElevatedButton(onPressed: (){},
+                                        style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(15),
+                                            ),
+                                            backgroundColor: Color(0xffffEA1C24)
+                                        ),
+                                        child: Text('Apply',style: TextStyle(color: Colors.white,fontSize: 20.sp),)),
                                   )
                                 ],
                               )),

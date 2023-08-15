@@ -73,7 +73,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                       Text(
                         'Online',
                         style: TextStyle(
-                          color: Colors.green,
+                          color: Colors.grey,
                           fontSize: 14.0.sp,
                         ),
                       ),
@@ -96,10 +96,10 @@ class _ConversationScreenState extends State<ConversationScreen> {
                       alignment: message.isMe ? Alignment.centerRight : Alignment.centerLeft,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: message.isMe ? Colors.blue : Colors.grey.shade900,
+                          color: message.isMe ? Colors.grey.shade900 : Colors.black,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        padding:  EdgeInsets.all(12.0.sp),
+                        padding: EdgeInsets.all(12.0.sp),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -128,35 +128,52 @@ class _ConversationScreenState extends State<ConversationScreen> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
+              child: Stack(
+                alignment: Alignment.centerRight,
                 children: [
                   Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.grey.shade900,
-                        hintText: 'Type a message...',
-                        hintStyle: const TextStyle(
-                          color: Colors.grey,
+                    flex:2,
+                    child: Container(
+                      height: 40.h,
+                      width: MediaQuery.of(context).size.width-50,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade600),
+                        gradient: LinearGradient(
+                          colors: [Colors.grey.shade600, Colors.black],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
                         ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                          borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 6.0.w,
+                          horizontal: 12.0.h,
                         ),
-                        contentPadding:  EdgeInsets.symmetric(
-                          vertical: 12.0.w,
-                          horizontal: 16.0.h,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Type your message here...',
+                            hintStyle: const TextStyle(
+                              color: Colors.grey,
+                            ),
+                            border: InputBorder.none,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 8.0.w),
-                  CircleAvatar(
-                    backgroundColor: Colors.green,
-                    child: IconButton(
-                      icon: const Icon(Icons.send),
-                      color: Colors.white,
-                      onPressed: () {},
+                  Expanded(
+                    child: Container(
+                      height: 45.h,
+                      width: 40.w,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.grey,
+                        child: IconButton(
+                          icon: const Icon(Icons.send_outlined),
+                          color: Colors.white,
+                          onPressed: () {},
+                        ),
+                      ),
                     ),
                   ),
                 ],

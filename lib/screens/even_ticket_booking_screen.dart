@@ -68,7 +68,7 @@ class _EventTicketBookingState extends State<EventTicketBooking> {
                               children: [
                                 SizedBox(
                                   height:
-                                  MediaQuery.of(context).size.height - 280,
+                                  MediaQuery.of(context).size.height - 230,
                                   width: MediaQuery.of(context).size.width - 80,
                                   child: Column(
                                     children: [
@@ -360,12 +360,12 @@ class _EventTicketBookingState extends State<EventTicketBooking> {
                                                     MediaQuery.of(context)
                                                         .size
                                                         .height -
-                                                        600,
+                                                        550.h,
                                                     width:
                                                     MediaQuery.of(context)
                                                         .size
                                                         .width -
-                                                        80,
+                                                        80.w,
                                                     child: Column(
                                                       children: [
                                                         Text(
@@ -456,7 +456,7 @@ class _EventTicketBookingState extends State<EventTicketBooking> {
                                                                         180.0),
                                                                     child: Image
                                                                         .asset(
-                                                                        'images/paypal.png'),
+                                                                        'images/paypel.png'),
                                                                   ),
                                                                 )),
                                                             RadioListTile(

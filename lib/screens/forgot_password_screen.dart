@@ -51,8 +51,8 @@ class _ForgotPassState extends State<ForgotPass> {
                             padding: const EdgeInsets.all(16.0),
                             child: SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.height - 550,
-                                width: MediaQuery.of(context).size.width - 80,
+                                    MediaQuery.of(context).size.height - 530.h,
+                                width: MediaQuery.of(context).size.width - 80.w,
                                 child: Column(
                                   children: [
                                     SizedBox(

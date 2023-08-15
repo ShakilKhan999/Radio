@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:relaks_media/controller/home_controller.dart';
 
 class NewsDetailsScreen extends StatelessWidget {
   final String imageUrl;
@@ -18,6 +21,7 @@ class NewsDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.put(HomeController());
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -34,23 +38,23 @@ class NewsDetailsScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context); // Navigate back when the content is tapped
-                          },
-                          child: Row(
-                            children: [
-                              Icon(
+                        Row(
+                          children: [
+                            IconButton(
+
+                              onPressed: () {
+                                homeController.newsCurrentPage.value = 0;
+                              },
+                              icon: Icon(
                                 Icons.arrow_back,
                                 color: Colors.white,
                               ),
-                              Padding(
-                                padding:  EdgeInsets.only(left: 130.0.sp),
-                                child: Text('News',style: TextStyle(color: Colors.white,fontSize: 25.sp,fontWeight: FontWeight.bold),),
-                              )
-                            ],
-                          ),
-
+                            ),
+                            Padding(
+                              padding:  EdgeInsets.only(left: 100.0.sp),
+                              child: Text('News',style: TextStyle(color: Colors.white,fontSize: 25.sp,fontWeight: FontWeight.bold),),
+                            )
+                          ],
                         ),
                         SizedBox(height: 16.0.h),
                         ClipRRect(
@@ -86,7 +90,7 @@ class NewsDetailsScreen extends StatelessWidget {
                                     ),
                                     backgroundColor:
                                     Colors.grey.shade800),
-                                child: Text(subtitle,style: TextStyle(color: Colors.grey),)),
+                                child: Text(subtitle,style: TextStyle(color: Colors.grey,fontSize: 8.sp),)),
                             SizedBox(width: 5.0.sp),
                             ElevatedButton(onPressed: (){},
                                 style: ElevatedButton
@@ -100,7 +104,7 @@ class NewsDetailsScreen extends StatelessWidget {
                                     ),
                                     backgroundColor:
                                     Colors.grey.shade800),
-                                child: Text(subtitle1,style: TextStyle(color: Colors.grey),)),
+                                child: Text(subtitle1,style: TextStyle(color: Colors.grey,fontSize: 8.sp),)),
                           ],
                         ),
 

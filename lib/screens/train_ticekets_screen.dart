@@ -45,8 +45,8 @@ class TrainTicketsScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: SizedBox(
-                                height: MediaQuery.of(context).size.height-300,
-                                width:MediaQuery.of(context).size.width-80,
+                                height: MediaQuery.of(context).size.height-300.h,
+                                width:MediaQuery.of(context).size.width-80.w,
                                 child: Column(
                                   children: [
                                     Image.asset('images/train_tickets.png')

@@ -1,3 +1,4 @@
+import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,22 +8,9 @@ import 'package:relaks_media/screens/chat_screen.dart';
 import 'package:relaks_media/screens/home_screen.dart';
 import 'package:relaks_media/screens/news_screen.dart';
 import 'package:relaks_media/screens/station_screen.dart';
-import 'package:relaks_media/screens/train_screen.dart';
-import 'package:relaks_media/screens/train_ticekets_screen.dart';
-
 import '../utils/main_drawer.dart';
-import 'air_screen.dart';
-import 'air_tickets_screen.dart';
-import 'bus_service_screen.dart';
-import 'bus_ticket_screen.dart';
-import 'career_screen.dart';
-
-import 'even_ticket_booking_screen.dart';
-import 'event_booking_screen.dart';
-import 'event_success_payment_screen.dart';
 import 'maintaince_screen.dart';
 import 'my_store_screen.dart';
-import 'others_services_screen.dart';
 
 class BottomNavigation extends StatefulWidget {
   static const String routeName='/bottomnav';
@@ -42,6 +30,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: Colors.black,
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: Colors.black,
@@ -75,22 +64,32 @@ class _BottomNavigationState extends State<BottomNavigation> {
           ),
         ),
         drawer: const MainDrawer(),
-        bottomNavigationBar: CurvedNavigationBar(
-          animationDuration: Duration(),
-          color: Colors.blue.withOpacity(.5),
-          backgroundColor: Colors.black,
-          onTap: (index) {
-            setState(() {
-              pageIndex = index;
-            });
-          },
-          items: [
-            Icon(Icons.home,color: Colors.white,),
-            Icon(Icons.newspaper,color: Colors.white),
-            Icon(Icons.chat,color: Colors.white),
-            Icon(Icons.storefront,color: Colors.white),
-          ],
+        bottomNavigationBar: Padding(
+          padding:  EdgeInsets.all(8.sp),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Container(
+              height: 80.h,
+              child: CurvedNavigationBar(
+                height: 70.h,
+                animationDuration: Duration(),
+                color: Colors.grey,
+                backgroundColor: Colors.black,
+                onTap: (index) {
+                  setState(() {
+                    pageIndex = index;
+                  });
+                },
+                items:  [
+                  Icon(Icons.home,color: Colors.white,),
+                  Icon(Icons.newspaper,color: Colors.white),
+                  Icon(Icons.chat,color: Colors.white),
+                  Icon(Icons.storefront,color: Colors.white),
+                ],
 
+              ),
+            ),
+          ),
         ),
 
         body: Center(

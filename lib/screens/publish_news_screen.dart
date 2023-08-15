@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
 import 'package:relaks_media/screens/publish_news_success_screen.dart';
+
+import '../controller/home_controller.dart';
 
 class PublishNewsScreen extends StatefulWidget {
   static const String routeName = '/publish_news';
@@ -37,6 +41,7 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.put(HomeController());
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
@@ -51,7 +56,7 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
                     icon: const Icon(Icons.arrow_back),
                     color: Colors.white,
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      homeController.newsCurrentPage.value = 0;
                     },
                   ),
                   SizedBox(width: 8.0.w),
@@ -87,9 +92,9 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                Icons.add_a_photo_outlined,
-                                size: 50.0.sp,
+                              ImageIcon(
+                                AssetImage('images/upload.png'),
+                                size: 30.0.sp,
                                 color: Colors.white,
                               ),
                               SizedBox(
