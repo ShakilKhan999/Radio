@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:relaks_media/screens/reset_password_screen.dart';
 
 import '../utils/glass_box.dart';
 
 class OtpScreen extends StatefulWidget {
+  static const String routeName='/otp';
 
 
   const OtpScreen({Key? key, }) : super(key: key);
@@ -133,12 +135,17 @@ class _OtpScreenState extends State<OtpScreen> {
                                             ),
                                             child: Container(
                                               padding: EdgeInsets.symmetric(horizontal: 80.0.sp, vertical: 6.0.sp),
-                                              child: Text(
-                                                'Submit',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16.0.sp,
-                                                  fontWeight: FontWeight.bold,
+                                              child: TextButton(
+                                                onPressed: (){
+                                                  Navigator.pushNamed(context, ResetPassword.routeName);
+                                                },
+                                                child: Text(
+                                                  'Submit',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16.0.sp,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                                 ),
                                               ),
                                             ),

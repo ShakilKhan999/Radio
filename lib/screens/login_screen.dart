@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:relaks_media/screens/forgot_password_screen.dart';
 
 import '../utils/glass_box.dart';
+import 'bottomnevigation.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const String routeName='/login';
 
    LoginScreen({Key? key,}) : super(key: key);
 
@@ -138,7 +141,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                           ),
                                         ),
                                         SizedBox(height: 20.h),
-                                        Center(child: Text('Forgot Password?',style: TextStyle(fontSize: 18.sp,color: Colors.white),)),
+                                        Center(child: TextButton(
+                                          style: TextButton.styleFrom(
+                                            minimumSize: Size.zero,
+                                            padding: EdgeInsets.zero,
+                                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                          ),
+                                          onPressed: (){
+                                            Navigator.pushNamed(context, ForgotPass.routeName);
+                                          },
+                                            child: Text('Forgot Password?',style: TextStyle(fontSize: 18.sp,color: Colors.white),))),
                                         SizedBox(height: 20.h,),
                                         Center(
                                           child: Container(
@@ -156,7 +168,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                               borderRadius: BorderRadius.circular(9.0),
                                             ),
                                             child: ElevatedButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                Navigator.pushReplacementNamed(context, BottomNavigation.routeName);
+                                              },
                                               style: ElevatedButton.styleFrom(
                                                 backgroundColor: Colors.transparent,
                                                 elevation: 0,

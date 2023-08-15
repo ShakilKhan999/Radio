@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/glass_box.dart';
 
 class SignupScreen extends StatefulWidget {
+  static const String routeName='/signup';
 
   SignupScreen({Key? key}) : super(key: key);
 

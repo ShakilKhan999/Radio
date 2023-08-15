@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyStoreScreen extends StatefulWidget {
+  static const String routeName='/mystore';
   const MyStoreScreen({super.key});
 
   @override
