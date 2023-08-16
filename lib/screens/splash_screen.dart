@@ -9,7 +9,7 @@ import 'package:relaks_media/screens/signup_screen.dart';
 import '../utils/glass_box.dart';
 
 class SplashScreen extends StatelessWidget {
-  static const String routeName='/';
+  static const String routeName='/splash';
 
 
   const SplashScreen({Key? key}) : super(key: key);

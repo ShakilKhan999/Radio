@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:relaks_media/controller/radio_controller.dart';
 import 'package:relaks_media/screens/career_screen.dart';
 import 'package:relaks_media/screens/downlode_screen.dart';
 import 'package:relaks_media/screens/live_radio_screen.dart';
@@ -50,6 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.put(HomeController());
+    RadioController radioController = Get.put(RadioController());
+    final AudioPlayer _audioPlayer = AudioPlayer();
     return Obx(() =>
     homeController.homestate.value == 1
         ? NewsScreen()
@@ -107,13 +111,36 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Image.asset('images/readio_Floting.png',height: 40,width: 40,fit: BoxFit.fill,)),
                       ),
                       SizedBox(width: 8),
-                      Text('Relaks Bangla - Live',style: TextStyle(fontFamily: 'Poppins',fontSize: 15.sp,fontWeight: FontWeight.bold),),
+                      Text('${radioController.getSelectedChName()} - Live',style: TextStyle(fontFamily: 'Poppins',fontSize: 15.sp,fontWeight: FontWeight.bold),),
                     ],
                   ),
-                  Obx(() => IconButton(onPressed: () {
-                    homeController.radioplaying.value ? homeController
-                        .radioplaying.value=false : homeController.radioplaying.value=true;
-                  }, icon: homeController.radioplaying.value?Icon(Icons.pause): ImageIcon(
+                  Obx(() => IconButton(onPressed: () async{
+                    // homeController.radioplaying.value ? homeController
+                    //     .radioplaying.value=false : homeController.radioplaying.value=true;
+                    // await _audioPlayer.setUrl(
+                    //   '${radioController.selectedRadioLink.value}',
+                    // );
+                    // if(radioController.playing.value)
+                    //   {
+                    //     await _audioPlayer.stop().then((value) => radioController.playing.value==false);
+                    //   }
+                    // else{
+                    //   await _audioPlayer.playing?
+                    //   await _audioPlayer.stop():
+                    //   await _audioPlayer.play();
+                    //   radioController.playing.value=true;
+                    // }
+                    // radioController.playing.value=radioController.playing.value?
+                    // radioController.playing.value==false:radioController.playing.value=true;
+                    // await _audioPlayer.setUrl(
+                    //   '${radioController.selectedRadioLink.value}',
+                    // );
+                    // await _audioPlayer.stop();
+                    // radioController.playing.value==false? await _audioPlayer.stop():
+                    // await _audioPlayer.stop().then((value) async => await _audioPlayer.play());
+
+                    radioController.playRadio();
+                  }, icon: radioController.playing.value?Icon(Icons.pause): ImageIcon(
                     AssetImage('images/play.png'),
                     size: 15.sp,color: Colors.white,),),
                   )

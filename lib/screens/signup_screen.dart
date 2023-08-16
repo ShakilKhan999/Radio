@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
+import '../controller/authController.dart';
 import '../utils/glass_box.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -29,6 +31,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController =
+    Get.put(AuthController());
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -73,7 +77,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                           SizedBox(
                                             height: 50.h,
                                             child: TextFormField(
-                                              controller: emailController,
+                                              controller: authController.mailController,
                                               decoration: const InputDecoration(
 
                                                 focusedBorder: OutlineInputBorder(
@@ -133,7 +137,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                           SizedBox(
                                             height: 50.h,
                                             child: TextFormField(
-                                              controller: passwordController,
+                                              controller: authController.passController,
                                               obscureText: !visiblepass,
                                               decoration: InputDecoration(
 
@@ -254,7 +258,9 @@ class _SignupScreenState extends State<SignupScreen> {
                                                 borderRadius: BorderRadius.circular(9.0),
                                               ),
                                               child: ElevatedButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  authController.SignUp();
+                                                },
                                                 style: ElevatedButton.styleFrom(
                                                   backgroundColor: Colors.transparent,
                                                   elevation: 0,

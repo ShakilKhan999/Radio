@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:relaks_media/controller/home_controller.dart';
+import 'package:relaks_media/controller/radio_controller.dart';
 import 'package:relaks_media/screens/chat_screen.dart';
 import 'package:relaks_media/screens/home_screen.dart';
 import 'package:relaks_media/screens/news_screen.dart';
@@ -28,7 +29,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   @override
   Widget build(BuildContext context) {
-
+    RadioController radioController = Get.put(RadioController());
     return Scaffold(
       backgroundColor: Colors.black,
         appBar: AppBar(
@@ -56,11 +57,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 ),
 
               IconButton(onPressed: (){}, icon: Image.asset('images/Referral Icon.png',)),
-
-              IconButton(onPressed: (){
-                Navigator.pushNamed(context, StationScreen.routeName);
-              }, icon: Image.asset('images/Switch Station.png')),
-            ],
+            Obx(()=>IconButton(onPressed: (){
+  Navigator.pushNamed(context, StationScreen.routeName);
+}, icon: Image.asset(radioController.getSelectedChImg())),
+             )
+              ],
           ),
         ),
         drawer: const MainDrawer(),

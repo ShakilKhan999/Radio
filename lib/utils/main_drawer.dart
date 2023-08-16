@@ -2,8 +2,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:relaks_media/Repo/authServiece.dart';
+import 'package:relaks_media/screens/login_screen.dart';
 import 'package:relaks_media/screens/news_screen.dart';
 
+import '../controller/authController.dart';
 import '../controller/home_controller.dart';
 
 class MainDrawer extends StatefulWidget {
@@ -18,6 +21,8 @@ class _MainDrawerState extends State<MainDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController =
+    Get.put(AuthController());
     HomeController homeController = Get.put(HomeController());
     return Drawer(
       backgroundColor: Colors.transparent,
@@ -169,6 +174,20 @@ class _MainDrawerState extends State<MainDrawer> {
                 leading: Icon(Icons.info_rounded, color: Colors.white),
                 title:  Text(
                   'Relaks Radio',
+                  style: TextStyle(color: Colors.white, fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                      fontSize:16.sp),
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  AuthServiece().signOut().then((value) => Get.offAll(LoginScreen()));
+                  homeController.homestate.value = 0;
+                  Navigator.pop(context);
+                },
+                leading: Icon(Icons.logout, color: Colors.white),
+                title:  Text(
+                  'Logout',
                   style: TextStyle(color: Colors.white, fontFamily: 'Poppins',
                       fontWeight: FontWeight.w600,
                       fontSize:16.sp),

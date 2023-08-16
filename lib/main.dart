@@ -15,6 +15,7 @@ import 'package:relaks_media/screens/event_success_payment_screen.dart';
 import 'package:relaks_media/screens/event_ticket_payment_screen.dart';
 import 'package:relaks_media/screens/forgot_password_screen.dart';
 import 'package:relaks_media/screens/home_screen.dart';
+import 'package:relaks_media/screens/launcherpage.dart';
 import 'package:relaks_media/screens/login_screen.dart';
 import 'package:relaks_media/screens/maintaince_screen.dart';
 import 'package:relaks_media/screens/message_request_screen.dart';
@@ -28,12 +29,16 @@ import 'package:relaks_media/screens/splash_screen.dart';
 import 'package:relaks_media/screens/station_screen.dart';
 import 'package:relaks_media/screens/train_screen.dart';
 import 'package:relaks_media/screens/train_ticekets_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -48,8 +53,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(),
-          initialRoute: SplashScreen.routeName,
+          initialRoute: LauncherPage.routeName,
           routes: {
+            LauncherPage.routeName:(context) => LauncherPage(),
             SplashScreen.routeName:(context) => SplashScreen(),
             LoginScreen.routeName:(context) => LoginScreen(),
             AirScreen.routeName:(context) => AirScreen(),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:relaks_media/controller/authController.dart';
 import 'package:relaks_media/screens/forgot_password_screen.dart';
 
 import '../utils/glass_box.dart';
@@ -31,6 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController =
+    Get.put(AuthController());
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -88,12 +92,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                         SizedBox(
                                           height: 50.h,
                                           child: TextFormField(
+                                            controller: authController.mailController,
                                             style: TextStyle(
                                                 color: Colors.grey,
                                                 fontFamily: 'Poppins',
                                                 fontSize: 15.sp),
                                             decoration: const InputDecoration(
-                                              hintText: 'sagorroy@gmail.com',
+                                              hintText: 'example@gmail.com',
                                               hintStyle: TextStyle(
                                                   color: Colors.grey,
                                                   fontFamily: 'Poppins'),
@@ -128,11 +133,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                         SizedBox(
                                           height: 50.h,
                                           child: TextFormField(
+                                            controller:authController.passController,
                                             style: TextStyle(
                                                 color: Colors.grey,
                                                 fontFamily: 'Poppins',
                                                 fontSize: 15.sp),
-                                            controller: passwordController,
                                             obscureText: !visiblepass,
                                             decoration: InputDecoration(
                                               contentPadding: EdgeInsets.only(
@@ -227,9 +232,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ),
                                             child: ElevatedButton(
                                               onPressed: () {
-                                                Navigator.pushReplacementNamed(
-                                                    context,
-                                                    BottomNavigation.routeName);
+                                                authController.LogIn();
+
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 backgroundColor:
