@@ -125,12 +125,15 @@ class LiveRadioScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                                 border: Border.all(color: Colors.transparent),
                                 borderRadius: BorderRadius.circular(100)),
-                            child: Obx(()=>Center(
-                                child: Icon(
-                                  radioController.playing.value?Icons.pause:Icons.play_arrow,
-                                  color: Colors.white,
-                                  size: 50,
-                                )))),
+                            child: Obx((){
+                              return Center(
+                                  child: Icon(
+                                    radioController.playing.value?Icons.pause:Icons.play_arrow,
+                                    color: Colors.white,
+                                    size: 50,
+                                  ));
+                            })
+                        ),
                       ),
                     ),
                   ),

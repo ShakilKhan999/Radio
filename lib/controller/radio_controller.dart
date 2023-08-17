@@ -116,10 +116,16 @@ class RadioController extends GetxController{
     await _audioPlayer.setUrl('$selectedRadioLink');
     if(playing.value==false)
       {
+        print("play123:"+playing.value.toString());
         await _audioPlayer.stop();
+        //playing.value=false;
+        print("play123:"+playing.value.toString());
       }
-    else if(playing.value==true){
+     if(playing.value==true){
+      print("play123:"+playing.value.toString());
       await _audioPlayer.play();
+     // playing.value=true;
+      print("play123:"+playing.value.toString());
     }
   }
 }

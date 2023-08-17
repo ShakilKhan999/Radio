@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:relaks_media/controller/authController.dart';
 import 'package:relaks_media/screens/forgot_password_screen.dart';
@@ -233,7 +234,29 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ),
                                             child: ElevatedButton(
                                               onPressed: () {
-                                                authController.LogIn();
+                                                if(authController.mailController.text==null ||authController.mailController.text=='' )
+                                                  {
+                                                    Fluttertoast.showToast(
+                                                      msg: 'Enter email address',
+                                                      toastLength: Toast.LENGTH_SHORT,
+                                                      gravity: ToastGravity.BOTTOM,
+                                                      backgroundColor: Colors.grey,
+                                                      textColor: Colors.white,
+                                                    );
+                                                  }
+                                                else if(authController.passController.text==null ||authController.passController.text=='' || authController.passController.text.length<6)
+                                                {
+                                                  Fluttertoast.showToast(
+                                                    msg: 'Enter valid password',
+                                                    toastLength: Toast.LENGTH_SHORT,
+                                                    gravity: ToastGravity.BOTTOM,
+                                                    backgroundColor: Colors.grey,
+                                                    textColor: Colors.white,
+                                                  );
+                                                }
+                                                else{
+                                                  authController.LogIn();
+                                                }
 
                                               },
                                               style: ElevatedButton.styleFrom(
