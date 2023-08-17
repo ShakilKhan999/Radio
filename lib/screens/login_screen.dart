@@ -216,7 +216,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                         Center(
                                           child: Container(
-                                            height: 50.h,
+                                            height: 40.h,
+                                            width: 296.w,
                                             decoration: BoxDecoration(
                                               gradient: LinearGradient(
                                                 colors: [
@@ -228,7 +229,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 end: Alignment.bottomRight,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(9.0),
+                                                  BorderRadius.circular(5.0),
                                             ),
                                             child: ElevatedButton(
                                               onPressed: () {
@@ -240,17 +241,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     Colors.transparent,
                                                 elevation: 0,
                                               ),
-                                              child: Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 80.0.sp,
-                                                    vertical: 6.0.sp),
-                                                child: Text(
-                                                  'Login',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16.0.sp,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
+                                              child: Text(
+                                                'Login',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16.0.sp,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                             ),

@@ -3,7 +3,7 @@ import 'package:just_audio/just_audio.dart';
 
 class RadioController extends GetxController{
   var playing=false.obs;
-  var selectedRadioLink=''.obs;
+  var selectedRadioLink='https://s3.voscast.com:9893/live'.obs;
   var selectedChannel=0.obs;
   final AudioPlayer _audioPlayer = AudioPlayer();
 
@@ -112,15 +112,14 @@ class RadioController extends GetxController{
   }
 
   Future<void> playRadio() async{
+    playing.value=playing.value?false:true;
     await _audioPlayer.setUrl('$selectedRadioLink');
-    if(playing.value==true)
+    if(playing.value==false)
       {
         await _audioPlayer.stop();
-        playing.value=false;
       }
-    else if(playing.value==false){
+    else if(playing.value==true){
       await _audioPlayer.play();
-      playing.value=true;
     }
   }
 }

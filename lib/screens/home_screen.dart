@@ -252,7 +252,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               }).toList(),
               options: CarouselOptions(
-                height: 240.h,
+                height: 250.h,
                 enlargeCenterPage: true,
                 autoPlay: true,
                 onPageChanged: (index,reason)=>setState(()=>activeIndex=index),
@@ -319,76 +319,73 @@ class _HomeScreenState extends State<HomeScreen> {
                 BorderRadius.circular(10),
                 child: Card(
                   color: Colors.grey.shade900,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            right: 250.sp),
-                        child: Text(
-                          'Relaks Top 50',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20.sp),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 15.h,
                         ),
-                      ),
-                      Container(
-                        height: 180.h,
-                        child: ListView.builder(
-                          scrollDirection:
-                          Axis.horizontal,
-                          itemCount: imageList.length,
-                          itemBuilder:
-                              (context, index) {
-                            return Container(
-                              margin:
-                              EdgeInsets.all(5),
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    imageList[index],
-                                    fit: BoxFit.cover,
-                                    height: 100.h,
-                                    width: 150.w,
-                                  ),
-                                  SizedBox(
-                                    height: 15.h,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment
-                                        .start,
-                                    children: [
-                                      Text(
-                                        'Eajdiger Hero',
-                                        style: TextStyle(
-                                            fontSize:
-                                            17.sp,
-                                            color: Colors
-                                                .white),
-                                      ),
-                                      SizedBox(
-                                        height: 3.h,
-                                      ),
-                                      Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment
-                                            .start,
-                                        children: [
-                                          const Icon(
-                                            Icons
-                                                .play_circle_fill_outlined,
-                                            color: Colors
-                                                .grey,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets
-                                                .only(
-                                                top:
-                                                4.0),
-                                            child:
+                        Padding(
+                          padding: EdgeInsets.only(
+                              right: 220.sp),
+                          child: Text(
+                            'Relaks Top 50',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.sp),
+                          ),
+                        ),
+                        SizedBox(height: 10.h,),
+                        Container(
+                          height: 180.h,
+                          child: ListView.builder(
+                            scrollDirection:
+                            Axis.horizontal,
+                            itemCount: imageList.length,
+                            itemBuilder:
+                                (context, index) {
+                              return Container(
+                                margin:
+                                EdgeInsets.all(5),
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      imageList[index],
+                                      fit: BoxFit.cover,
+                                      height: 100.h,
+                                      width: 150.w,
+                                    ),
+                                    SizedBox(
+                                      height: 15.h,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment
+                                          .start,
+                                      children: [
+                                        Text(
+                                          'Eajdiger Hero',
+                                          style: TextStyle(
+                                              fontSize:
+                                              17.sp,
+                                              color: Colors
+                                                  .white),
+                                        ),
+                                        SizedBox(
+                                          height: 5.h,
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            const Icon(
+                                              Icons
+                                                  .play_circle_outline_outlined,
+                                              color: Colors
+                                                  .grey,size: 15,
+                                            ),
                                             Text(
                                               '1.4K Play',
                                               style: TextStyle(
@@ -397,18 +394,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   color: Colors.white
                                                       .withOpacity(0.4)),
                                             ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            );
-                          },
+                                          ],
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -435,61 +432,58 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontSize: 20.sp),
                         ),
                       ),
-                      Container(
-                        height: 180.h,
-                        child: ListView.builder(
-                          scrollDirection:
-                          Axis.horizontal,
-                          itemCount: imageList.length,
-                          itemBuilder:
-                              (context, index) {
-                            return Container(
-                              margin:
-                              EdgeInsets.all(5),
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    imageList[index],
-                                    fit: BoxFit.cover,
-                                    height: 100.h,
-                                    width: 150.w,
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment
-                                        .start,
-                                    children: [
-                                      Text(
-                                        'Eajdiger Hero',
-                                        style: TextStyle(
-                                            fontSize:
-                                            17.sp,
-                                            color: Colors
-                                                .white),
-                                      ),
-                                      SizedBox(
-                                        height: 3.h,
-                                      ),
-                                      Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment
-                                            .start,
-                                        children: [
-                                          Icon(
-                                            Icons
-                                                .play_circle_fill_outlined,
-                                            color: Colors
-                                                .grey,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets
-                                                .only(
-                                                top:
-                                                3.0),
-                                            child:
+                      SizedBox(height: 10.h,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: SizedBox(
+                          height: 180.h,
+                          child: ListView.builder(
+                            scrollDirection:
+                            Axis.horizontal,
+                            itemCount: imageList.length,
+                            itemBuilder:
+                                (context, index) {
+                              return Container(
+                                margin:
+                                EdgeInsets.all(5),
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      imageList[index],
+                                      fit: BoxFit.cover,
+                                      height: 100.h,
+                                      width: 150.w,
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment
+                                          .start,
+                                      children: [
+                                        Text(
+                                          'Eajdiger Hero',
+                                          style: TextStyle(
+                                              fontSize:
+                                              17.sp,
+                                              color: Colors
+                                                  .white),
+                                        ),
+                                        SizedBox(
+                                          height: 3.h,
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Icon(
+                                              Icons
+                                                  .play_circle_outline_outlined,
+                                              color: Colors
+                                                  .grey,size: 15,
+                                            ),
                                             Text(
                                               '1.4K Play',
                                               style: TextStyle(
@@ -498,15 +492,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   color: Colors.white
                                                       .withOpacity(0.4)),
                                             ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            );
-                          },
+                                          ],
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ],
@@ -907,7 +901,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                            right: 250.sp),
+                            right: 270.sp),
                         child: Text(
                           'Relaks Top 50',
                           style: TextStyle(

@@ -57,7 +57,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
                               child: SizedBox(
-                                  height: MediaQuery.of(context).size.height-270,
+                                  height: MediaQuery.of(context).size.height-250,
                                   width:MediaQuery.of(context).size.width-80,
                                   child: Column(
                                     children: [
@@ -79,7 +79,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                             child: TextFormField(
                                               controller: authController.mailController,
                                               decoration: const InputDecoration(
-
+                                                hintText: 'example@gmail.com',
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontFamily: 'Poppins'),
                                                 focusedBorder: OutlineInputBorder(
                                                     borderSide: BorderSide(
                                                         color: Colors.grey,
@@ -109,7 +112,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                             child: TextFormField(
                                               controller: phoneController,
                                               decoration: const InputDecoration(
-
+                                                hintText: '+88154654654',
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontFamily: 'Poppins'),
                                                 focusedBorder: OutlineInputBorder(
                                                     borderSide: BorderSide(
                                                         color: Colors.grey,
@@ -140,7 +146,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                               controller: authController.passController,
                                               obscureText: !visiblepass,
                                               decoration: InputDecoration(
-
+                                                hintText: '*************',
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontFamily: 'Poppins'),
                                                 focusedBorder: const OutlineInputBorder(
                                                     borderSide: BorderSide(
                                                         color: Colors.grey,
@@ -194,6 +203,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                               controller: conPasswordController,
                                               obscureText: !visiblepass,
                                               decoration: InputDecoration(
+                                                hintText: '*************',
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontFamily: 'Poppins'),
                                                 focusedBorder:
                                                 const OutlineInputBorder(
                                                     borderSide: BorderSide(

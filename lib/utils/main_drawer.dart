@@ -40,6 +40,7 @@ class _MainDrawerState extends State<MainDrawer> {
                     color: Colors.white,
                   )),
               ListTile(
+                minLeadingWidth: 0,
                 onTap: () {
                   homeController.homestate.value = 0;
                   Navigator.pop(context);
@@ -60,6 +61,7 @@ class _MainDrawerState extends State<MainDrawer> {
                 ),
               ),
               ListTile(
+                minLeadingWidth: 0,
                 onTap: () {
                   homeController.homestate.value = 1;
                   Navigator.pop(context);
@@ -76,6 +78,7 @@ class _MainDrawerState extends State<MainDrawer> {
                 ),
               ),
               ListTile(
+                minLeadingWidth: 0,
                 onTap: () {
                   Navigator.pop(context);
                 },
@@ -91,6 +94,7 @@ class _MainDrawerState extends State<MainDrawer> {
                 ),
               ),
               ListTile(
+                minLeadingWidth: 0,
                 onTap: () {
                   Navigator.pop(context);
                 },
@@ -106,6 +110,7 @@ class _MainDrawerState extends State<MainDrawer> {
                 ),
               ),
               ListTile(
+                minLeadingWidth: 0,
                 onTap: () {
                   homeController.homestate.value = 4;
                   Navigator.pop(context);
@@ -122,6 +127,7 @@ class _MainDrawerState extends State<MainDrawer> {
                 ),
               ),
               ListTile(
+                minLeadingWidth: 0,
                 onTap: () {
                   homeController.homestate.value = 5;
                   Navigator.pop(context);
@@ -138,6 +144,7 @@ class _MainDrawerState extends State<MainDrawer> {
                 ),
               ),
               ListTile(
+                minLeadingWidth: 0,
                 onTap: () {
                   homeController.homestate.value = 6;
                   Navigator.pop(context);
@@ -151,6 +158,7 @@ class _MainDrawerState extends State<MainDrawer> {
                 ),
               ),
               ListTile(
+                minLeadingWidth: 0,
                 onTap: () {
                   homeController.homestate.value = 7;
                   Navigator.pop(context);
@@ -167,6 +175,7 @@ class _MainDrawerState extends State<MainDrawer> {
                 ),
               ),
               ListTile(
+                minLeadingWidth: 0,
                 onTap: () {
                   homeController.homestate.value = 0;
                   Navigator.pop(context);
@@ -180,6 +189,7 @@ class _MainDrawerState extends State<MainDrawer> {
                 ),
               ),
               ListTile(
+                minLeadingWidth: 0,
                 onTap: () {
                   AuthServiece().signOut().then((value) => Get.offAll(LoginScreen()));
                   homeController.homestate.value = 0;

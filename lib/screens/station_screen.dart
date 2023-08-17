@@ -420,7 +420,7 @@ class StationScreen extends StatelessWidget {
                                                     width: 35,
                                                   ),
                                                   Text(
-                                                    'Relaks Radio TV',
+                                                    'Relaks Radio \nTV',
                                                     style: TextStyle(
                                                         color: Colors.white),
                                                   )
@@ -507,7 +507,7 @@ class StationScreen extends StatelessWidget {
                                                     width: 35.w,
                                                   ),
                                                   Text(
-                                                    'Relaks News 24',
+                                                    'Relaks News \n24',
                                                     style: TextStyle(
                                                         color: Colors.white),
                                                   )

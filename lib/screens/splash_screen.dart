@@ -22,7 +22,7 @@ class SplashScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('images/splash.png'),
               fit: BoxFit.cover,
@@ -51,47 +51,42 @@ class SplashScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width-60,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Don't have an account?",
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Don't have account?",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontFamily: 'Poppins',
+                          fontSize: 11.sp,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed:(){
+                          Navigator.pushNamed(context,SignupScreen.routeName);
+                        },
+                        child: Text(
+                          "Create a account",
                           style: TextStyle(
-                            color: Colors.grey,
                             fontFamily: 'Poppins',
-                            fontSize: 13.sp,
+                            color: Colors.white,
+                            fontSize: 11.sp,
 
+                            decoration: TextDecoration.combine([
+                              TextDecoration.underline,
+                            ]),
+                            decorationColor: Colors.grey,
+                            decorationThickness: 3.0.sp,
                           ),
                         ),
-
-                        TextButton(
-                          onPressed:(){
-                            Navigator.pushNamed(context,SignupScreen.routeName);
-                          },
-                          child: Text(
-                            "Create an account",
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              color: Colors.white,
-                              fontSize: 15.sp,
-
-                              decoration: TextDecoration.combine([
-                                TextDecoration.underline,
-                              ]),
-                              decorationColor: Colors.grey,
-                              decorationThickness: 3.0.sp,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
 
                   Container(
                     height: 48.h,
-                    width: 210.w,
+                    width: 230.w,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -132,7 +127,7 @@ class SplashScreen extends StatelessWidget {
                   SizedBox(height: 16.0.h),
                   Container(
                     height: 48.h,
-                    width: 210.w,
+                    width: 230.w,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                       color: Colors.transparent,
