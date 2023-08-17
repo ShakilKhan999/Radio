@@ -202,7 +202,7 @@ class LiveRadioScreen extends StatelessWidget {
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 15.sp,
-                                                  fontWeight: FontWeight.bold),
+                                                 ),
                                             ),
                                           ),
                                         ],

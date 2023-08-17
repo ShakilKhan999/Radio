@@ -566,8 +566,7 @@ class StationScreen extends StatelessWidget {
                                     ),
                                     Container(
                                       height: 40.h,
-                                      width: MediaQuery.of(context).size.width -
-                                          120.w,
+                                      width: 287.w,
                                       decoration: BoxDecoration(
                                           border: Border.all(
                                               color: Colors.transparent),
@@ -597,7 +596,7 @@ class StationScreen extends StatelessWidget {
                                             'Switch your Station',
                                             style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 20.sp),
+                                                fontSize: 18.sp),
                                           )),
                                     ),
                                   ],

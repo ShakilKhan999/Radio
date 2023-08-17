@@ -162,88 +162,91 @@ class _HomeScreenState extends State<HomeScreen> {
                 return ClipRRect(
                   borderRadius:
                   BorderRadius.circular(30),
-                  child: Card(
-                    color: Colors.grey.shade900,
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'images/image1.png',
-                          fit: BoxFit.cover,
-                        ),
-                        Row(
-                          children: [
-                            Padding(
-                              padding:
-                              EdgeInsets.only(
-                                  left: 8.0),
-                              child: Text(
-                                'Upcoming Show',
-                                style: TextStyle(
-                                  fontSize: 20.sp,
-                                  color: Colors.white,
-                                  fontWeight:
-                                  FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 10.0.sp),
-                          child: Row(
+                  child: SizedBox(
+                    child: Card(
+                      color: Colors.grey.shade900,
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            'images/image1.png',
+                            fit: BoxFit.cover,height: 150.h,width: 328.w,
+                          ),
+                          SizedBox(height: 10.h,),
+                          Row(
                             children: [
-                              Text(
-                                'Friday',
-                                style: TextStyle(
+                              Padding(
+                                padding:
+                                EdgeInsets.only(
+                                    left: 8.0),
+                                child: Text(
+                                  'Upcoming Show',
+                                  style: TextStyle(
                                     fontSize: 20.sp,
-                                    color:
-                                    Colors.white),
-                              ),
-                              Text(
-                                ' | ',
-                                style: TextStyle(
-                                    fontSize: 20.sp,
-                                    color:
-                                    Colors.white),
-                              ),
-                              Container(
-                                child: Image.asset(
-                                  'images/bdflag.png',
-                                  height: 10.h,
-                                  width: 15.w,
-                                  fit: BoxFit.cover,
+                                    color: Colors.white,
+                                    fontWeight:
+                                    FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                ' 9:00 AM ',
-                                style: TextStyle(
-                                    fontSize: 20.sp,
-                                    color:
-                                    Colors.white),
-                              ),
-                              Container(
-                                child: Image.asset(
-                                  'images/usflag.png',
-                                  height: 10.h,
-                                  width: 15.w,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Text(
-                                ' 4:00 AM',
-                                style: TextStyle(
-                                    fontSize: 20.sp,
-                                    color:
-                                    Colors.white),
                               ),
                             ],
                           ),
-                        )
-                      ],
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: 10.0.sp),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Friday',
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      color:
+                                      Colors.white),
+                                ),
+                                Text(
+                                  ' | ',
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      color:
+                                      Colors.white),
+                                ),
+                                Container(
+                                  child: Image.asset(
+                                    'images/bdflag.png',
+                                    height: 8.h,
+                                    width: 12.w,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Text(
+                                  ' 9:00 AM ',
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      color:
+                                      Colors.white),
+                                ),
+                                Container(
+                                  child: Image.asset(
+                                    'images/usflag.png',
+                                    height: 8.h,
+                                    width: 12.w,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Text(
+                                  ' 4:00 AM',
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      color:
+                                      Colors.white),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 );

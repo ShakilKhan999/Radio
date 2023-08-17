@@ -244,6 +244,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                           ),
                                           Center(
                                             child: Container(
+                                              height: 40.sp,
+                                              width: 300.w,
                                               decoration: BoxDecoration(
                                                 gradient: LinearGradient(
                                                   colors: [
@@ -255,7 +257,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                   begin: Alignment.topLeft,
                                                   end: Alignment.bottomRight,
                                                 ),
-                                                borderRadius: BorderRadius.circular(9.0),
+                                                borderRadius: BorderRadius.circular(5.0),
                                               ),
                                               child: ElevatedButton(
                                                 onPressed: () {
@@ -265,16 +267,13 @@ class _SignupScreenState extends State<SignupScreen> {
                                                   backgroundColor: Colors.transparent,
                                                   elevation: 0,
                                                 ),
-                                                child: Container(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 80.0.sp, vertical: 6.0.sp),
-                                                  child: Text(
-                                                    'Signup',
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 16.0.sp,
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
+                                                child: Text(
+                                                  'Signup',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Poppins',
+                                                    color: Colors.white,
+                                                    fontSize: 17.0.sp,
+
                                                   ),
                                                 ),
                                               ),
@@ -300,7 +299,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                       ),
                                                       child: Row(
                                                         children: [
-                                                          Image.asset('images/Google.png',width: 30.w),
+                                                          Image.asset('images/Google.png',width: 20.w),
                                                           Text(
                                                             'Google',
                                                             style: TextStyle(

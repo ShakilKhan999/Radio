@@ -16,6 +16,9 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double sch=MediaQuery.of(context).size.height;
+    double scw=MediaQuery.of(context).size.width;
+    print("height"+sch.toString()+"width"+scw.toString());
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -87,8 +90,8 @@ class SplashScreen extends StatelessWidget {
                   ),
 
                   Container(
-                    height: 50.h,
-                    width: 220.w,
+                    height: 48.h,
+                    width: 210.w,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -101,7 +104,7 @@ class SplashScreen extends StatelessWidget {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
-                      borderRadius: BorderRadius.circular(9.0),
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
                     child: ElevatedButton(
                       onPressed: () {
@@ -119,8 +122,8 @@ class SplashScreen extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Poppins',
-                            fontSize: 18.0.sp,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0.sp,
+                            // fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -128,12 +131,12 @@ class SplashScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 16.0.h),
                   Container(
-                    height: 50.h,
-                    width: 220.w,
+                    height: 48.h,
+                    width: 210.w,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                       color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(9.0),
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
                     child: ElevatedButton(
 
