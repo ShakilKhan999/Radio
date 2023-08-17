@@ -106,6 +106,7 @@ class StationScreen extends StatelessWidget {
                                           child: TextButton(
                                               onPressed: () {
                                                 radioController.selectedChannel.value=0;
+                                                radioController.selectedRadioLink.value='https://s3.voscast.com:9893/live';
                                               },
                                               child: Row(
                                                 children: [

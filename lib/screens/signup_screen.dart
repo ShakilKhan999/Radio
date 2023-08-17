@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import '../controller/authController.dart';
@@ -259,7 +260,40 @@ class _SignupScreenState extends State<SignupScreen> {
                                               ),
                                               child: ElevatedButton(
                                                 onPressed: () {
-                                                  authController.SignUp();
+                                                  if(authController.mailController.text==null ||authController.mailController.text=='' )
+                                                  {
+                                                    Fluttertoast.showToast(
+                                                      msg: 'Enter email address',
+                                                      toastLength: Toast.LENGTH_SHORT,
+                                                      gravity: ToastGravity.BOTTOM,
+                                                      backgroundColor: Colors.grey,
+                                                      textColor: Colors.white,
+                                                    );
+                                                  }
+                                                  else if(authController.passController.text==null ||authController.passController.text=='' || authController.passController.text.length<6)
+                                                  {
+                                                    Fluttertoast.showToast(
+                                                      msg: 'Enter valid password',
+                                                      toastLength: Toast.LENGTH_SHORT,
+                                                      gravity: ToastGravity.BOTTOM,
+                                                      backgroundColor: Colors.grey,
+                                                      textColor: Colors.white,
+                                                    );
+                                                  }
+                                                  else if(authController.passController.text!=conPasswordController.text)
+                                                  {
+                                                    Fluttertoast.showToast(
+                                                      msg: 'Confirm Password',
+                                                      toastLength: Toast.LENGTH_SHORT,
+                                                      gravity: ToastGravity.BOTTOM,
+                                                      backgroundColor: Colors.grey,
+                                                      textColor: Colors.white,
+                                                    );
+                                                  }
+                                                  else
+                                                    {
+                                                      authController.SignUp();
+                                                    }
                                                 },
                                                 style: ElevatedButton.styleFrom(
                                                   backgroundColor: Colors.transparent,
