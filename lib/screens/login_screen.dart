@@ -133,62 +133,64 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                         SizedBox(
                                           height: 50.h,
-                                          child: TextFormField(
-                                            controller:authController.passController,
-                                            style: TextStyle(
-                                                color: Colors.grey,
-                                                fontFamily: 'Poppins',
-                                                fontSize: 15.sp),
-                                            obscureText: !visiblepass,
-                                            decoration: InputDecoration(
-                                              contentPadding: EdgeInsets.only(
-                                                  top: 9.sp, left: 5.sp),
-                                              hintText: '*************',
-                                              hintStyle: TextStyle(
+                                          child: Center(
+                                            child: TextFormField(
+                                              controller:authController.passController,
+                                              style: TextStyle(
                                                   color: Colors.grey,
-                                                  fontFamily: 'Poppins'),
-                                              focusedBorder:
-                                                  const OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Colors.grey,
-                                                          width: 1.2)),
-                                              enabledBorder:
-                                                  const OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Colors.grey,
-                                                          width: 1.2)),
-                                              border: const OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: Colors.grey,
-                                                      width: 1.2)),
-                                              suffixIcon: visiblepass
-                                                  ? IconButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          visiblepass
-                                                              ? visiblepass =
-                                                                  false
-                                                              : visiblepass =
-                                                                  true;
-                                                        });
-                                                      },
-                                                      icon: const Icon(
-                                                          Icons.visibility,
-                                                          color: Colors.grey))
-                                                  : IconButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          visiblepass
-                                                              ? visiblepass =
-                                                                  false
-                                                              : visiblepass =
-                                                                  true;
-                                                        });
-                                                      },
-                                                      icon: const Icon(
-                                                        Icons.visibility_off,
+                                                  fontFamily: 'Poppins',
+                                                  fontSize: 15.sp),
+                                              obscureText: !visiblepass,
+                                              decoration: InputDecoration(
+                                                contentPadding: EdgeInsets.all(
+                                                    8.sp),
+                                                hintText: '*************',
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontFamily: 'Poppins'),
+                                                focusedBorder:
+                                                    const OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors.grey,
+                                                            width: 1.2)),
+                                                enabledBorder:
+                                                    const OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors.grey,
+                                                            width: 1.2)),
+                                                border: const OutlineInputBorder(
+                                                    borderSide: BorderSide(
                                                         color: Colors.grey,
-                                                      )),
+                                                        width: 1.2)),
+                                                suffixIcon: visiblepass
+                                                    ? IconButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            visiblepass
+                                                                ? visiblepass =
+                                                                    false
+                                                                : visiblepass =
+                                                                    true;
+                                                          });
+                                                        },
+                                                        icon: const Icon(
+                                                            Icons.visibility,
+                                                            color: Colors.grey))
+                                                    : IconButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            visiblepass
+                                                                ? visiblepass =
+                                                                    false
+                                                                : visiblepass =
+                                                                    true;
+                                                          });
+                                                        },
+                                                        icon: const Icon(
+                                                          Icons.visibility_off,
+                                                          color: Colors.grey,
+                                                        )),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -310,6 +312,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       elevation: 0,
                                                     ),
                                                     child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
                                                         Image.asset(
                                                           'images/Google.png',
@@ -319,10 +322,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         Text(
                                                           'Google',
                                                           style: TextStyle(
+                                                            fontFamily: 'Poppins',
                                                             color: Colors.white,
-                                                            fontSize: 16.0.sp,
-                                                            fontWeight:
-                                                                FontWeight.bold,
+                                                            fontSize: 14.0.sp,
+
                                                           ),
                                                         ),
                                                       ],
@@ -352,6 +355,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       elevation: 0,
                                                     ),
                                                     child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
                                                         Image.asset(
                                                           'images/Facebook.png',
@@ -361,10 +365,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         Text(
                                                           'Facebook',
                                                           style: TextStyle(
+                                                            fontFamily: 'Poppins',
                                                             color: Colors.white,
-                                                            fontSize: 16.0.sp,
-                                                            fontWeight:
-                                                                FontWeight.bold,
+                                                            fontSize: 14.0.sp,
                                                           ),
                                                         ),
                                                       ],

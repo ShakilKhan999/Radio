@@ -14,59 +14,107 @@ import 'maintaince_screen.dart';
 import 'my_store_screen.dart';
 
 class BottomNavigation extends StatefulWidget {
-  static const String routeName='/bottomnav';
+  static const String routeName = '/bottomnav';
+
   const BottomNavigation({super.key});
 
   @override
   State<BottomNavigation> createState() => _BottomNavigationState();
 }
-int homescreenindex=0;
+
+int homescreenindex = 0;
+
 class _BottomNavigationState extends State<BottomNavigation> {
   int pageIndex = 0;
-  List<Widget> homescreens =  [HomeScreen(), MaintainceScreen(), StationScreen()];
-  List<Widget> widgetList =  [HomeScreen(),
-    NewsScreen(), ChatScreen(),MyStoreScreen()];
-
+  List<Widget> homescreens = [
+    HomeScreen(),
+    MaintainceScreen(),
+    StationScreen()
+  ];
+  List<Widget> widgetList = [
+    HomeScreen(),
+    NewsScreen(),
+    ChatScreen(),
+    MyStoreScreen()
+  ];
+  GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     RadioController radioController = Get.put(RadioController());
     return Scaffold(
-      backgroundColor: Colors.black,
+      // key: _key,
+        backgroundColor: Colors.black,
+        drawer: const MainDrawer(),
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: Colors.black,
           elevation: 0,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                  width: MediaQuery.of(context).size.width-185,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade900,
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: const TextField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search, color: Colors.white),
-                      hintText: 'Search for audio content,radio chanel,news..',
-                      hintStyle: TextStyle(color: Colors.white),
-                      border: InputBorder.none,
-                    ),
+          // leading: IconButton(
+          //   icon: Icon(Icons.menu),
+          //   onPressed: () {
+          //     MainDrawer();
+          //     Scaffold.of(context).openDrawer();
+          //   },
+          // ),
+
+          flexibleSpace:Center(
+            child:  Column(
+              children: [
+                SizedBox(height: 30.h,),
+                Container(
+                  height: 60.h,
+                  width: MediaQuery.of(context).size.width-10.w,
+                  // color: Colors.red,
+                  child: Row(
+                    // crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(width: 40.w,),
+                      Container(
+                        height: 45.h,
+                        width: MediaQuery.of(context).size.width - 150.w,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade900,
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child:  TextField(
+                          style: TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            prefixIcon: Padding(
+                              padding: EdgeInsets.zero,
+                              child: Icon(Icons.search, color: Colors.grey),
+                            ),
+                            hintText:
+                            'Search for audio content,radio chanel,news..',
+                            hintStyle: TextStyle(color: Colors.grey[700]),
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Image.asset(
+                            'images/Referral Icon.png',
+                          )),
+                      Obx(
+                            () => IconButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, StationScreen.routeName);
+                            },
+                            icon: Image.asset(radioController.getSelectedChImg())),
+                      )
+                    ],
                   ),
                 ),
-
-              IconButton(onPressed: (){}, icon: Image.asset('images/Referral Icon.png',)),
-            Obx(()=>IconButton(onPressed: (){
-  Navigator.pushNamed(context, StationScreen.routeName);
-}, icon: Image.asset(radioController.getSelectedChImg())),
-             )
               ],
+            ),
           ),
+
+
         ),
-        drawer: const MainDrawer(),
+
         bottomNavigationBar: Padding(
-          padding:  EdgeInsets.all(8.sp),
+          padding: EdgeInsets.all(8.sp),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Container(
@@ -81,18 +129,19 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     pageIndex = index;
                   });
                 },
-                items:  [
-                  Icon(Icons.home,color: Colors.white,),
-                  Icon(Icons.newspaper,color: Colors.white),
-                  Icon(Icons.chat,color: Colors.white),
-                  Icon(Icons.storefront,color: Colors.white),
+                items: [
+                  Icon(
+                    Icons.home,
+                    color: Colors.white,
+                  ),
+                  Icon(Icons.newspaper, color: Colors.white),
+                  Icon(Icons.chat, color: Colors.white),
+                  Icon(Icons.storefront, color: Colors.white),
                 ],
-
               ),
             ),
           ),
         ),
-
         body: Center(
           child: widgetList[pageIndex],
         ));

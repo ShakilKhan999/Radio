@@ -45,7 +45,7 @@ class LiveRadioScreen extends StatelessWidget {
                           radioController.getSelectedChName(),
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 25.sp,
+                              fontSize: 20.sp,
                               fontFamily: 'Poppins'),
                         )),
                         IconButton(
@@ -150,7 +150,7 @@ class LiveRadioScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: SizedBox(
-                          height: MediaQuery.of(context).size.height - 530.h,
+                          height: MediaQuery.of(context).size.height - 520.h,
                           width: MediaQuery.of(context).size.width - 80.w,
                           child: Column(
                             children: [
@@ -166,49 +166,55 @@ class LiveRadioScreen extends StatelessWidget {
                                     SizedBox(
                                       width: 5.w,
                                     ),
-                                    Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: 30.h,
-                                            width: 90.w,
-                                            decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.grey,
-                                                  Colors.black
-                                                ],
-                                                begin: Alignment.centerLeft,
-                                                end: Alignment.centerRight,
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              height: 30.h,
+                                              width: 90.w,
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    Colors.grey,
+                                                    Colors.black
+                                                  ],
+                                                  begin: Alignment.centerLeft,
+                                                  end: Alignment.centerRight,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'John Pierce',
-                                                style: TextStyle(
-                                                  fontFamily: 'Poppins',
-                                                  fontSize: 15.sp,
-                                                  color: Colors.white,
+                                              child: Center(
+                                                child: Text(
+                                                  'John Pierce',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Poppins',
+                                                    fontSize: 15.sp,
+                                                    color: Colors.white,
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Text(
-                                              'Thanks for being so awesome. High',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15.sp,
-                                                 ),
+                                            Padding(
+                                              padding: const EdgeInsets.all(5.0),
+                                              child: FittedBox(
+                                                child: Text(
+                                                  'Thanks for being so awesome. High',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15.sp,
+                                                     ),
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -226,49 +232,53 @@ class LiveRadioScreen extends StatelessWidget {
                                     SizedBox(
                                       width: 5.w,
                                     ),
-                                    Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: 30.h,
-                                            width: 90.w,
-                                            decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.grey,
-                                                  Colors.black
-                                                ],
-                                                begin: Alignment.centerLeft,
-                                                end: Alignment.centerRight,
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              height: 30.h,
+                                              width: 90.w,
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    Colors.grey,
+                                                    Colors.black
+                                                  ],
+                                                  begin: Alignment.centerLeft,
+                                                  end: Alignment.centerRight,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'John Pierce',
-                                                style: TextStyle(
-                                                  fontFamily: 'Poppins',
-                                                  fontSize: 15.sp,
-                                                  color: Colors.white,
+                                              child: Center(
+                                                child: Text(
+                                                  'John Pierce',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Poppins',
+                                                    fontSize: 15.sp,
+                                                    color: Colors.white,
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Text(
-                                              'Thanks for being so awesome. High',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15.sp,
-                                                  fontWeight: FontWeight.bold),
+                                            Padding(
+                                              padding: const EdgeInsets.all(5.0),
+                                              child: FittedBox(
+                                                child: Text(
+                                                  'Thanks for being so awesome. High',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15.sp,
+                                                      fontWeight: FontWeight.bold),
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -286,49 +296,53 @@ class LiveRadioScreen extends StatelessWidget {
                                     SizedBox(
                                       width: 5.w,
                                     ),
-                                    Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: 30.h,
-                                            width: 90.w,
-                                            decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.grey,
-                                                  Colors.black
-                                                ],
-                                                begin: Alignment.centerLeft,
-                                                end: Alignment.centerRight,
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              height: 30.h,
+                                              width: 90.w,
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    Colors.grey,
+                                                    Colors.black
+                                                  ],
+                                                  begin: Alignment.centerLeft,
+                                                  end: Alignment.centerRight,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'John Pierce',
-                                                style: TextStyle(
-                                                  fontFamily: 'Poppins',
-                                                  fontSize: 15.sp,
-                                                  color: Colors.white,
+                                              child: Center(
+                                                child: Text(
+                                                  'John Pierce',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Poppins',
+                                                    fontSize: 15.sp,
+                                                    color: Colors.white,
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Text(
-                                              'Thanks for being so awesome. High',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15.sp,
-                                                  fontWeight: FontWeight.bold),
+                                            Padding(
+                                              padding: const EdgeInsets.all(5.0),
+                                              child: FittedBox(
+                                                child: Text(
+                                                  'Thanks for being so awesome. High',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15.sp,
+                                                      fontWeight: FontWeight.bold),
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ],
