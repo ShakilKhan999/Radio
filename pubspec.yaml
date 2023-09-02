@@ -55,6 +55,8 @@ dependencies:
   webview_flutter: ^4.0.2
   just_audio: ^0.9.34
   fluttertoast: ^8.0.8
+  http:
+  shared_preferences: ^2.1.2
 
 
 

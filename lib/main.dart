@@ -24,7 +24,7 @@ import 'package:relaks_media/screens/news_screen.dart';
 import 'package:relaks_media/screens/others_services_screen.dart';
 import 'package:relaks_media/screens/otp_screen.dart';
 import 'package:relaks_media/screens/reset_password_screen.dart';
-import 'package:relaks_media/screens/singup/signup_screen.dart';
+import 'package:relaks_media/screens/singup/view/signup_screen.dart';
 import 'package:relaks_media/screens/splash_screen.dart';
 import 'package:relaks_media/screens/station_screen.dart';
 import 'package:relaks_media/screens/train_screen.dart';

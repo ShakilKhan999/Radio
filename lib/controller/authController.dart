@@ -21,14 +21,14 @@ class AuthController extends GetxController{
     }
   }
 
-  Future<void> SignUp() async {
-    User? user = await AuthServiece().registerWithEmailAndPassword(mailController.text, passController.text);
-    if (user != null) {
-      print('User registered: ${user.email}');
-      Get.offAll(BottomNavigation());
-    } else {
-      print('Registration failed.');
-      // Show an error message to the user
-    }
-  }
+  // Future<void> SignUp() async {
+  //   User? user = await AuthServiece().registerWithEmailAndPassword(mailController.text, passController.text);
+  //   if (user != null) {
+  //     print('User registered: ${user.email}');
+  //     Get.offAll(BottomNavigation());
+  //   } else {
+  //     print('Registration failed.');
+  //     // Show an error message to the user
+  //   }
+  // }
 }
