@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:relaks_media/controller/radio_controller.dart';
 import 'package:relaks_media/screens/career_screen.dart';
 import 'package:relaks_media/screens/downlode_screen.dart';
 import 'package:relaks_media/screens/live_radio_screen.dart';
@@ -50,6 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.put(HomeController());
+    RadioController radioController = Get.put(RadioController());
+    final AudioPlayer _audioPlayer = AudioPlayer();
     return Obx(() =>
     homeController.homestate.value == 1
         ? NewsScreen()
@@ -107,13 +111,36 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Image.asset('images/readio_Floting.png',height: 40,width: 40,fit: BoxFit.fill,)),
                       ),
                       SizedBox(width: 8),
-                      Text('Relaks Bangla - Live',style: TextStyle(fontFamily: 'Poppins',fontSize: 15.sp,fontWeight: FontWeight.bold),),
+                      Text('${radioController.getSelectedChName()} - Live',style: TextStyle(fontFamily: 'Poppins',fontSize: 15.sp,fontWeight: FontWeight.bold),),
                     ],
                   ),
-                  Obx(() => IconButton(onPressed: () {
-                    homeController.radioplaying.value ? homeController
-                        .radioplaying.value=false : homeController.radioplaying.value=true;
-                  }, icon: homeController.radioplaying.value?Icon(Icons.pause): ImageIcon(
+                  Obx(() => IconButton(onPressed: () async{
+                    // homeController.radioplaying.value ? homeController
+                    //     .radioplaying.value=false : homeController.radioplaying.value=true;
+                    // await _audioPlayer.setUrl(
+                    //   '${radioController.selectedRadioLink.value}',
+                    // );
+                    // if(radioController.playing.value)
+                    //   {
+                    //     await _audioPlayer.stop().then((value) => radioController.playing.value==false);
+                    //   }
+                    // else{
+                    //   await _audioPlayer.playing?
+                    //   await _audioPlayer.stop():
+                    //   await _audioPlayer.play();
+                    //   radioController.playing.value=true;
+                    // }
+                    // radioController.playing.value=radioController.playing.value?
+                    // radioController.playing.value==false:radioController.playing.value=true;
+                    // await _audioPlayer.setUrl(
+                    //   '${radioController.selectedRadioLink.value}',
+                    // );
+                    // await _audioPlayer.stop();
+                    // radioController.playing.value==false? await _audioPlayer.stop():
+                    // await _audioPlayer.stop().then((value) async => await _audioPlayer.play());
+
+                    radioController.playRadio();
+                  }, icon: radioController.playing.value?Icon(Icons.pause): ImageIcon(
                     AssetImage('images/play.png'),
                     size: 15.sp,color: Colors.white,),),
                   )
@@ -135,94 +162,97 @@ class _HomeScreenState extends State<HomeScreen> {
                 return ClipRRect(
                   borderRadius:
                   BorderRadius.circular(30),
-                  child: Card(
-                    color: Colors.grey.shade900,
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'images/image1.png',
-                          fit: BoxFit.cover,
-                        ),
-                        Row(
-                          children: [
-                            Padding(
-                              padding:
-                              EdgeInsets.only(
-                                  left: 8.0),
-                              child: Text(
-                                'Upcoming Show',
-                                style: TextStyle(
-                                  fontSize: 20.sp,
-                                  color: Colors.white,
-                                  fontWeight:
-                                  FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 10.0.sp),
-                          child: Row(
+                  child: SizedBox(
+                    child: Card(
+                      color: Colors.grey.shade900,
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            'images/image1.png',
+                            fit: BoxFit.cover,height: 150.h,width: 328.w,
+                          ),
+                          SizedBox(height: 10.h,),
+                          Row(
                             children: [
-                              Text(
-                                'Friday',
-                                style: TextStyle(
+                              Padding(
+                                padding:
+                                EdgeInsets.only(
+                                    left: 8.0),
+                                child: Text(
+                                  'Upcoming Show',
+                                  style: TextStyle(
                                     fontSize: 20.sp,
-                                    color:
-                                    Colors.white),
-                              ),
-                              Text(
-                                ' | ',
-                                style: TextStyle(
-                                    fontSize: 20.sp,
-                                    color:
-                                    Colors.white),
-                              ),
-                              Container(
-                                child: Image.asset(
-                                  'images/bdflag.png',
-                                  height: 10.h,
-                                  width: 15.w,
-                                  fit: BoxFit.cover,
+                                    color: Colors.white,
+                                    fontWeight:
+                                    FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                ' 9:00 AM ',
-                                style: TextStyle(
-                                    fontSize: 20.sp,
-                                    color:
-                                    Colors.white),
-                              ),
-                              Container(
-                                child: Image.asset(
-                                  'images/usflag.png',
-                                  height: 10.h,
-                                  width: 15.w,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Text(
-                                ' 4:00 AM',
-                                style: TextStyle(
-                                    fontSize: 20.sp,
-                                    color:
-                                    Colors.white),
                               ),
                             ],
                           ),
-                        )
-                      ],
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: 10.0.sp),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Friday',
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      color:
+                                      Colors.white),
+                                ),
+                                Text(
+                                  ' | ',
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      color:
+                                      Colors.white),
+                                ),
+                                Container(
+                                  child: Image.asset(
+                                    'images/bdflag.png',
+                                    height: 8.h,
+                                    width: 12.w,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Text(
+                                  ' 9:00 AM ',
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      color:
+                                      Colors.white),
+                                ),
+                                Container(
+                                  child: Image.asset(
+                                    'images/usflag.png',
+                                    height: 8.h,
+                                    width: 12.w,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Text(
+                                  ' 4:00 AM',
+                                  style: TextStyle(
+                                      fontSize: 15.sp,
+                                      color:
+                                      Colors.white),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 );
               }).toList(),
               options: CarouselOptions(
-                height: 240.h,
+                height: 250.h,
                 enlargeCenterPage: true,
                 autoPlay: true,
                 onPageChanged: (index,reason)=>setState(()=>activeIndex=index),
@@ -289,76 +319,73 @@ class _HomeScreenState extends State<HomeScreen> {
                 BorderRadius.circular(10),
                 child: Card(
                   color: Colors.grey.shade900,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            right: 250.sp),
-                        child: Text(
-                          'Relaks Top 50',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20.sp),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 15.h,
                         ),
-                      ),
-                      Container(
-                        height: 180.h,
-                        child: ListView.builder(
-                          scrollDirection:
-                          Axis.horizontal,
-                          itemCount: imageList.length,
-                          itemBuilder:
-                              (context, index) {
-                            return Container(
-                              margin:
-                              EdgeInsets.all(5),
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    imageList[index],
-                                    fit: BoxFit.cover,
-                                    height: 100.h,
-                                    width: 150.w,
-                                  ),
-                                  SizedBox(
-                                    height: 15.h,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment
-                                        .start,
-                                    children: [
-                                      Text(
-                                        'Eajdiger Hero',
-                                        style: TextStyle(
-                                            fontSize:
-                                            17.sp,
-                                            color: Colors
-                                                .white),
-                                      ),
-                                      SizedBox(
-                                        height: 3.h,
-                                      ),
-                                      Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment
-                                            .start,
-                                        children: [
-                                          const Icon(
-                                            Icons
-                                                .play_circle_fill_outlined,
-                                            color: Colors
-                                                .grey,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets
-                                                .only(
-                                                top:
-                                                4.0),
-                                            child:
+                        Padding(
+                          padding: EdgeInsets.only(
+                              right: 220.sp),
+                          child: Text(
+                            'Relaks Top 50',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.sp),
+                          ),
+                        ),
+                        SizedBox(height: 10.h,),
+                        Container(
+                          height: 180.h,
+                          child: ListView.builder(
+                            scrollDirection:
+                            Axis.horizontal,
+                            itemCount: imageList.length,
+                            itemBuilder:
+                                (context, index) {
+                              return Container(
+                                margin:
+                                EdgeInsets.all(5),
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      imageList[index],
+                                      fit: BoxFit.cover,
+                                      height: 100.h,
+                                      width: 150.w,
+                                    ),
+                                    SizedBox(
+                                      height: 15.h,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment
+                                          .start,
+                                      children: [
+                                        Text(
+                                          'Eajdiger Hero',
+                                          style: TextStyle(
+                                              fontSize:
+                                              17.sp,
+                                              color: Colors
+                                                  .white),
+                                        ),
+                                        SizedBox(
+                                          height: 5.h,
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            const Icon(
+                                              Icons
+                                                  .play_circle_outline_outlined,
+                                              color: Colors
+                                                  .grey,size: 15,
+                                            ),
                                             Text(
                                               '1.4K Play',
                                               style: TextStyle(
@@ -367,18 +394,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   color: Colors.white
                                                       .withOpacity(0.4)),
                                             ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            );
-                          },
+                                          ],
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -405,61 +432,58 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontSize: 20.sp),
                         ),
                       ),
-                      Container(
-                        height: 180.h,
-                        child: ListView.builder(
-                          scrollDirection:
-                          Axis.horizontal,
-                          itemCount: imageList.length,
-                          itemBuilder:
-                              (context, index) {
-                            return Container(
-                              margin:
-                              EdgeInsets.all(5),
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    imageList[index],
-                                    fit: BoxFit.cover,
-                                    height: 100.h,
-                                    width: 150.w,
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment
-                                        .start,
-                                    children: [
-                                      Text(
-                                        'Eajdiger Hero',
-                                        style: TextStyle(
-                                            fontSize:
-                                            17.sp,
-                                            color: Colors
-                                                .white),
-                                      ),
-                                      SizedBox(
-                                        height: 3.h,
-                                      ),
-                                      Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment
-                                            .start,
-                                        children: [
-                                          Icon(
-                                            Icons
-                                                .play_circle_fill_outlined,
-                                            color: Colors
-                                                .grey,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets
-                                                .only(
-                                                top:
-                                                3.0),
-                                            child:
+                      SizedBox(height: 10.h,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: SizedBox(
+                          height: 180.h,
+                          child: ListView.builder(
+                            scrollDirection:
+                            Axis.horizontal,
+                            itemCount: imageList.length,
+                            itemBuilder:
+                                (context, index) {
+                              return Container(
+                                margin:
+                                EdgeInsets.all(5),
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      imageList[index],
+                                      fit: BoxFit.cover,
+                                      height: 100.h,
+                                      width: 150.w,
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment
+                                          .start,
+                                      children: [
+                                        Text(
+                                          'Eajdiger Hero',
+                                          style: TextStyle(
+                                              fontSize:
+                                              17.sp,
+                                              color: Colors
+                                                  .white),
+                                        ),
+                                        SizedBox(
+                                          height: 3.h,
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .start,
+                                          children: [
+                                            Icon(
+                                              Icons
+                                                  .play_circle_outline_outlined,
+                                              color: Colors
+                                                  .grey,size: 15,
+                                            ),
                                             Text(
                                               '1.4K Play',
                                               style: TextStyle(
@@ -468,15 +492,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   color: Colors.white
                                                       .withOpacity(0.4)),
                                             ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            );
-                          },
+                                          ],
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ],
@@ -877,7 +901,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                            right: 250.sp),
+                            right: 270.sp),
                         child: Text(
                           'Relaks Top 50',
                           style: TextStyle(

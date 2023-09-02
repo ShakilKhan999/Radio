@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:relaks_media/controller/otherservice_controller.dart';
 import 'package:relaks_media/screens/bus_ticket_screen.dart';
 
 import '../controller/home_controller.dart';
@@ -13,6 +14,7 @@ class BusServiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.put(HomeController());
+    OtherServiceController otherServiceController = Get.put(OtherServiceController());
     return Obx(()=>homeController.busstate==1?BusTicketScreen():SafeArea(
       child: Scaffold(
         body: Container(
@@ -52,6 +54,7 @@ class BusServiceScreen extends StatelessWidget {
                                   Text('Bus',style: TextStyle(color: Colors.white,fontSize: 30.sp),),
                                   GestureDetector(
                                     onTap: (){
+                                      otherServiceController.busSite=0;
                                       homeController.busstate.value=1;
                                     },
                                     child: Padding(
@@ -67,6 +70,7 @@ class BusServiceScreen extends StatelessWidget {
                                   ),
                                   GestureDetector(
                                     onTap: (){
+                                      otherServiceController.busSite=1;
                                       homeController.busstate.value=1;
                                     },
                                     child: Padding(
@@ -82,6 +86,7 @@ class BusServiceScreen extends StatelessWidget {
                                   ),
                                   GestureDetector(
                                     onTap: (){
+                                      otherServiceController.busSite=2;
                                       homeController.busstate.value=1;
                                     },
                                     child: Padding(

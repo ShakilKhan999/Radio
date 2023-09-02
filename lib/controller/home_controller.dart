@@ -13,7 +13,6 @@ class HomeController extends GetxController{
   var paymentmethodtypestate=0.obs;
   var downloadestate = 0.obs;
   var radioplaying=false.obs;
-
   var liveRadio = 0.obs;
 
   var newsCurrentPage = 0.obs;

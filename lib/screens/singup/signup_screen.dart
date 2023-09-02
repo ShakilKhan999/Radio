@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 
-import '../utils/glass_box.dart';
+import '../../controller/authController.dart';
+import '../../utils/glass_box.dart';
 
 class SignupScreen extends StatefulWidget {
   static const String routeName='/signup';
@@ -29,10 +32,12 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController =
+    Get.put(AuthController());
     return SafeArea(
       child: Scaffold(
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('images/splash.png'),
               fit: BoxFit.cover,
@@ -53,7 +58,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
                               child: SizedBox(
-                                  height: MediaQuery.of(context).size.height-270,
+                                  height: MediaQuery.of(context).size.height-250,
                                   width:MediaQuery.of(context).size.width-80,
                                   child: Column(
                                     children: [
@@ -73,9 +78,12 @@ class _SignupScreenState extends State<SignupScreen> {
                                           SizedBox(
                                             height: 50.h,
                                             child: TextFormField(
-                                              controller: emailController,
+                                              controller: authController.mailController,
                                               decoration: const InputDecoration(
-
+                                                hintText: 'example@gmail.com',
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontFamily: 'Poppins'),
                                                 focusedBorder: OutlineInputBorder(
                                                     borderSide: BorderSide(
                                                         color: Colors.grey,
@@ -105,7 +113,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                             child: TextFormField(
                                               controller: phoneController,
                                               decoration: const InputDecoration(
-
+                                                hintText: '+88154654654',
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontFamily: 'Poppins'),
                                                 focusedBorder: OutlineInputBorder(
                                                     borderSide: BorderSide(
                                                         color: Colors.grey,
@@ -133,10 +144,13 @@ class _SignupScreenState extends State<SignupScreen> {
                                           SizedBox(
                                             height: 50.h,
                                             child: TextFormField(
-                                              controller: passwordController,
+                                              controller: authController.passController,
                                               obscureText: !visiblepass,
                                               decoration: InputDecoration(
-
+                                                hintText: '*************',
+                                                hintStyle: const TextStyle(
+                                                    color: Colors.grey,
+                                                    fontFamily: 'Poppins'),
                                                 focusedBorder: const OutlineInputBorder(
                                                     borderSide: BorderSide(
                                                         color: Colors.grey,
@@ -190,6 +204,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                               controller: conPasswordController,
                                               obscureText: !visiblepass,
                                               decoration: InputDecoration(
+                                                hintText: '*************',
+                                                hintStyle: const TextStyle(
+                                                    color: Colors.grey,
+                                                    fontFamily: 'Poppins'),
                                                 focusedBorder:
                                                 const OutlineInputBorder(
                                                     borderSide: BorderSide(
@@ -240,6 +258,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                           ),
                                           Center(
                                             child: Container(
+                                              height: 40.sp,
+                                              width: 300.w,
                                               decoration: BoxDecoration(
                                                 gradient: LinearGradient(
                                                   colors: [
@@ -251,24 +271,56 @@ class _SignupScreenState extends State<SignupScreen> {
                                                   begin: Alignment.topLeft,
                                                   end: Alignment.bottomRight,
                                                 ),
-                                                borderRadius: BorderRadius.circular(9.0),
+                                                borderRadius: BorderRadius.circular(5.0),
                                               ),
                                               child: ElevatedButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  if(authController.mailController.text==null ||authController.mailController.text=='' )
+                                                  {
+                                                    Fluttertoast.showToast(
+                                                      msg: 'Enter email address',
+                                                      toastLength: Toast.LENGTH_SHORT,
+                                                      gravity: ToastGravity.BOTTOM,
+                                                      backgroundColor: Colors.grey,
+                                                      textColor: Colors.white,
+                                                    );
+                                                  }
+                                                  else if(authController.passController.text==null ||authController.passController.text=='' || authController.passController.text.length<6)
+                                                  {
+                                                    Fluttertoast.showToast(
+                                                      msg: 'Enter valid password',
+                                                      toastLength: Toast.LENGTH_SHORT,
+                                                      gravity: ToastGravity.BOTTOM,
+                                                      backgroundColor: Colors.grey,
+                                                      textColor: Colors.white,
+                                                    );
+                                                  }
+                                                  else if(authController.passController.text!=conPasswordController.text)
+                                                  {
+                                                    Fluttertoast.showToast(
+                                                      msg: 'Confirm Password',
+                                                      toastLength: Toast.LENGTH_SHORT,
+                                                      gravity: ToastGravity.BOTTOM,
+                                                      backgroundColor: Colors.grey,
+                                                      textColor: Colors.white,
+                                                    );
+                                                  }
+                                                  else
+                                                    {
+                                                      authController.SignUp();
+                                                    }
+                                                },
                                                 style: ElevatedButton.styleFrom(
                                                   backgroundColor: Colors.transparent,
                                                   elevation: 0,
                                                 ),
-                                                child: Container(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 80.0.sp, vertical: 6.0.sp),
-                                                  child: Text(
-                                                    'Signup',
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 16.0.sp,
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
+                                                child: Text(
+                                                  'Signup',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Poppins',
+                                                    color: Colors.white,
+                                                    fontSize: 17.0.sp,
+
                                                   ),
                                                 ),
                                               ),
@@ -294,7 +346,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                       ),
                                                       child: Row(
                                                         children: [
-                                                          Image.asset('images/Google.png',width: 30.w),
+                                                          Image.asset('images/Google.png',width: 20.w),
                                                           Text(
                                                             'Google',
                                                             style: TextStyle(

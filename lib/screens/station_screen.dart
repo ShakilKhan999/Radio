@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:relaks_media/screens/maintaince_screen.dart';
 
+import '../controller/radio_controller.dart';
 import '../utils/glass_box.dart';
 
 class StationScreen extends StatelessWidget {
@@ -11,6 +13,7 @@ class StationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    RadioController radioController = Get.put(RadioController());
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -101,7 +104,10 @@ class StationScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(25)),
                                           child: TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                radioController.selectedChannel.value=0;
+                                                radioController.selectedRadioLink.value='https://s3.voscast.com:9893/live';
+                                              },
                                               child: Row(
                                                 children: [
                                                   Image.asset(
@@ -140,7 +146,10 @@ class StationScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(25)),
                                           child: TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                radioController.selectedChannel.value=1;
+                                                radioController.selectedRadioLink.value='https://s3.voscast.com:9893/live';
+                                              },
                                               child: Row(
                                                 children: [
                                                   Image.asset(
@@ -183,7 +192,10 @@ class StationScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(25)),
                                           child: TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                radioController.selectedChannel.value=2;
+                                                radioController.selectedRadioLink.value='https://s1.voscast.com:11349/live';
+                                              },
                                               child: Row(
                                                 children: [
                                                   Image.asset(
@@ -222,7 +234,10 @@ class StationScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(25)),
                                           child: TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                radioController.selectedChannel.value=3;
+                                                radioController.selectedRadioLink.value='https://s3.voscast.com:10859/live';
+                                              },
                                               child: Row(
                                                 children: [
                                                   Image.asset(
@@ -265,7 +280,10 @@ class StationScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(25)),
                                           child: TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                radioController.selectedChannel.value=4;
+                                                radioController.selectedRadioLink.value='https://s3.voscast.com:10885/live';
+                                              },
                                               child: Row(
                                                 children: [
                                                   Image.asset(
@@ -304,7 +322,10 @@ class StationScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(25)),
                                           child: TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                radioController.selectedChannel.value=5;
+                                                radioController.selectedRadioLink.value='https://s3.voscast.com:10769/live';
+                                              },
                                               child: Row(
                                                 children: [
                                                   Image.asset(
@@ -347,7 +368,10 @@ class StationScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(25)),
                                           child: TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                radioController.selectedChannel.value=6;
+                                                radioController.selectedRadioLink.value='https://s3.voscast.com:10821/live';
+                                              },
                                               child: Row(
                                                 children: [
                                                   Image.asset(
@@ -386,7 +410,9 @@ class StationScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(25)),
                                           child: TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                radioController.selectedChannel.value=7;
+                                              },
                                               child: Row(
                                                 children: [
                                                   Image.asset(
@@ -395,7 +421,7 @@ class StationScreen extends StatelessWidget {
                                                     width: 35,
                                                   ),
                                                   Text(
-                                                    'Relaks Radio TV',
+                                                    'Relaks Radio \nTV',
                                                     style: TextStyle(
                                                         color: Colors.white),
                                                   )
@@ -429,7 +455,10 @@ class StationScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(25)),
                                           child: TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                radioController.selectedChannel.value=8;
+                                                radioController.selectedRadioLink.value='https://s3.voscast.com:10071/live';
+                                              },
                                               child: Row(
                                                 children: [
                                                   Image.asset(
@@ -468,7 +497,9 @@ class StationScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(25)),
                                           child: TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                radioController.selectedChannel.value=9;
+                                              },
                                               child: Row(
                                                 children: [
                                                   Image.asset(
@@ -477,7 +508,7 @@ class StationScreen extends StatelessWidget {
                                                     width: 35.w,
                                                   ),
                                                   Text(
-                                                    'Relaks News 24',
+                                                    'Relaks News \n24',
                                                     style: TextStyle(
                                                         color: Colors.white),
                                                   )
@@ -511,7 +542,9 @@ class StationScreen extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(25)),
                                           child: TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                radioController.selectedChannel.value=10;
+                                              },
                                               child: Row(
                                                 children: [
                                                   Image.asset(
@@ -534,8 +567,7 @@ class StationScreen extends StatelessWidget {
                                     ),
                                     Container(
                                       height: 40.h,
-                                      width: MediaQuery.of(context).size.width -
-                                          120.w,
+                                      width: 287.w,
                                       decoration: BoxDecoration(
                                           border: Border.all(
                                               color: Colors.transparent),
@@ -543,8 +575,16 @@ class StationScreen extends StatelessWidget {
                                               BorderRadius.circular(20)),
                                       child: ElevatedButton(
                                           onPressed: () {
-                                            Navigator.pushNamed(context,
-                                                MaintainceScreen.routeName);
+                                            if(radioController.selectedChannel.value==0 ||radioController.selectedChannel.value==7
+                                            || radioController.selectedChannel.value==9 || radioController.selectedChannel.value==10)
+                                              {
+                                                Navigator.pushNamed(context,
+                                                    MaintainceScreen.routeName);
+                                              }
+                                            else{
+                                              Get.back();
+                                            }
+
                                           },
                                           style: ElevatedButton.styleFrom(
                                               shape: RoundedRectangleBorder(
@@ -557,7 +597,7 @@ class StationScreen extends StatelessWidget {
                                             'Switch your Station',
                                             style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 20.sp),
+                                                fontSize: 18.sp),
                                           )),
                                     ),
                                   ],

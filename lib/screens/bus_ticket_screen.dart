@@ -1,16 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:relaks_media/controller/otherservice_controller.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../controller/home_controller.dart';
 import '../utils/glass_box.dart';
 
-class BusTicketScreen extends StatelessWidget {
+class BusTicketScreen extends StatefulWidget {
   static const String routeName='/busticket';
   const BusTicketScreen({super.key});
 
   @override
+  State<BusTicketScreen> createState() => _BusTicketScreenState();
+}
+
+class _BusTicketScreenState extends State<BusTicketScreen> {
+  OtherServiceController otherServiceController = Get.put(OtherServiceController());
+int siteno=0;
+  String link='https://www.shohoz.com/bus-tickets';
+
+  @override
+  void initState() {
+    link=otherServiceController.busSite==0?'https://bdtickets.com/':
+    otherServiceController.busSite==1?'https://www.shohoz.com/bus-tickets':
+    otherServiceController.busSite==2?'https://paribahan.com/':'https://www.shohoz.com/bus-tickets';
+    super.initState();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
+    final controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(const Color(0x00000000))
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+            // Update loading bar.
+          },
+          onPageStarted: (String url) {},
+          onPageFinished: (String url) {},
+          onWebResourceError: (WebResourceError error) {},
+          onNavigationRequest: (NavigationRequest request) {
+            if (request.url.startsWith('https://www.youtube.com/')) {
+              return NavigationDecision.prevent;
+            }
+            return NavigationDecision.navigate;
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(link));
+
     HomeController homeController = Get.put(HomeController());
     return SafeArea(
       child: Scaffold(
@@ -46,11 +87,7 @@ class BusTicketScreen extends StatelessWidget {
                           child: SizedBox(
                               height: MediaQuery.of(context).size.height-350.h,
                               width:MediaQuery.of(context).size.width-80.w,
-                              child: Column(
-                                children: [
-                                  Image.asset('images/busticket.png')
-                                ],
-                              )),
+                              child: WebViewWidget(controller: controller,)),
                         ),
 
                       ),

@@ -204,7 +204,7 @@ class _NewsScreenState extends State<NewsScreen> {
             //   ),
             // );
           },
-          label: Text('Publish News'),
+          label: Text('Publish News',style: TextStyle(fontSize: 14.sp,fontFamily: 'Poppins',fontWeight: FontWeight.w600),),
           backgroundColor: Color(0xffffEA1C24),
         ) : Container(),
       ),

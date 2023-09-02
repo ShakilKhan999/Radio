@@ -115,6 +115,8 @@ class _OtpScreenState extends State<OtpScreen> {
                                       ),
                                       Center(
                                         child: Container(
+                                          height: 40.h,
+                                          width: 296.w,
                                           decoration: BoxDecoration(
                                             gradient: LinearGradient(
                                               colors: [
@@ -133,19 +135,17 @@ class _OtpScreenState extends State<OtpScreen> {
                                               backgroundColor: Colors.transparent,
                                               elevation: 0,
                                             ),
-                                            child: Container(
-                                              padding: EdgeInsets.symmetric(horizontal: 80.0.sp, vertical: 6.0.sp),
-                                              child: TextButton(
-                                                onPressed: (){
-                                                  Navigator.pushNamed(context, ResetPassword.routeName);
-                                                },
-                                                child: Text(
-                                                  'Submit',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16.0.sp,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
+                                            child: TextButton(
+                                              onPressed: (){
+                                                Navigator.pushNamed(context, ResetPassword.routeName);
+                                              },
+                                              child: Text(
+                                                'Submit',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16.0.sp,
+
+                                                  fontFamily: 'Poppins',
                                                 ),
                                               ),
                                             ),
