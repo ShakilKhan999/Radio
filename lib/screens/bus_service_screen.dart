@@ -45,7 +45,7 @@ class BusServiceScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: SizedBox(
-                              height: MediaQuery.of(context).size.height-600,
+                              height: MediaQuery.of(context).size.height-500,
                               width:MediaQuery.of(context).size.width-80,
                               child: Column(
                                 children: [
@@ -104,7 +104,6 @@ class BusServiceScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-
               ],
             ),
           ),

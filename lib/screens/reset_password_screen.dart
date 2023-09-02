@@ -56,7 +56,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                             padding: const EdgeInsets.all(16.0),
                             child: SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.height - 520,
+                                    MediaQuery.of(context).size.height - 520.h,
                                 width: MediaQuery.of(context).size.width - 80,
                                 child: Column(
                                   children: [
@@ -226,14 +226,15 @@ class _ResetPasswordState extends State<ResetPassword> {
                                               ),
                                               child: Container(
                                                 padding: EdgeInsets.symmetric(
-                                                    horizontal: 110.0.sp,
+                                                    horizontal: 100.0.sp,
                                                     vertical: 6.0.sp),
                                                 child: Text(
                                                   'Submit',
                                                   style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 18.0.sp,
-                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16.0.sp,
+                                                    fontFamily: 'Poppins',
+                                                    fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
                                               ),

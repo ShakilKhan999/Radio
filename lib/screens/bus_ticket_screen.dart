@@ -44,8 +44,8 @@ class BusTicketScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: SizedBox(
-                              height: MediaQuery.of(context).size.height-350,
-                              width:MediaQuery.of(context).size.width-80,
+                              height: MediaQuery.of(context).size.height-350.h,
+                              width:MediaQuery.of(context).size.width-80.w,
                               child: Column(
                                 children: [
                                   Image.asset('images/busticket.png')

@@ -1,7 +1,7 @@
-// chat_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'conversation_screen.dart';
+import 'message_request_screen.dart';
 
 class ChatScreen extends StatelessWidget {
   static const String routeName = '/chat';
@@ -28,7 +28,7 @@ class ChatScreen extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding:  EdgeInsets.all(16.0.sp),
+            padding: EdgeInsets.all(16.0.sp),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -68,12 +68,49 @@ class ChatScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                Text(
-                  'Message Requests: 2',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    color: Colors.white,
-                    fontSize: 18.0.sp,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      MessageRequestScreen.routeName,
+                      arguments: chatAccounts,
+                    );
+                  },
+                 child: Row(
+                    children: [
+                      Text(
+                        'Message Request',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Poppins',
+                          fontSize: 18.0.sp,
+                        ),
+                      ),
+                      SizedBox(width: 5.0.w),
+                      Container(
+                        height: 25.sp,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(
+                            colors: [Colors.grey, Colors.black],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                          ),
+                        ),
+                        child: CircleAvatar(
+                          backgroundColor: Colors.transparent,
+                          child: Text(
+                            '2',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Poppins',
+                              fontSize: 18.0.sp,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

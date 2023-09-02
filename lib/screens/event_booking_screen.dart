@@ -51,7 +51,7 @@ class EventBookingScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: MediaQuery.of(context).size.height-450,
+                                  height: MediaQuery.of(context).size.height-400,
                                   width:MediaQuery.of(context).size.width-80,
                                   child: Column(
                                     children: [
@@ -133,7 +133,7 @@ class EventBookingScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: MediaQuery.of(context).size.height-450,
+                                  height: MediaQuery.of(context).size.height-400,
                                   width:MediaQuery.of(context).size.width-80,
                                   child: Column(
                                     children: [

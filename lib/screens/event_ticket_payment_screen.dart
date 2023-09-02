@@ -54,7 +54,7 @@ class EventTicketPayment extends StatelessWidget {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: MediaQuery.of(context).size.height-280,
+                                  height: MediaQuery.of(context).size.height-250,
                                   width:MediaQuery.of(context).size.width-80,
                                   child: Column(
                                     children: [

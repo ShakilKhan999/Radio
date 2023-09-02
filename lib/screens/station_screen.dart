@@ -5,7 +5,8 @@ import 'package:relaks_media/screens/maintaince_screen.dart';
 import '../utils/glass_box.dart';
 
 class StationScreen extends StatelessWidget {
-  static const String routeName='/station';
+  static const String routeName = '/station';
+
   const StationScreen({super.key});
 
   @override
@@ -13,7 +14,7 @@ class StationScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('images/splash.png'),
               fit: BoxFit.cover,
@@ -30,19 +31,49 @@ class StationScreen extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(15.sp),
                         child: GlassBox(
-
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: SizedBox(
                                 height:
-                                MediaQuery.of(context).size.height - 400,
-                                width: MediaQuery.of(context).size.width - 80,
+                                    MediaQuery.of(context).size.height - 380.h,
+                                width: MediaQuery.of(context).size.width - 70.w,
                                 child: Column(
                                   children: [
-                                    Text(
-                                      'Reset Password',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 30.sp),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          'Switch Your Station',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: 'Poppins',
+                                              fontSize: 25.sp),
+                                        ),
+                                        SizedBox(
+                                          width: 15.w,
+                                        ),
+                                        Container(
+                                          height: 30.h,
+                                          width: 30.w,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey.shade700,
+                                              border: Border.all(
+                                                  color: Colors.transparent),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: IconButton(
+                                            icon: ImageIcon(
+                                              AssetImage('images/close.png'),
+                                              color: Colors.white,
+                                              size: 20.sp,
+                                            ),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        )
+                                      ],
                                     ),
                                     SizedBox(
                                       height: 30.h,
@@ -50,347 +81,478 @@ class StationScreen extends StatelessWidget {
                                     Row(
                                       children: [
                                         Container(
-                                          width:
-                                          MediaQuery.of(context).size.width -
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
                                               240.w,
-
+                                          height: 50.h,
                                           decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Colors.grey.shade500,
+                                                  Colors.grey.shade700,
+                                                ],
+                                                stops: [0.3, 1.0],
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                              ),
                                               border: Border.all(
                                                   color: Colors.transparent),
                                               borderRadius:
-                                              BorderRadius.circular(20)),
-                                          child: ElevatedButton(
+                                                  BorderRadius.circular(25)),
+                                          child: TextButton(
                                               onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.transparent,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(15),
-                                                ),
-                                              ),
                                               child: Row(
                                                 children: [
-                                                  Image.asset('images/Relaks Radio EU.png',height: 20,width: 25,),
-                                                  Text('Relaks Radio',style: TextStyle(color: Colors.white),)
+                                                  Image.asset(
+                                                    'images/Relaks Radio.png',
+                                                    height: 30.h,
+                                                    width: 35.w,
+                                                  ),
+                                                  Text(
+                                                    'Relaks Radio',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  )
                                                 ],
-                                              )
-                                          ),
+                                              )),
+                                        ),
+                                        SizedBox(
+                                          width: 5.w,
                                         ),
                                         Container(
-                                          width:
-                                          MediaQuery.of(context).size.width -
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
                                               240.w,
-
                                           decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Colors.grey.shade500,
+                                                  Colors.grey.shade700,
+                                                ],
+                                                stops: [0.3, 1.0],
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                              ),
                                               border: Border.all(
                                                   color: Colors.transparent),
                                               borderRadius:
-                                              BorderRadius.circular(20)),
-                                          child: ElevatedButton(
+                                                  BorderRadius.circular(25)),
+                                          child: TextButton(
                                               onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.transparent,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(15),
-                                                ),
-                                              ),
                                               child: Row(
                                                 children: [
-                                                  Image.asset('images/Relaks Radio Bangla Logo Png.png',height: 20,width: 25,),
-                                                  Text('Relaks Radio \nBangla',style: TextStyle(color: Colors.white),)
+                                                  Image.asset(
+                                                    'images/Relaks Radio Bangla.png',
+                                                    height: 30.h,
+                                                    width: 35.w,
+                                                  ),
+                                                  Text(
+                                                    'Relaks Radio \nBangla',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  )
                                                 ],
-                                              )
-                                          ),
+                                              )),
                                         ),
                                       ],
+                                    ),
+                                    SizedBox(
+                                      height: 5.h,
                                     ),
                                     Row(
                                       children: [
                                         Container(
-                                          width:
-                                          MediaQuery.of(context).size.width -
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
                                               240.w,
-
                                           decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Colors.grey.shade500,
+                                                  Colors.grey.shade700,
+                                                ],
+                                                stops: [0.3, 1.0],
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                              ),
                                               border: Border.all(
                                                   color: Colors.transparent),
                                               borderRadius:
-                                              BorderRadius.circular(20)),
-                                          child: ElevatedButton(
+                                                  BorderRadius.circular(25)),
+                                          child: TextButton(
                                               onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.transparent,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(15),
-                                                ),
-                                              ),
                                               child: Row(
                                                 children: [
-                                                  Image.asset('images/Relaks Radio Lanka.png',height: 20,width: 25,),
-                                                  Text('Relaks Radio \nLanka',style: TextStyle(color: Colors.white),)
+                                                  Image.asset(
+                                                    'images/Relaks Radio Lanka.png',
+                                                    height: 30.h,
+                                                    width: 35.w,
+                                                  ),
+                                                  Text(
+                                                    'Relaks Radio \nLanka',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  )
                                                 ],
-                                              )
-                                          ),
+                                              )),
+                                        ),
+                                        SizedBox(
+                                          width: 5.w,
                                         ),
                                         Container(
-                                          width:
-                                          MediaQuery.of(context).size.width -
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
                                               240.w,
-
                                           decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Colors.grey.shade500,
+                                                  Colors.grey.shade700,
+                                                ],
+                                                stops: [0.3, 1.0],
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                              ),
                                               border: Border.all(
                                                   color: Colors.transparent),
                                               borderRadius:
-                                              BorderRadius.circular(20)),
-                                          child: ElevatedButton(
+                                                  BorderRadius.circular(25)),
+                                          child: TextButton(
                                               onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.transparent,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(15),
-                                                ),
-                                              ),
                                               child: Row(
                                                 children: [
-                                                  Image.asset('images/Relaks Radio EU.png',height: 20,width: 25,),
-                                                  Text('Relaks Radio \nEU',style: TextStyle(color: Colors.white),)
+                                                  Image.asset(
+                                                    'images/Relaks Radio EU.png',
+                                                    height: 30.h,
+                                                    width: 35.w,
+                                                  ),
+                                                  Text(
+                                                    'Relaks Radio \nEU',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  )
                                                 ],
-                                              )
-                                          ),
+                                              )),
                                         ),
                                       ],
+                                    ),
+                                    SizedBox(
+                                      height: 5.h,
                                     ),
                                     Row(
                                       children: [
                                         Container(
-                                          width:
-                                          MediaQuery.of(context).size.width -
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
                                               240.w,
-
                                           decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Colors.grey.shade500,
+                                                  Colors.grey.shade700,
+                                                ],
+                                                stops: [0.3, 1.0],
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                              ),
                                               border: Border.all(
                                                   color: Colors.transparent),
                                               borderRadius:
-                                              BorderRadius.circular(20)),
-                                          child: ElevatedButton(
+                                                  BorderRadius.circular(25)),
+                                          child: TextButton(
                                               onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.transparent,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(15),
-                                                ),
-                                              ),
                                               child: Row(
                                                 children: [
-                                                  Image.asset('images/Relaks Radio EU.png',height: 20,width: 25,),
-                                                  Text('Relaks Radio \nTamil',style: TextStyle(color: Colors.white),)
+                                                  Image.asset(
+                                                    'images/Relaks Radio Tamil.png',
+                                                    height: 30.h,
+                                                    width: 35.w,
+                                                  ),
+                                                  Text(
+                                                    'Relaks Radio \nTamil',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  )
                                                 ],
-                                              )
-                                          ),
+                                              )),
+                                        ),
+                                        SizedBox(
+                                          width: 5.w,
                                         ),
                                         Container(
-                                          width:
-                                          MediaQuery.of(context).size.width -
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
                                               240.w,
-
                                           decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Colors.grey.shade500,
+                                                  Colors.grey.shade700,
+                                                ],
+                                                stops: [0.3, 1.0],
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                              ),
                                               border: Border.all(
                                                   color: Colors.transparent),
                                               borderRadius:
-                                              BorderRadius.circular(20)),
-                                          child: ElevatedButton(
+                                                  BorderRadius.circular(25)),
+                                          child: TextButton(
                                               onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.transparent,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(15),
-                                                ),
-                                              ),
                                               child: Row(
                                                 children: [
-                                                  Image.asset('images/Relaks Radio India Png.png',height: 20,width: 25,),
-                                                  Text('Relaks Radio \nIndia',style: TextStyle(color: Colors.white),)
+                                                  Image.asset(
+                                                    'images/Relaks Radio India.png',
+                                                    height: 30.h,
+                                                    width: 35.w,
+                                                  ),
+                                                  Text(
+                                                    'Relaks Radio \nIndia',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  )
                                                 ],
-                                              )
-                                          ),
+                                              )),
                                         ),
                                       ],
+                                    ),
+                                    SizedBox(
+                                      height: 5.h,
                                     ),
                                     Row(
                                       children: [
                                         Container(
-                                          width:
-                                          MediaQuery.of(context).size.width -
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
                                               240.w,
                                           decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Colors.grey.shade500,
+                                                  Colors.grey.shade700,
+                                                ],
+                                                stops: [0.3, 1.0],
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                              ),
                                               border: Border.all(
                                                   color: Colors.transparent),
                                               borderRadius:
-                                              BorderRadius.circular(20)),
-                                          child: ElevatedButton(
+                                                  BorderRadius.circular(25)),
+                                          child: TextButton(
                                               onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.transparent,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(15),
-                                                ),
-                                              ),
                                               child: Row(
                                                 children: [
-                                                  Image.asset('images/Relaks Radio Pakistan.png',height: 20,width: 25,),
-                                                  Text("Relaks Radio \nPakistan",style: TextStyle(color: Colors.white),)
+                                                  Image.asset(
+                                                    'images/Relaks Radio Pakistan.png',
+                                                    height: 30.h,
+                                                    width: 35.w,
+                                                  ),
+                                                  Text(
+                                                    "Relaks Radio \nPakistan",
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  )
                                                 ],
-                                              )
-                                          ),
+                                              )),
+                                        ),
+                                        SizedBox(
+                                          width: 5.w,
                                         ),
                                         Container(
-                                          width:
-                                          MediaQuery.of(context).size.width -
-                                              240.w,
-
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              235.w,
                                           decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Colors.grey.shade500,
+                                                  Colors.grey.shade700,
+                                                ],
+                                                stops: [0.3, 1.0],
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                              ),
                                               border: Border.all(
                                                   color: Colors.transparent),
                                               borderRadius:
-                                              BorderRadius.circular(20)),
-                                          child: ElevatedButton(
+                                                  BorderRadius.circular(25)),
+                                          child: TextButton(
                                               onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.transparent,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(15),
-                                                ),
-                                              ),
                                               child: Row(
                                                 children: [
-                                                  Image.asset('images/Relaks tv.png',height: 20,width: 25,),
-                                                  Text('Relaks Radio TV',style: TextStyle(color: Colors.white),)
+                                                  Image.asset(
+                                                    'images/Relaks Tv.png',
+                                                    height: 30,
+                                                    width: 35,
+                                                  ),
+                                                  Text(
+                                                    'Relaks Radio TV',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  )
                                                 ],
-                                              )
-                                          ),
+                                              )),
                                         ),
                                       ],
+                                    ),
+                                    SizedBox(
+                                      height: 5.h,
                                     ),
                                     Row(
                                       children: [
                                         Container(
-                                          width:
-                                          MediaQuery.of(context).size.width -
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
                                               240.w,
-
                                           decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Colors.grey.shade500,
+                                                  Colors.grey.shade700,
+                                                ],
+                                                stops: [0.3, 1.0],
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                              ),
                                               border: Border.all(
                                                   color: Colors.transparent),
                                               borderRadius:
-                                              BorderRadius.circular(20)),
-                                          child: ElevatedButton(
+                                                  BorderRadius.circular(25)),
+                                          child: TextButton(
                                               onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.transparent,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(15),
-                                                ),
-                                              ),
                                               child: Row(
                                                 children: [
-                                                  Image.asset('images/Relaks Radio Music.png',height: 20,width: 25,),
-                                                  Text('Relaks Radio \nMusic',style: TextStyle(color: Colors.white),)
+                                                  Image.asset(
+                                                    'images/Relaks Radio Music.png',
+                                                    height: 30,
+                                                    width: 35,
+                                                  ),
+                                                  Text(
+                                                    'Relaks Radio \nMusic',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  )
                                                 ],
-                                              )
-                                          ),
+                                              )),
+                                        ),
+                                        SizedBox(
+                                          width: 5.w,
                                         ),
                                         Container(
-                                          width:
-                                          MediaQuery.of(context).size.width -
-                                              240.w,
-
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              235.w,
                                           decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Colors.grey.shade500,
+                                                  Colors.grey.shade700,
+                                                ],
+                                                stops: [0.3, 1.0],
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                              ),
                                               border: Border.all(
                                                   color: Colors.transparent),
                                               borderRadius:
-                                              BorderRadius.circular(20)),
-                                          child: ElevatedButton(
+                                                  BorderRadius.circular(25)),
+                                          child: TextButton(
                                               onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.transparent,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(15),
-                                                ),
-                                              ),
                                               child: Row(
                                                 children: [
-                                                  Image.asset('images/Relaks News 24.png',height: 20,width: 25,),
-                                                  Text('Relaks News 24',style: TextStyle(color: Colors.white),)
+                                                  Image.asset(
+                                                    'images/Relaks News 24.png',
+                                                    height: 30.h,
+                                                    width: 35.w,
+                                                  ),
+                                                  Text(
+                                                    'Relaks News 24',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  )
                                                 ],
-                                              )
-                                          ),
+                                              )),
                                         ),
                                       ],
+                                    ),
+                                    SizedBox(
+                                      height: 5.h,
                                     ),
                                     Row(
                                       children: [
                                         Container(
-                                          width:
-                                          MediaQuery.of(context).size.width -
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
                                               240.w,
-
                                           decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Colors.grey.shade500,
+                                                  Colors.grey.shade700,
+                                                ],
+                                                stops: [0.3, 1.0],
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                              ),
                                               border: Border.all(
                                                   color: Colors.transparent),
                                               borderRadius:
-                                              BorderRadius.circular(20)),
-                                          child: ElevatedButton(
+                                                  BorderRadius.circular(25)),
+                                          child: TextButton(
                                               onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.transparent,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(15),
-                                                ),
-                                              ),
                                               child: Row(
                                                 children: [
-                                                  Image.asset('images/Relaks Radio EU.png',height: 20,width: 25,),
-                                                  Text('Relaks Star',style: TextStyle(color: Colors.white),)
+                                                  Image.asset(
+                                                    'images/Relaks Star.png',
+                                                    height: 30.h,
+                                                    width: 35.w,
+                                                  ),
+                                                  Text(
+                                                    'Relaks Star',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  )
                                                 ],
-                                              )
-                                          ),
+                                              )),
                                         ),
-
                                       ],
                                     ),
                                     SizedBox(
                                       height: 20.h,
                                     ),
                                     Container(
-                                      width:
-                                      MediaQuery.of(context).size.width -
-                                          120,
+                                      height: 40.h,
+                                      width: MediaQuery.of(context).size.width -
+                                          120.w,
                                       decoration: BoxDecoration(
                                           border: Border.all(
                                               color: Colors.transparent),
                                           borderRadius:
-                                          BorderRadius.circular(20)),
+                                              BorderRadius.circular(20)),
                                       child: ElevatedButton(
                                           onPressed: () {
-                                            Navigator.pushNamed(context, MaintainceScreen.routeName);
+                                            Navigator.pushNamed(context,
+                                                MaintainceScreen.routeName);
                                           },
                                           style: ElevatedButton.styleFrom(
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                BorderRadius.circular(15),
+                                                    BorderRadius.circular(25),
                                               ),
                                               backgroundColor:
-                                              Color(0xffffEA1C24)),
+                                                  Color(0xffffEA1C24)),
                                           child: Text(
                                             'Switch your Station',
                                             style: TextStyle(
