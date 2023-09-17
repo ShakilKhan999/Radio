@@ -57,6 +57,9 @@ dependencies:
   fluttertoast: ^8.0.8
   http:
   shared_preferences: ^2.1.2
+  provider:
+  image_picker:
+  audioplayers: ^4.1.0
 
 
 

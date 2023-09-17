@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:provider/provider.dart';
 import 'package:relaks_media/controller/radio_controller.dart';
 import 'package:relaks_media/screens/career_screen.dart';
 import 'package:relaks_media/screens/downlode_screen.dart';
@@ -13,6 +14,10 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../controller/home_controller.dart';
+import '../models/upcoming_show_model.dart';
+import '../provider/home_page_provider.dart';
+import '../utils/carousel_slider.dart';
+import 'audio_play_screen.dart';
 import 'fund_raising_screen].dart';
 import 'news_screen.dart';
 
@@ -48,6 +53,12 @@ class _HomeScreenState extends State<HomeScreen> {
     'Drama',
     'Drama',
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -157,112 +168,16 @@ class _HomeScreenState extends State<HomeScreen> {
         physics: AlwaysScrollableScrollPhysics(),
         child: Column(
           children: [
-            CarouselSlider(
-              items: images.map((imageUrl) {
-                return ClipRRect(
-                  borderRadius:
-                  BorderRadius.circular(30),
-                  child: SizedBox(
-                    child: Card(
-                      color: Colors.grey.shade900,
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'images/image1.png',
-                            fit: BoxFit.cover,height: 150.h,width: 328.w,
-                          ),
-                          SizedBox(height: 10.h,),
-                          Row(
-                            children: [
-                              Padding(
-                                padding:
-                                EdgeInsets.only(
-                                    left: 8.0),
-                                child: Text(
-                                  'Upcoming Show',
-                                  style: TextStyle(
-                                    fontSize: 20.sp,
-                                    color: Colors.white,
-                                    fontWeight:
-                                    FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: 10.0.sp),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Friday',
-                                  style: TextStyle(
-                                      fontSize: 15.sp,
-                                      color:
-                                      Colors.white),
-                                ),
-                                Text(
-                                  ' | ',
-                                  style: TextStyle(
-                                      fontSize: 15.sp,
-                                      color:
-                                      Colors.white),
-                                ),
-                                Container(
-                                  child: Image.asset(
-                                    'images/bdflag.png',
-                                    height: 8.h,
-                                    width: 12.w,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Text(
-                                  ' 9:00 AM ',
-                                  style: TextStyle(
-                                      fontSize: 15.sp,
-                                      color:
-                                      Colors.white),
-                                ),
-                                Container(
-                                  child: Image.asset(
-                                    'images/usflag.png',
-                                    height: 8.h,
-                                    width: 12.w,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Text(
-                                  ' 4:00 AM',
-                                  style: TextStyle(
-                                      fontSize: 15.sp,
-                                      color:
-                                      Colors.white),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
-              options: CarouselOptions(
-                height: 250.h,
-                enlargeCenterPage: true,
-                autoPlay: true,
-                onPageChanged: (index,reason)=>setState(()=>activeIndex=index),
-                autoPlayInterval:
-                Duration(seconds: 3),
-                autoPlayAnimationDuration:
-                Duration(milliseconds: 800),
-                pauseAutoPlayOnTouch: true,
-                viewportFraction: 0.8,
-              ),
+            Consumer<UpcomingShowProvider>(
+              builder: (context, provider, child) {
+                if (provider.isLoading) {
+                  Provider.of<UpcomingShowProvider>(context, listen: false).fetchUpcomingShows();
+                  return const Center(child: CircularProgressIndicator());
+                } else {
+                  final List<UpcomingShow> upcomingShows = provider.upcomingShows;
+                  return CarouselSliderWidget(objects: upcomingShows);
+                }
+              },
             ),
             SizedBox(height: 5.h,),
             buildIndicator(),
@@ -301,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         fit: BoxFit.cover,
                       ),
                       SizedBox(width: 3.w),
-                      Text(
+                      const Text(
                         'More Info',
                         style: TextStyle(
                             color: Colors.black),
@@ -321,90 +236,109 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.grey.shade900,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: 220.sp),
-                          child: Text(
-                            'Relaks Top 50',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.sp),
-                          ),
-                        ),
-                        SizedBox(height: 10.h,),
-                        Container(
-                          height: 180.h,
-                          child: ListView.builder(
-                            scrollDirection:
-                            Axis.horizontal,
-                            itemCount: imageList.length,
-                            itemBuilder:
-                                (context, index) {
-                              return Container(
-                                margin:
-                                EdgeInsets.all(5),
-                                child: Column(
-                                  children: [
-                                    Image.asset(
-                                      imageList[index],
-                                      fit: BoxFit.cover,
-                                      height: 100.h,
-                                      width: 150.w,
-                                    ),
-                                    SizedBox(
-                                      height: 15.h,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment
-                                          .start,
-                                      children: [
-                                        Text(
-                                          'Eajdiger Hero',
-                                          style: TextStyle(
-                                              fontSize:
-                                              17.sp,
-                                              color: Colors
-                                                  .white),
-                                        ),
-                                        SizedBox(
-                                          height: 5.h,
-                                        ),
-                                        Row(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment
-                                              .start,
-                                          children: [
-                                            const Icon(
-                                              Icons
-                                                  .play_circle_outline_outlined,
-                                              color: Colors
-                                                  .grey,size: 15,
-                                            ),
-                                            Text(
-                                              '1.4K Play',
-                                              style: TextStyle(
-                                                  fontSize:
-                                                  15.sp,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4)),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    )
-                                  ],
+                    child: Consumer<ApiProvider>(
+                      builder: (context, provider, child) {
+                        if (provider.isLoading) {
+                          Provider.of<ApiProvider>(context, listen: false).fetchData();
+                          return const Center(child: CircularProgressIndicator());
+                        } else {
+                          final List<Results>? dataList = provider.dataList;
+                          return Column(
+                            children: [
+                              SizedBox(
+                                height: 15.h,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    right: 220.sp),
+                                child: Text(
+                                  'Relaks Top 50',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.sp),
                                 ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
+                              ),
+                              SizedBox(height: 10.h,),
+                              Container(
+                                height: 180.h,
+                                child: ListView.builder(
+                                  scrollDirection:
+                                  Axis.horizontal,
+                                  itemCount: dataList?.length ?? 0,
+                                  itemBuilder:
+                                      (context, index) {
+                                        final Results data = dataList![index];
+                                    return InkWell(
+                                      onTap: (){
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => AudioPlayerScreen()),
+                                        );
+                                      },
+                                      child: Container(
+                                        margin:
+                                        EdgeInsets.all(5),
+                                        child: Column(
+                                          children: [
+                                            Image.network(
+                                              data.image ?? 'https://isowall.co.za/wp-content/uploads/2017/12/demo-image.jpg',
+                                              fit: BoxFit.cover,
+                                              height: 100.h,
+                                              width: 150.w,
+                                            ),
+                                            SizedBox(
+                                              height: 15.h,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment
+                                                  .start,
+                                              children: [
+                                                Text(
+                                                  data.title!,
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                      17.sp,
+                                                      color: Colors
+                                                          .white),
+                                                ),
+                                                SizedBox(
+                                                  height: 5.h,
+                                                ),
+                                                Row(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                                  children: [
+                                                    const Icon(
+                                                      Icons
+                                                          .play_circle_outline_outlined,
+                                                      color: Colors
+                                                          .grey,size: 15,
+                                                    ),
+                                                    Text(
+                                                      '${data.playCount} Play',
+                                                      style: TextStyle(
+                                                          fontSize:
+                                                          15.sp,
+                                                          color: Colors.white
+                                                              .withOpacity(0.4)),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          );
+                        }
+                      },
                     ),
                   ),
                 ),
@@ -417,93 +351,112 @@ class _HomeScreenState extends State<HomeScreen> {
                 BorderRadius.circular(10),
                 child: Card(
                   color: Colors.grey.shade900,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            right: 250.sp),
-                        child: Text(
-                          'Trending',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20.sp),
-                        ),
-                      ),
-                      SizedBox(height: 10.h,),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: SizedBox(
-                          height: 180.h,
-                          child: ListView.builder(
-                            scrollDirection:
-                            Axis.horizontal,
-                            itemCount: imageList.length,
-                            itemBuilder:
-                                (context, index) {
-                              return Container(
-                                margin:
-                                EdgeInsets.all(5),
-                                child: Column(
-                                  children: [
-                                    Image.asset(
-                                      imageList[index],
-                                      fit: BoxFit.cover,
-                                      height: 100.h,
-                                      width: 150.w,
-                                    ),
-                                    SizedBox(
-                                      height: 10.h,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment
-                                          .start,
-                                      children: [
-                                        Text(
-                                          'Eajdiger Hero',
-                                          style: TextStyle(
-                                              fontSize:
-                                              17.sp,
-                                              color: Colors
-                                                  .white),
-                                        ),
-                                        SizedBox(
-                                          height: 3.h,
-                                        ),
-                                        Row(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment
-                                              .start,
+                  child: Consumer<ApiProvider>(
+                    builder: (context, provider, child) {
+                      if (provider.isLoading) {    Provider.of<ApiProvider>(context, listen: false).fetchData();
+
+                        return const Center(child: CircularProgressIndicator());
+                      } else {
+                        final List<Results>? dataList = provider.dataList;
+                        return Column(
+                          children: [
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  right: 250.sp),
+                              child: Text(
+                                'Trending',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.sp),
+                              ),
+                            ),
+                            SizedBox(height: 10.h,),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: SizedBox(
+                                height: 180.h,
+                                child:  ListView.builder(
+                                  scrollDirection:
+                                  Axis.horizontal,
+                                  itemCount: dataList?.length ?? 0,
+                                  itemBuilder:
+                                      (context, index) {
+                                    final Results data = dataList![index];
+                                    return InkWell(
+                                      onTap: (){
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => AudioPlayerScreen()),
+                                        );
+                                      },
+                                      child: Container(
+                                        margin:
+                                        EdgeInsets.all(5),
+                                        child: Column(
                                           children: [
-                                            Icon(
-                                              Icons
-                                                  .play_circle_outline_outlined,
-                                              color: Colors
-                                                  .grey,size: 15,
+                                            Image.network(
+                                              data.image ?? 'https://isowall.co.za/wp-content/uploads/2017/12/demo-image.jpg',
+                                              fit: BoxFit.cover,
+                                              height: 100.h,
+                                              width: 150.w,
                                             ),
-                                            Text(
-                                              '1.4K Play',
-                                              style: TextStyle(
-                                                  fontSize:
-                                                  15.sp,
-                                                  color: Colors.white
-                                                      .withOpacity(0.4)),
+                                            SizedBox(
+                                              height: 15.h,
                                             ),
+                                            Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment
+                                                  .start,
+                                              children: [
+                                                Text(
+                                                  data.title!,
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                      17.sp,
+                                                      color: Colors
+                                                          .white),
+                                                ),
+                                                SizedBox(
+                                                  height: 5.h,
+                                                ),
+                                                Row(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                                  children: [
+                                                    const Icon(
+                                                      Icons
+                                                          .play_circle_outline_outlined,
+                                                      color: Colors
+                                                          .grey,size: 15,
+                                                    ),
+                                                    Text(
+                                                      '${data.playCount} Play',
+                                                      style: TextStyle(
+                                                          fontSize:
+                                                          15.sp,
+                                                          color: Colors.white
+                                                              .withOpacity(0.4)),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            )
                                           ],
-                                        )
-                                      ],
-                                    )
-                                  ],
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                    },
                   ),
                 ),
               ),

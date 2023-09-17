@@ -10,6 +10,7 @@ import 'package:relaks_media/screens/fund_raising.dart';
 import 'package:relaks_media/screens/home_screen.dart';
 import 'package:relaks_media/screens/news_screen.dart';
 import 'package:relaks_media/screens/station_screen.dart';
+import '../demo.dart';
 import '../utils/main_drawer.dart';
 import 'maintaince_screen.dart';
 import 'my_store_screen.dart';
@@ -70,7 +71,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     // crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(width: 40.w,),
+                      SizedBox(width: 30.w,),
                       Container(
                         height: 45.h,
                         width: MediaQuery.of(context).size.width - 150.w,
@@ -100,7 +101,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                       Obx(
                             () => IconButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, StationScreen.routeName);
+                              Navigator.pushNamed(context, Demo.routeName);
                             },
                             icon: Image.asset(radioController.getSelectedChImg())),
                       )

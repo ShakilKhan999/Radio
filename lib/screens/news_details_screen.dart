@@ -43,7 +43,8 @@ class NewsDetailsScreen extends StatelessWidget {
                             IconButton(
 
                               onPressed: () {
-                                homeController.newsCurrentPage.value = 0;
+                                Navigator.pop(context);
+                                //homeController.newsCurrentPage.value = 0;
                               },
                               icon: Icon(
                                 Icons.arrow_back,
@@ -59,7 +60,7 @@ class NewsDetailsScreen extends StatelessWidget {
                         SizedBox(height: 16.0.h),
                         ClipRRect(
                           borderRadius: BorderRadius.circular(15.sp),
-                          child: Image.asset(
+                          child: Image.network(
                             imageUrl,
                             fit: BoxFit.cover,
                             height: 200.0,
