@@ -7,19 +7,19 @@ import '../../bottomnevigation.dart';
 
 class SignUpController extends GetxController {
 
-   var isLoginCompeleted = false.obs;
+   var isSignupCompeleted = false.obs;
 
     void signUp({required String email, required String phone, required String password}) async {
-    isLoginCompeleted.value = false;
+    isSignupCompeleted.value = false;
     try {
       EasyLoading.show();
       final response = await SignUpRepository()
-          .login(email: email, phone: phone, password: password);
+          .signup(email: email, phone: phone, password: password);
       if (response.success!) {
         await SharedPreferenceHelper().saveMemberData(response);
         await SharedPreferenceHelper().setLoginStatus(status: true);
         EasyLoading.dismiss();
-        isLoginCompeleted.value = true;
+        isSignupCompeleted.value = true;
         Get.offAll(const BottomNavigation());
       } else {
         EasyLoading.dismiss();

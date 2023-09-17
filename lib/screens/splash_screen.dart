@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:relaks_media/screens/bottomnevigation.dart';
-import 'package:relaks_media/screens/login_screen.dart';
+import 'package:relaks_media/screens/login/view/login_screen.dart';
 import 'package:relaks_media/screens/singup/view/signup_screen.dart';
 
 import '../utils/glass_box.dart';

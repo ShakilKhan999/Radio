@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:relaks_media/Repo/authServiece.dart';
-import 'package:relaks_media/screens/login_screen.dart';
+import 'package:relaks_media/screens/login/view/login_screen.dart';
 import 'package:relaks_media/screens/news_screen.dart';
 
 import '../controller/authController.dart';

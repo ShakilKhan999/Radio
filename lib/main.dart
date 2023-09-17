@@ -16,7 +16,7 @@ import 'package:relaks_media/screens/event_ticket_payment_screen.dart';
 import 'package:relaks_media/screens/forgot_password_screen.dart';
 import 'package:relaks_media/screens/home_screen.dart';
 import 'package:relaks_media/screens/launcherpage.dart';
-import 'package:relaks_media/screens/login_screen.dart';
+import 'package:relaks_media/screens/login/view/login_screen.dart';
 import 'package:relaks_media/screens/maintaince_screen.dart';
 import 'package:relaks_media/screens/message_request_screen.dart';
 import 'package:relaks_media/screens/my_store_screen.dart';

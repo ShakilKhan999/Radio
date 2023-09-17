@@ -5,14 +5,10 @@ import 'package:relaks_media/models/signup_response.dart';
 import '../../../global/constants.dart';
 
 class SignUpRepository {
-  Future<SignUpResponse> login(
+  Future<SignUpResponse> signup(
       {required String email,
       required String phone,
       required String password}) async {
-    // var headers = {
-    //   'accept': 'text/plain',
-    //   'Content-Type': 'application/json',
-    // };
     var postBody = jsonEncode({
       'name': '',
       'email': email,
