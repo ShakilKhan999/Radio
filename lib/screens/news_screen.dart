@@ -4,9 +4,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:relaks_media/controller/home_controller.dart';
 import 'package:relaks_media/screens/publish_news_screen.dart';
 
+import '../models/news_model.dart';
+import '../provider/news_api_provider.dart';
 import 'news_details_screen.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -28,7 +31,7 @@ class _NewsScreenState extends State<NewsScreen> {
     'Drama',
     'Drama',
   ];
-  List<Map<String, dynamic>> newsData = [
+/*  List<Map<String, dynamic>> newsData = [
     {
       'imageUrl': 'images/news1.png',
       'title': 'Boris Johnson: By- election confirmed',
@@ -74,7 +77,13 @@ class _NewsScreenState extends State<NewsScreen> {
       'description':
           "A former bookseller and a great orator from the English-speaking area of Cameroon, he founded the opposition Social Democratic Front (SDF) in 1990. His popularity led the regime to accept a multi-party system was inevitable. In fact his party believed he won the 1992 presidential election, but the  Supreme Court judge that heard its petition alleging fraud said his 'hands were tied' - and let the official results granting victory to incumbent Paul Biya, with 40% of the vote, stand. This caused great upset with SDF supporters and their leader was put under house arrest for three months in his home in the economic hub, Bamenda, and a state of emergency was declared.Still the US must have given credence to his claim to the presidency, inviting him and his wife to the inauguration of Bill Clinton in January 1993. Fru Ndi was not a supporter of the secessionist rebellion in Anglophone Cameroon that has claimed tens of thousands of lives over the last six years - and was even kidnapped and beaten up by militants in 2019, and part of his house was burnt down.",
     },
-  ];
+  ];*/
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,101 +94,125 @@ class _NewsScreenState extends State<NewsScreen> {
         body: Obx(
           () {
             if (homeController.newsCurrentPage.value == 0) {
-              return SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Card(
-                          color: Colors.transparent,
-                          child: Column(
-                            children: [
-                              SizedBox(height: 15.h),
-                              Container(
-                                height: 40.h,
-                                width: MediaQuery.of(context).size.width,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: buttonList.length,
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      margin:
-                                          EdgeInsets.symmetric(horizontal: 5.w),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(15),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            gradient: LinearGradient(
-                                              colors: [
-                                                Colors.grey,
-                                                Colors.black.withOpacity(0.4),
-                                              ],
-                                              stops: [0.0, 1.0],
-                                              begin: Alignment.centerLeft,
-                                              end: Alignment.topRight,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
-                                          child: ElevatedButton(
-                                            onPressed: () {},
-                                            style: ElevatedButton.styleFrom(
-                                              primary: Colors.transparent,
-                                              elevation: 0,
-                                              padding: EdgeInsets.all(10),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
+              return Consumer<NewsApiProvider>(
+                builder: (context, provider, child) {
+                  if (provider.isLoading & provider.isLoadingCat) {
+                    Provider.of<NewsApiProvider>(context, listen: false).fetchData();
+                    Provider.of<NewsApiProvider>(context, listen: false).fetchCategory();
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    final List<News>? newsData = provider.dataList;
+                    final List<CategoryName>? category = provider.category;
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Card(
+                                color: Colors.transparent,
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 15.h),
+                                    Container(
+                                      height: 40.h,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount:category!.length,
+                                        itemBuilder: (context, index) {
+                                          return Container(
+                                            margin:
+                                            EdgeInsets.symmetric(horizontal: 5.w),
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(15),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      Colors.grey,
+                                                      Colors.black.withOpacity(0.4),
+                                                    ],
+                                                    stops: [0.0, 1.0],
+                                                    begin: Alignment.centerLeft,
+                                                    end: Alignment.topRight,
+                                                  ),
+                                                  borderRadius:
+                                                  BorderRadius.circular(15),
+                                                ),
+                                                child: ElevatedButton(
+                                                  onPressed: () {
+                                                    Provider.of<NewsApiProvider>(context, listen: false).fetchDataCategoryBasedNews(index+1);
+                                                  },
+                                                  style: ElevatedButton.styleFrom(
+                                                    primary: Colors.transparent,
+                                                    elevation: 0,
+                                                    padding: EdgeInsets.all(10),
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                      BorderRadius.circular(15),
+                                                    ),
+                                                    textStyle:
+                                                    TextStyle(fontSize: 16.sp),
+                                                  ),
+                                                  child: Text(
+                                                    category[index].name!,
+                                                    style:
+                                                    TextStyle(color: Colors.white),
+                                                  ),
+                                                ),
                                               ),
-                                              textStyle:
-                                                  TextStyle(fontSize: 16.sp),
                                             ),
-                                            child: Text(
-                                              buttonList[index],
-                                              style:
-                                                  TextStyle(color: Colors.white),
-                                            ),
-                                          ),
-                                        ),
+                                          );
+                                        },
                                       ),
-                                    );
-                                  },
+                                    ),
+                                    SizedBox(height: 10.h),
+                                  ],
                                 ),
                               ),
-                              SizedBox(height: 10.h),
-                            ],
+                            ),
                           ),
-                        ),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: newsData!.length,
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  onTap: () {
+                                    /*homeController.newsCurrentPage.value  = 1;
+                                    homeController.currentIndex.value  = index;
+                                    log('clicked');*/
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => NewsDetailsScreen(
+                                            imageUrl: newsData[index].image ?? '',
+                                            title: newsData[index].title ?? '',
+                                            subtitle: newsData[index].subtitle ?? '',
+                                            subtitle1: newsData[index].subtitle ?? '',
+                                            description: newsData[index].description ?? '' // Replace AnotherPage() with your actual page
+                                        )));
+                                  },
+                                  child: NewsCard(
+                                      imageUrl: newsData[index].image ?? '',
+                                      title: newsData[index].title ?? '',
+                                      subtitle: newsData[index].subtitle ?? '',
+                                      subImage: newsData[index].image ?? '',
+                                      subtitle1: newsData[index].subtitle ?? '',
+                                      description: newsData[index].description ?? ''
+                                  ),
+                                );
+                              },
+                            ),
+                          )
+                        ],
                       ),
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: newsData.length,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              homeController.newsCurrentPage.value  = 1;
-                              homeController.currentIndex.value  = index;
-                              log('clicked');
-                            },
-                            child: NewsCard(
-                                imageUrl: newsData[index]['imageUrl'],
-                                title: newsData[index]['title'],
-                                subtitle: newsData[index]['subtitle'],
-                                subImage: newsData[index]['subImage'],
-                                subtitle1: newsData[index]['subtitle1'],
-                                description: newsData[index]['description']),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+                    );
+                  }
+                },
               );
-            } else if(homeController.newsCurrentPage.value == 1) {
+            } /*else if(homeController.newsCurrentPage.value == 1) {
               return NewsDetailsScreen(
                   imageUrl: newsData[homeController.currentIndex.value]['imageUrl'],
                   title: newsData[homeController.currentIndex.value]['title'],
@@ -187,7 +220,7 @@ class _NewsScreenState extends State<NewsScreen> {
                   subtitle1: newsData[homeController.currentIndex.value]['subImage'],
                   description: newsData[homeController.currentIndex.value]['description'],);
 
-            }
+            }*/
             else {
               return PublishNewsScreen();
             }
@@ -247,7 +280,7 @@ class NewsCard extends StatelessWidget {
                     // Adjust the scale factor to decrease the image size
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
+                      child: Image.network(
                         imageUrl,
                         fit: BoxFit.cover,
                       ),
@@ -280,7 +313,7 @@ class NewsCard extends StatelessWidget {
                               ),
                             ),
                             SizedBox(width: 3.0.w),
-                            Image.asset(
+                            Image.network(
                               subImage,
                               height: 5.h,
                               width: 5.w,

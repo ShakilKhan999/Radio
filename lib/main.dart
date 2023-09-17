@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:provider/provider.dart';
+import 'package:relaks_media/demo.dart';
+import 'package:relaks_media/provider/home_page_provider.dart';
+import 'package:relaks_media/provider/news_api_provider.dart';
 import 'package:relaks_media/screens/air_screen.dart';
 import 'package:relaks_media/screens/air_tickets_screen.dart';
 import 'package:relaks_media/screens/bottomnevigation.dart';
@@ -34,7 +38,17 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider<UpcomingShowProvider>(create: (_) => UpcomingShowProvider()),
+          ChangeNotifierProvider<ApiProvider>(create: (_) => ApiProvider()),
+          ChangeNotifierProvider<NewsApiProvider>(create: (_) => NewsApiProvider()),
+
+          // Add other providers if needed
+        ],
+        child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -73,7 +87,6 @@ class MyApp extends StatelessWidget {
             EventTicketPayment.routeName:(context) => EventTicketPayment(),
             ForgotPass.routeName:(context) => ForgotPass(),
             HomeScreen.routeName:(context) => HomeScreen(),
-            LoginScreen.routeName:(context) => LoginScreen(),
             MaintainceScreen.routeName:(context) => MaintainceScreen(),
             MyStoreScreen.routeName:(context) => MyStoreScreen(),
             NewsScreen.routeName:(context) => NewsScreen(),
@@ -83,6 +96,7 @@ class MyApp extends StatelessWidget {
             StationScreen.routeName:(context) => StationScreen(),
             TrainScreen.routeName:(context) => TrainScreen(),
             TrainTicketsScreen.routeName:(context) => TrainTicketsScreen(),
+            Demo.routeName:(context) => Demo(),
           },
         );
       },

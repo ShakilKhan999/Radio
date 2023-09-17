@@ -1,10 +1,13 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
-import 'package:relaks_media/screens/publish_news_success_screen.dart';
-
+import 'package:provider/provider.dart';
 import '../controller/home_controller.dart';
+import '../models/news_model.dart';
+import '../provider/news_api_provider.dart';
+import '../utils/image_picker.dart';
 
 class PublishNewsScreen extends StatefulWidget {
   static const String routeName = '/publish_news';
@@ -16,12 +19,21 @@ class PublishNewsScreen extends StatefulWidget {
 }
 
 class _PublishNewsScreenState extends State<PublishNewsScreen> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController tittleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
   late DateTime selectedDate;
 
-  @override
-  void initState() {
-    super.initState();
-    selectedDate = DateTime.now();
+  String selectedImagePath = '';
+  String? _userImage = '';
+
+  File? imageFile;
+
+  setProfileImageState(String value) {
+    setState(() {
+      selectedImagePath = value;
+    });
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -38,6 +50,13 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
       });
     }
   }
+
+  @override
+  void initState() {
+    super.initState();
+    selectedDate = DateTime.now();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -81,34 +100,9 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 16.0.h),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Card(
-                        color: Colors.grey.shade900,
-                        child: Container(
-                          width: double.infinity,
-                          height: 200.0,
-                          alignment: Alignment.center,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ImageIcon(
-                                AssetImage('images/upload.png'),
-                                size: 30.0.sp,
-                                color: Colors.white,
-                              ),
-                              SizedBox(
-                                height: 5.sp,
-                              ),
-                              Text(
-                                'Upload thumbnail',
-                                style: TextStyle(
-                                    color: Colors.grey.shade300, fontSize: 15.sp),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                    NewsImagePicker(
+                      setImagePath: setProfileImageState,
+                      imagePath: _userImage,
                     ),
                     SizedBox(height: 24.0.h),
                     Row(
@@ -124,14 +118,15 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
                                   children: [
                                     const Icon(Icons.person, color: Colors.white),
                                     SizedBox(width: 8.0.w),
-                                    const Expanded(
+                                    Expanded(
                                       child: TextField(
-                                        decoration: InputDecoration(
+                                        controller: nameController,
+                                        decoration: const InputDecoration(
                                           labelText: 'Name',
                                           labelStyle:
                                               TextStyle(color: Colors.white),
                                         ),
-                                        style: TextStyle(color: Colors.white),
+                                        style: const TextStyle(color: Colors.white),
                                       ),
                                     ),
                                   ],
@@ -183,8 +178,9 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
                       borderRadius: BorderRadius.circular(20),
                       child: Card(
                         color: Colors.grey.shade900,
-                        child: const TextField(
-                          decoration: InputDecoration(
+                        child: TextField(
+                          controller: tittleController,
+                          decoration: const InputDecoration(
                             labelText: 'Title',
                             prefixIcon: Icon(
                               Icons.text_format_outlined,
@@ -192,7 +188,7 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
                             ),
                             labelStyle: TextStyle(color: Colors.white),
                           ),
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
@@ -201,9 +197,10 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
                       borderRadius: BorderRadius.circular(20),
                       child: Card(
                         color: Colors.grey.shade900,
-                        child: const TextField(
+                        child: TextField(
+                          controller: descriptionController,
                           maxLines: 10,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Description',
                             prefixIcon: Icon(
                               Icons.description_outlined,
@@ -211,7 +208,7 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
                             ),
                             labelStyle: TextStyle(color: Colors.white),
                           ),
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
@@ -224,24 +221,32 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
           ],
         ),
       ),
-      floatingActionButton: Align(
-        alignment: Alignment.bottomCenter,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: FloatingActionButton.extended(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PublishSuccessNews(),
-                ),
+      floatingActionButton: Consumer<NewsApiProvider>(
+        builder: (context, formDataProvider, child) {
+          return ElevatedButton(
+            onPressed: () async {
+              if (selectedImagePath != '') {
+                setState(() {
+                  imageFile =
+                      File(selectedImagePath);
+                });
+              }
+              final formData = CreateNewsModel(
+                category: '2',
+                user: '1',
+                title: nameController.text.toString(),
+                subtitle: tittleController.text.toString(),
+                description: descriptionController.text.toString(),
+                image: imageFile!,
+
               );
+
+              await formDataProvider.sendDataToApi(formData);
             },
-            label: const Text('Publish your News'),
-            backgroundColor: const Color(0xffffEA1C24),
-          ),
-        ),
-      ),
+            child: Text('Send Data to API'),
+          );
+        },
+      )
     );
   }
 }
