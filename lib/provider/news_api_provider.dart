@@ -1,7 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import '../models/news_model.dart';
 import 'package:http/http.dart' as http;
+
+import '../screens/publish_news_success_screen.dart';
 
 class NewsApiProvider extends ChangeNotifier {
   List<News>? _dataList;
@@ -37,9 +40,8 @@ class NewsApiProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   Future<void> fetchDataCategoryBasedNews(int index) async {
-     String api = 'http://devtriples.pythonanywhere.com/api/v1/posting/news_posting_by_category/$index/'; // Replace with your API endpoint
+    String api = 'http://devtriples.pythonanywhere.com/api/v1/posting/news_posting_by_category/$index/'; // Replace with your API endpoint
     _isLoading = true;
 
     final response = await http.get(
@@ -84,8 +86,7 @@ class NewsApiProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-  Future<void> sendDataToApi(CreateNewsModel formData) async {
+  Future<void> sendDataToApi(CreateNewsModel formData, BuildContext context) async {
     String authToken =  'dd88a40d63b744b9f777f03aad98b7460048f06a';
     final url = Uri.parse('http://devtriples.pythonanywhere.com/api/v1/posting/news_posting/create/');
 
@@ -104,14 +105,28 @@ class NewsApiProvider extends ChangeNotifier {
 
     final response = await request.send();
     print('>>>>>>>>>>>>>>>>>${response.statusCode}');
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
+      /*Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => PublishSuccessNews()),
+      );*/
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Saved data!!!'),
+          duration: Duration(seconds: 3), // Duration for which the SnackBar is displayed
+        ),
+      );
       // Success, you can handle the response here
     } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Can't save data"),
+          duration: Duration(seconds: 3), // Duration for which the SnackBar is displayed
+        ),
+      );
       // Handle the error
       print('Error sending data to API: ${response.reasonPhrase}');
     }
   }
 
 }
-
-

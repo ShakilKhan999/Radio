@@ -42,7 +42,7 @@ void main() async{
       MultiProvider(
         providers: [
           ChangeNotifierProvider<UpcomingShowProvider>(create: (_) => UpcomingShowProvider()),
-          ChangeNotifierProvider<ApiProvider>(create: (_) => ApiProvider()),
+          ChangeNotifierProvider<AudioProvider>(create: (_) => AudioProvider()),
           ChangeNotifierProvider<NewsApiProvider>(create: (_) => NewsApiProvider()),
 
           // Add other providers if needed

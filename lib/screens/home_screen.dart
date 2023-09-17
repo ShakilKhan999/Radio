@@ -155,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     AssetImage('images/play.png'),
                     size: 15.sp,color: Colors.white,),),
                   )
-                   ],
+                ],
               ),
             ),
           ),
@@ -236,10 +236,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.grey.shade900,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Consumer<ApiProvider>(
+                    child: Consumer<AudioProvider>(
                       builder: (context, provider, child) {
                         if (provider.isLoading) {
-                          Provider.of<ApiProvider>(context, listen: false).fetchData();
+                          Provider.of<AudioProvider>(context, listen: false).fetchData();
                           return const Center(child: CircularProgressIndicator());
                         } else {
                           final List<Results>? dataList = provider.dataList;
@@ -267,12 +267,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemCount: dataList?.length ?? 0,
                                   itemBuilder:
                                       (context, index) {
-                                        final Results data = dataList![index];
+                                    final Results data = dataList![index];
                                     return InkWell(
                                       onTap: (){
                                         Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) => AudioPlayerScreen()),
+                                          MaterialPageRoute(builder: (context) => AudioPlayerScreen(audioUrl: data.audioFile!,)),
                                         );
                                       },
                                       child: Container(
@@ -281,7 +281,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: Column(
                                           children: [
                                             Image.network(
-                                              data.image ?? 'https://isowall.co.za/wp-content/uploads/2017/12/demo-image.jpg',
+                                              data.image ?? 'https://images.pexels.com/photos/4114774/pexels-photo-4114774.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
                                               fit: BoxFit.cover,
                                               height: 100.h,
                                               width: 150.w,
@@ -351,11 +351,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 BorderRadius.circular(10),
                 child: Card(
                   color: Colors.grey.shade900,
-                  child: Consumer<ApiProvider>(
+                  child: Consumer<AudioProvider>(
                     builder: (context, provider, child) {
-                      if (provider.isLoading) {    Provider.of<ApiProvider>(context, listen: false).fetchData();
+                      if (provider.isLoading) {    Provider.of<AudioProvider>(context, listen: false).fetchData();
 
-                        return const Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                       } else {
                         final List<Results>? dataList = provider.dataList;
                         return Column(
@@ -389,7 +389,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       onTap: (){
                                         Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) => AudioPlayerScreen()),
+                                          MaterialPageRoute(builder: (context) => AudioPlayerScreen(audioUrl: data.audioFile!,)),
                                         );
                                       },
                                       child: Container(
@@ -398,7 +398,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: Column(
                                           children: [
                                             Image.network(
-                                              data.image ?? 'https://isowall.co.za/wp-content/uploads/2017/12/demo-image.jpg',
+                                              data.image ?? 'https://images.pexels.com/photos/4114774/pexels-photo-4114774.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
                                               fit: BoxFit.cover,
                                               height: 100.h,
                                               width: 150.w,
@@ -1279,13 +1279,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   buildIndicator() => AnimatedSmoothIndicator(activeIndex: activeIndex,
-      count: images.length,
-      effect:ScaleEffect(
+    count: images.length,
+    effect:ScaleEffect(
         dotColor: Colors.grey.shade700,
         activeDotColor: Colors.white,
         dotHeight: 6.sp,
         dotWidth: 6.sp,
         scale: 1.5
-      ) ,
+    ) ,
   );
 }

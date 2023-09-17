@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -85,134 +84,137 @@ class _NewsScreenState extends State<NewsScreen> {
     super.initState();
   }
 
+  List<String> categoryNameList = [];
+
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.put(HomeController());
     return Obx( () =>
-      Scaffold(
-        backgroundColor: Colors.black,
-        body: Obx(
-          () {
-            if (homeController.newsCurrentPage.value == 0) {
-              return Consumer<NewsApiProvider>(
-                builder: (context, provider, child) {
-                  if (provider.isLoading & provider.isLoadingCat) {
-                    Provider.of<NewsApiProvider>(context, listen: false).fetchData();
-                    Provider.of<NewsApiProvider>(context, listen: false).fetchCategory();
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    final List<News>? newsData = provider.dataList;
-                    final List<CategoryName>? category = provider.category;
-                    return SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Card(
-                                color: Colors.transparent,
-                                child: Column(
-                                  children: [
-                                    SizedBox(height: 15.h),
-                                    Container(
-                                      height: 40.h,
-                                      width: MediaQuery.of(context).size.width,
-                                      child: ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount:category!.length,
-                                        itemBuilder: (context, index) {
-                                          return Container(
-                                            margin:
-                                            EdgeInsets.symmetric(horizontal: 5.w),
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(15),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      Colors.grey,
-                                                      Colors.black.withOpacity(0.4),
-                                                    ],
-                                                    stops: [0.0, 1.0],
-                                                    begin: Alignment.centerLeft,
-                                                    end: Alignment.topRight,
-                                                  ),
-                                                  borderRadius:
-                                                  BorderRadius.circular(15),
-                                                ),
-                                                child: ElevatedButton(
-                                                  onPressed: () {
-                                                    Provider.of<NewsApiProvider>(context, listen: false).fetchDataCategoryBasedNews(index+1);
-                                                  },
-                                                  style: ElevatedButton.styleFrom(
-                                                    primary: Colors.transparent,
-                                                    elevation: 0,
-                                                    padding: EdgeInsets.all(10),
-                                                    shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                      BorderRadius.circular(15),
+        Scaffold(
+          backgroundColor: Colors.black,
+          body: Obx(
+                () {
+              if (homeController.newsCurrentPage.value == 0) {
+                return Consumer<NewsApiProvider>(
+                  builder: (context, provider, child) {
+                    if (provider.isLoading & provider.isLoadingCat) {
+                      Provider.of<NewsApiProvider>(context, listen: false).fetchCategory();
+                      Provider.of<NewsApiProvider>(context, listen: false).fetchData();
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      final List<CategoryName>? category = provider.category;
+                      final List<News>? newsData = provider.dataList;
+                      return SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Card(
+                                  color: Colors.transparent,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: 15.h),
+                                      Container(
+                                        height: 40.h,
+                                        width: MediaQuery.of(context).size.width,
+                                        child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount:category!.length,
+                                          itemBuilder: (context, index) {
+                                            String categoryName = category[index].name!;
+                                            return Container(
+                                              margin:
+                                              EdgeInsets.symmetric(horizontal: 5.w),
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.circular(15),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    gradient: LinearGradient(
+                                                      colors: [
+                                                        Colors.grey,
+                                                        Colors.black.withOpacity(0.4),
+                                                      ],
+                                                      stops: [0.0, 1.0],
+                                                      begin: Alignment.centerLeft,
+                                                      end: Alignment.topRight,
                                                     ),
-                                                    textStyle:
-                                                    TextStyle(fontSize: 16.sp),
+                                                    borderRadius:
+                                                    BorderRadius.circular(15),
                                                   ),
-                                                  child: Text(
-                                                    category[index].name!,
-                                                    style:
-                                                    TextStyle(color: Colors.white),
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      Provider.of<NewsApiProvider>(context, listen: false).fetchDataCategoryBasedNews(category[index].id!);
+                                                    },
+                                                    style: ElevatedButton.styleFrom(
+                                                      primary: Colors.transparent,
+                                                      elevation: 0,
+                                                      padding: EdgeInsets.all(10),
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                        BorderRadius.circular(15),
+                                                      ),
+                                                      textStyle:
+                                                      TextStyle(fontSize: 16.sp),
+                                                    ),
+                                                    child: Text(
+                                                      categoryName,
+                                                      style:
+                                                      TextStyle(color: Colors.white),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          );
-                                        },
+                                            );
+                                          },
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(height: 10.h),
-                                  ],
+                                      SizedBox(height: 10.h),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: newsData!.length,
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                  onTap: () {
-                                    /*homeController.newsCurrentPage.value  = 1;
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: newsData!.length,
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      /*homeController.newsCurrentPage.value  = 1;
                                     homeController.currentIndex.value  = index;
                                     log('clicked');*/
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => NewsDetailsScreen(
-                                            imageUrl: newsData[index].image ?? '',
-                                            title: newsData[index].title ?? '',
-                                            subtitle: newsData[index].subtitle ?? '',
-                                            subtitle1: newsData[index].subtitle ?? '',
-                                            description: newsData[index].description ?? '' // Replace AnotherPage() with your actual page
-                                        )));
-                                  },
-                                  child: NewsCard(
-                                      imageUrl: newsData[index].image ?? '',
-                                      title: newsData[index].title ?? '',
-                                      subtitle: newsData[index].subtitle ?? '',
-                                      subImage: newsData[index].image ?? '',
-                                      subtitle1: newsData[index].subtitle ?? '',
-                                      description: newsData[index].description ?? ''
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                        ],
-                      ),
-                    );
-                  }
-                },
-              );
-            } /*else if(homeController.newsCurrentPage.value == 1) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => NewsDetailsScreen(
+                                              imageUrl: newsData[index].image ?? '',
+                                              title: newsData[index].title ?? '',
+                                              subtitle: newsData[index].subtitle ?? '',
+                                              subtitle1: newsData[index].subtitle ?? '',
+                                              description: newsData[index].description ?? '' // Replace AnotherPage() with your actual page
+                                          )));
+                                    },
+                                    child: NewsCard(
+                                        imageUrl: newsData[index].image ?? '',
+                                        title: newsData[index].title ?? '',
+                                        subtitle: newsData[index].subtitle ?? '',
+                                        subImage: newsData[index].image ?? '',
+                                        subtitle1: newsData[index].subtitle ?? '',
+                                        description: newsData[index].description ?? ''
+                                    ),
+                                  );
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    }
+                  },
+                );
+              } /*else if(homeController.newsCurrentPage.value == 1) {
               return NewsDetailsScreen(
                   imageUrl: newsData[homeController.currentIndex.value]['imageUrl'],
                   title: newsData[homeController.currentIndex.value]['title'],
@@ -221,26 +223,26 @@ class _NewsScreenState extends State<NewsScreen> {
                   description: newsData[homeController.currentIndex.value]['description'],);
 
             }*/
-            else {
-              return PublishNewsScreen();
-            }
-          },
-        ),
-        floatingActionButton: homeController.newsCurrentPage.value == 0 ? FloatingActionButton.extended(
-          onPressed: () {
-            homeController.newsCurrentPage.value  = 2;
+              else {
+                return PublishNewsScreen();
+              }
+            },
+          ),
+          floatingActionButton: homeController.newsCurrentPage.value == 0 ? FloatingActionButton.extended(
+            onPressed: () {
+              //homeController.newsCurrentPage.value  = 2;
 
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => PublishNewsScreen(),
-            //   ),
-            // );
-          },
-          label: Text('Publish News',style: TextStyle(fontSize: 14.sp,fontFamily: 'Poppins',fontWeight: FontWeight.w600),),
-          backgroundColor: Color(0xffffEA1C24),
-        ) : Container(),
-      ),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PublishNewsScreen(),
+                ),
+              );
+            },
+            label: Text('Publish News',style: TextStyle(fontSize: 14.sp,fontFamily: 'Poppins',fontWeight: FontWeight.w600),),
+            backgroundColor: Color(0xffffEA1C24),
+          ) : Container(),
+        ),
     );
   }
 }
@@ -255,11 +257,11 @@ class NewsCard extends StatelessWidget {
 
   NewsCard(
       {required this.imageUrl,
-      required this.title,
-      required this.subtitle,
-      required this.subImage,
-      required this.subtitle1,
-      required this.description});
+        required this.title,
+        required this.subtitle,
+        required this.subImage,
+        required this.subtitle1,
+        required this.description});
 
   @override
   Widget build(BuildContext context) {
