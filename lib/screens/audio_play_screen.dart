@@ -1,7 +1,8 @@
-import 'dart:math';
+import 'dart:developer';
 
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -47,7 +48,8 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
         inactiveColor: Colors.grey,
         value: position.inSeconds.toDouble(),
         min: 0.0,
-        max: duration.inSeconds.toDouble(),
+        // max: duration.inSeconds.toDouble(),
+        max: 19,
         onChanged: (double value) {
           setState(() {
             changeToSecond(value.toInt());
@@ -64,19 +66,30 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   @override
   void initState() {
     _initialiseControllers();
-    audioPlayer.onDurationChanged.listen((event) {
-      setState(() {
-        duration = event;
-      });
-    });
+
+    // audioPlayer.onDurationChanged.listen((event) {
+    //   setState(() {
+    //     duration = event;
+    //     log('duration: '+duration.toString());
+    //   });
+    // });
+    du();
     audioPlayer.onPositionChanged.listen((event) {
       setState(() {
         position = event;
+        log('position: ' + position.toString());
       });
     });
+
+    super.initState();
+  }
+
+  Future<void> du() async {
     audioPlayer.setSourceUrl(
         'https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg');
-    super.initState();
+    duration = (await audioPlayer.getDuration())!;
+    log(duration.toString());
+    setState(() {});
   }
 
   @override
@@ -94,7 +107,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 15.0),
+                      padding: const EdgeInsets.only(left: 15.0),
                       child: IconButton(
                         onPressed: () {
                           homeController.homestate.value = 0;
@@ -127,7 +140,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.only(right: 15),
+                      padding: const EdgeInsets.only(right: 15),
                       width: 60,
                     )
                   ],
@@ -162,7 +175,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                           fontFamily: 'Poppins'),
                     ),
                     Text(
-                      duration.toString(),
+                      duration.inSeconds.toString(),
                       style: TextStyle(
                           color: Colors.grey,
                           fontSize: 12.sp,
@@ -173,65 +186,99 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
               ],
             ),
 
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                AudioWaveforms(
-                    size: Size(MediaQuery.of(context).size.width / 2, 50),
-                    recorderController: recorderController),
-                
-                // ElevatedButton(
-                //   onPressed: () {
-                //     final audioUrl =
-                //         "https://example.com/audio.mp3"; // Replace with your audio file URL
-                //     _playAudio(audioUrl);
-                //   },
-                //   child: _isPlaying ? Text('Pause') : Text('Play'),
-                // ),
-              ],
-            ),
+            // Column(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: <Widget>[
+            //     AudioWaveforms(
+            //         size: Size(MediaQuery.of(context).size.width / 2, 50),
+            //         recorderController: recorderController),
 
-            // Container(
-            //   width: MediaQuery.of(context).size.width - 50,
-            //   height: 70.h,
-            //   decoration: BoxDecoration(
-            //     color: Colors.grey,
-            //     borderRadius: BorderRadius.circular(50)
-            //   ),
-            //   child: Column(
-            //     children: [
-            //       Container(),
-            //     ],
-            //   ),
+            //   ],
             // ),
+
+            Container(
+              width: MediaQuery.of(context).size.width - 50,
+              height: 70.h,
+              decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      Color.fromARGB(95, 42, 40, 40),
+                      Color.fromARGB(153, 217, 214, 214),
+                      Color.fromARGB(153, 194, 191, 191),
+                    ],
+                  ),
+                  // color: Colors.white,
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(width: 1, color: Colors.white)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    height: 30,
+                    width: 30,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.grey),
+                    child: Center(
+                      child: const Text(
+                        "10x",
+                        style: TextStyle(fontSize: 12, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: const Icon(
+                      Icons.replay_10,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Container(
+                    height: 50.h,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.red,
+                      radius: 35,
+                      child: IconButton(
+                        icon: Icon(
+                          isPlaying ? Icons.pause : Icons.play_arrow,
+                          size: 35,
+                          color: Colors.white,
+                        ),
+                        iconSize: 50,
+                        onPressed: () async {
+                          if (isPlaying) {
+                            await audioPlayer.pause();
+                            setState(() {
+                              isPlaying = false;
+                            });
+                          } else {
+                            await audioPlayer.play(UrlSource(
+                                'https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg'));
+                            setState(() {
+                              isPlaying = true;
+                            });
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: const Icon(
+                      Icons.forward_10,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Container(
+                    child: const Icon(
+                      Icons.file_download_sharp,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
-        )
-
-        // Center(
-        //   child: CircleAvatar(
-        //     radius: 35,
-        //     child: IconButton(
-        //       icon: Icon(
-        //         isPlaying ? Icons.pause : Icons.play_arrow,
-        //       ),
-        //       iconSize: 50,
-        //       onPressed: () async {
-        //         if(isPlaying) {
-        //           await audioPlayer.pause();
-        //           setState(() {
-        //             isPlaying = false;
-        //           });
-        //         } else {
-        //           await audioPlayer.play(UrlSource('https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg'));
-        //           setState(() {
-        //             isPlaying = true;
-        //           });
-        //         }
-        //       },
-        //     ),
-        //   ),
-        // ),
-
-        );
+        ));
   }
 }
