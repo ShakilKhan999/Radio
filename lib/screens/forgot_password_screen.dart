@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:relaks_media/screens/otp_screen.dart';
+import 'package:relaks_media/screens/otp/view/otp_screen.dart';
 
 import '../utils/glass_box.dart';
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ import 'package:relaks_media/screens/message_request_screen.dart';
 import 'package:relaks_media/screens/my_store_screen.dart';
 import 'package:relaks_media/screens/news_screen.dart';
 import 'package:relaks_media/screens/others_services_screen.dart';
-import 'package:relaks_media/screens/otp_screen.dart';
+import 'package:relaks_media/screens/otp/view/otp_screen.dart';
 import 'package:relaks_media/screens/reset_password_screen.dart';
 import 'package:relaks_media/screens/singup/view/signup_screen.dart';
 import 'package:relaks_media/screens/splash_screen.dart';
@@ -67,7 +68,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(),
-          initialRoute: LauncherPage.routeName,
+          initialRoute: OtpScreen.routeName,
           routes: {
             LauncherPage.routeName:(context) => LauncherPage(),
             SplashScreen.routeName:(context) => SplashScreen(),
@@ -98,6 +99,7 @@ class MyApp extends StatelessWidget {
             TrainTicketsScreen.routeName:(context) => TrainTicketsScreen(),
             Demo.routeName:(context) => Demo(),
           },
+      builder: EasyLoading.init(),
         );
       },
     );
