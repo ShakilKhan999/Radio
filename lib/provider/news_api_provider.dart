@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import '../global/constants.dart';
 import '../models/news_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,7 +15,7 @@ class NewsApiProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isLoadingCat => _isLoadingCat;
 
-  final String apiUrl = 'http://devtriples.pythonanywhere.com/api/v1/posting/news_posting_list/'; // Replace with your API endpoint
+  final String apiUrl = '${baseUrl}api/v1/posting/news_posting_list/'; // Replace with your API endpoint
   final String authToken = 'dd88a40d63b744b9f777f03aad98b7460048f06a'; // Replace with your authentication token
 
   Future<void> fetchData() async {
@@ -39,7 +40,7 @@ class NewsApiProvider extends ChangeNotifier {
 
 
   Future<void> fetchDataCategoryBasedNews(int index) async {
-     String api = 'http://devtriples.pythonanywhere.com/api/v1/posting/news_posting_by_category/$index/'; // Replace with your API endpoint
+     String api = '${baseUrl}api/v1/posting/news_posting_by_category/$index/'; // Replace with your API endpoint
     _isLoading = true;
 
     final response = await http.get(
@@ -62,7 +63,7 @@ class NewsApiProvider extends ChangeNotifier {
   }
 
   Future<void> fetchCategory() async {
-    String api = 'http://devtriples.pythonanywhere.com/api/v1/posting/news_posting_category_list/'; // Replace with your API endpoint
+    String api = '${baseUrl}api/v1/posting/news_posting_category_list/'; // Replace with your API endpoint
     _isLoadingCat = true;
 
     final response = await http.get(
@@ -87,7 +88,7 @@ class NewsApiProvider extends ChangeNotifier {
 
   Future<void> sendDataToApi(CreateNewsModel formData) async {
     String authToken =  'dd88a40d63b744b9f777f03aad98b7460048f06a';
-    final url = Uri.parse('http://devtriples.pythonanywhere.com/api/v1/posting/news_posting/create/');
+    final url = Uri.parse('${baseUrl}api/v1/posting/news_posting/create/');
 
     final request = http.MultipartRequest('POST', url);
     request.fields['category'] = formData.category;

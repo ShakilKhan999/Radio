@@ -16,7 +16,7 @@ class LoginRepository {
     // log(response.body.toString());
     // return loginResponseFromJson(response.body);
     var request = http.MultipartRequest(
-        'POST', Uri.parse('http://16.171.2.83/api/v1/login/'));
+        'POST', Uri.parse('${baseUrl}api/v1/login/'));
     request.fields.addAll({'username': email, 'password': password});
 
     http.StreamedResponse response = await request.send();

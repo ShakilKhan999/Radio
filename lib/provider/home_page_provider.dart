@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../global/constants.dart';
 import '../models/upcoming_show_model.dart';
 
 class UpcomingShowProvider extends ChangeNotifier {
@@ -12,7 +13,7 @@ class UpcomingShowProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   final String apiUrl =
-      'http://devtriples.pythonanywhere.com/api/v1/posting/upcoming_show_list/';
+      '${baseUrl}api/v1/posting/upcoming_show_list/';
   final String authToken =
       'dd88a40d63b744b9f777f03aad98b7460048f06a';
 
@@ -46,7 +47,7 @@ class ApiProvider extends ChangeNotifier {
   List<Results>? get dataList => _dataList;
   bool get isLoading => _isLoading;
 
-  final String apiUrl = 'http://devtriples.pythonanywhere.com/api/v1/posting/audio_posting_by_category/1/'; // Replace with your API endpoint
+  final String apiUrl = '${baseUrl}api/v1/posting/audio_posting_by_category/1/'; // Replace with your API endpoint
   final String authToken = 'dd88a40d63b744b9f777f03aad98b7460048f06a'; // Replace with your authentication token
 
   Future<void> fetchData() async {
