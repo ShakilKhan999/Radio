@@ -69,6 +69,14 @@ class ApiProvider extends ChangeNotifier {
     _isLoading = false;
     notifyListeners();
   }
+  int index = 0;
+  setIndex({required int index}){
+    index = index;
+    notifyListeners();
+  }
+  Results getIndex(){
+    return _dataList![index];
+  }
 }
 
 
