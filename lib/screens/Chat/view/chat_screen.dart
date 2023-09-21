@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:relaks_media/screens/Chat/chat_controller.dart';
 import 'conversation_screen.dart';
-import 'message_request_screen.dart';
+import '../../message_request_screen.dart';
 
 class ChatScreen extends StatelessWidget {
   static const String routeName = '/chat';
@@ -23,6 +25,8 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ChatController chatController = Get.put(ChatController());
+    chatController.getuserList();
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(

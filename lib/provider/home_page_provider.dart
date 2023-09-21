@@ -15,7 +15,7 @@ class UpcomingShowProvider extends ChangeNotifier {
   final String apiUrl =
       '${baseUrl}api/v1/posting/upcoming_show_list/';
   final String authToken =
-      'dd88a40d63b744b9f777f03aad98b7460048f06a';
+      'e0e6b09f5a9b9734c44d039ea02d7630adee76d9';
 
   Future<void> fetchUpcomingShows() async {
     _isLoading = true;
@@ -48,7 +48,7 @@ class ApiProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   final String apiUrl = '${baseUrl}api/v1/posting/audio_posting_by_category/1/'; // Replace with your API endpoint
-  final String authToken = 'dd88a40d63b744b9f777f03aad98b7460048f06a'; // Replace with your authentication token
+  final String authToken = 'e0e6b09f5a9b9734c44d039ea02d7630adee76d9'; // Replace with your authentication token
 
   Future<void> fetchData() async {
     _isLoading = true;

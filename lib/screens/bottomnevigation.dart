@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:relaks_media/controller/home_controller.dart';
 import 'package:relaks_media/controller/radio_controller.dart';
-import 'package:relaks_media/screens/chat_screen.dart';
+import 'package:relaks_media/screens/Chat/view/chat_screen.dart';
 import 'package:relaks_media/screens/fund_raising.dart';
 import 'package:relaks_media/screens/home_screen.dart';
 import 'package:relaks_media/screens/news_screen.dart';
