@@ -21,7 +21,6 @@ import 'package:relaks_media/screens/maintaince_screen.dart';
 import 'package:relaks_media/screens/message_request_screen.dart';
 import 'package:relaks_media/screens/my_store_screen.dart';
 import 'package:relaks_media/screens/news_screen.dart';
-import 'package:relaks_media/screens/others_services_screen.dart';
 import 'package:relaks_media/screens/otp_screen.dart';
 import 'package:relaks_media/screens/reset_password_screen.dart';
 import 'package:relaks_media/screens/signup_screen.dart';

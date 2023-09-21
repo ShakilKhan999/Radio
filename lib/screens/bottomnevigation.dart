@@ -129,14 +129,15 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     pageIndex = index;
                   });
                 },
-                items: [
+                items: const [
                   Icon(
                     Icons.home,
                     color: Colors.white,
                   ),
-                  Icon(Icons.newspaper, color: Colors.white),
-                  Icon(Icons.chat, color: Colors.white),
-                  Icon(Icons.storefront, color: Colors.white),
+                  ImageIcon(AssetImage('images/news.png'),color: Colors.white,),
+                  ImageIcon(AssetImage('images/msg.png'),color: Colors.white,),
+                  ImageIcon(AssetImage('images/store.png'),color: Colors.white,),
+
                 ],
               ),
             ),

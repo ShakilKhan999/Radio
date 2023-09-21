@@ -49,8 +49,9 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding:  EdgeInsets.only(left: 8.0.sp,right: 8.sp),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
                     icon: const Icon(Icons.arrow_back),
@@ -59,18 +60,15 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
                       homeController.newsCurrentPage.value = 0;
                     },
                   ),
-                  SizedBox(width: 8.0.w),
-                  Padding(
-                    padding:  EdgeInsets.only(left: 70.0.sp),
-                    child: Text(
-                      'Publish News',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22.0.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  Text(
+                    'Publish News',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22.0.sp,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
+                  SizedBox(width: 10.w,),
                 ],
               ),
             ),
@@ -110,7 +108,7 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 24.0.h),
+                    // SizedBox(height: 5.0.h),
                     Row(
                       children: [
                         Expanded(
@@ -122,14 +120,14 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
                                 padding:  EdgeInsets.only(left: 8.0.sp),
                                 child: Row(
                                   children: [
-                                    const Icon(Icons.person, color: Colors.white),
+                                    const Icon(Icons.person_outlined, color: Colors.white),
                                     SizedBox(width: 8.0.w),
                                     const Expanded(
                                       child: TextField(
                                         decoration: InputDecoration(
-                                          labelText: 'Name',
+                                          labelText: 'Enter your name',
                                           labelStyle:
-                                              TextStyle(color: Colors.white),
+                                              TextStyle(color: Colors.grey),
                                         ),
                                         style: TextStyle(color: Colors.white),
                                       ),
@@ -140,7 +138,7 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 16.0.w),
+                        // SizedBox(width: 2.0.w),
                         Expanded(
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
@@ -158,14 +156,14 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
                                         onTap: () => _selectDate(context),
                                         child: InputDecorator(
                                           decoration: const InputDecoration(
-                                            labelText: 'Date',
+                                            labelText: 'Update Date',
                                             labelStyle:
                                                 TextStyle(color: Colors.white),
                                           ),
                                           child: Text(
                                             '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
                                             style: const TextStyle(
-                                                color: Colors.white),
+                                                color: Colors.grey),
                                           ),
                                         ),
                                       ),
@@ -178,19 +176,19 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16.0.h),
+                    // SizedBox(height: 5.0.h),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Card(
                         color: Colors.grey.shade900,
                         child: const TextField(
                           decoration: InputDecoration(
-                            labelText: 'Title',
+                            labelText: 'Enter news titile',
                             prefixIcon: Icon(
                               Icons.text_format_outlined,
                               color: Colors.white,
                             ),
-                            labelStyle: TextStyle(color: Colors.white),
+                            labelStyle: TextStyle(color: Colors.grey),
                           ),
                           style: TextStyle(color: Colors.white),
                         ),
@@ -201,22 +199,39 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
                       borderRadius: BorderRadius.circular(20),
                       child: Card(
                         color: Colors.grey.shade900,
-                        child: const TextField(
-                          maxLines: 10,
-                          decoration: InputDecoration(
-                            labelText: 'Description',
-                            prefixIcon: Icon(
-                              Icons.description_outlined,
-                              color: Colors.white,
-                            ),
-                            labelStyle: TextStyle(color: Colors.white),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ImageIcon(
+                                AssetImage('images/text.png'),
+                                color: Colors.white,
+                                size: 20.0, // Adjust the size as needed
+                              ),
+                              SizedBox(width: 8.0), // Add some spacing between icon and hintText
+                              Container(
+                                width: 200.0, // Adjust the width as needed
+                                child: const TextField(
+                                  maxLines: 10,
+                                  decoration: InputDecoration(
+                                    hintText: 'Description',
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                    border: InputBorder.none, // Remove the border
+                                  ),
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ],
                           ),
-                          style: TextStyle(color: Colors.white),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 24.0.h),
-                   
+                    )
+
+
+
+
+
                   ],
                 ),
               ),
