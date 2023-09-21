@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:provider/provider.dart';
+import 'package:relaks_media/demo.dart';
+import 'package:relaks_media/provider/home_page_provider.dart';
+import 'package:relaks_media/provider/news_api_provider.dart';
 import 'package:relaks_media/screens/air_screen.dart';
 import 'package:relaks_media/screens/air_tickets_screen.dart';
 import 'package:relaks_media/screens/bottomnevigation.dart';
@@ -16,14 +21,15 @@ import 'package:relaks_media/screens/event_ticket_payment_screen.dart';
 import 'package:relaks_media/screens/forgot_password_screen.dart';
 import 'package:relaks_media/screens/home_screen.dart';
 import 'package:relaks_media/screens/launcherpage.dart';
-import 'package:relaks_media/screens/login_screen.dart';
+import 'package:relaks_media/screens/login/view/login_screen.dart';
 import 'package:relaks_media/screens/maintaince_screen.dart';
 import 'package:relaks_media/screens/message_request_screen.dart';
 import 'package:relaks_media/screens/my_store_screen.dart';
 import 'package:relaks_media/screens/news_screen.dart';
-import 'package:relaks_media/screens/otp_screen.dart';
+import 'package:relaks_media/screens/others_services_screen.dart';
+import 'package:relaks_media/screens/otp/view/otp_screen.dart';
 import 'package:relaks_media/screens/reset_password_screen.dart';
-import 'package:relaks_media/screens/signup_screen.dart';
+import 'package:relaks_media/screens/singup/view/signup_screen.dart';
 import 'package:relaks_media/screens/splash_screen.dart';
 import 'package:relaks_media/screens/station_screen.dart';
 import 'package:relaks_media/screens/train_screen.dart';
@@ -33,14 +39,24 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider<UpcomingShowProvider>(create: (_) => UpcomingShowProvider()),
+          ChangeNotifierProvider<ApiProvider>(create: (_) => ApiProvider()),
+          ChangeNotifierProvider<NewsApiProvider>(create: (_) => NewsApiProvider()),
+
+          // Add other providers if needed
+        ],
+        child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
 
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  // This widget is the root of your application. 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -52,7 +68,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(),
-          initialRoute: LauncherPage.routeName,
+          initialRoute: OtpScreen.routeName,
           routes: {
             LauncherPage.routeName:(context) => LauncherPage(),
             SplashScreen.routeName:(context) => SplashScreen(),
@@ -72,7 +88,6 @@ class MyApp extends StatelessWidget {
             EventTicketPayment.routeName:(context) => EventTicketPayment(),
             ForgotPass.routeName:(context) => ForgotPass(),
             HomeScreen.routeName:(context) => HomeScreen(),
-            LoginScreen.routeName:(context) => LoginScreen(),
             MaintainceScreen.routeName:(context) => MaintainceScreen(),
             MyStoreScreen.routeName:(context) => MyStoreScreen(),
             NewsScreen.routeName:(context) => NewsScreen(),
@@ -82,7 +97,9 @@ class MyApp extends StatelessWidget {
             StationScreen.routeName:(context) => StationScreen(),
             TrainScreen.routeName:(context) => TrainScreen(),
             TrainTicketsScreen.routeName:(context) => TrainTicketsScreen(),
+            Demo.routeName:(context) => Demo(),
           },
+      builder: EasyLoading.init(),
         );
       },
     );

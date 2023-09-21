@@ -4,9 +4,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:relaks_media/controller/authController.dart';
 import 'package:relaks_media/screens/forgot_password_screen.dart';
+import 'package:relaks_media/screens/login/controller/login_controller.dart';
 
-import '../utils/glass_box.dart';
-import 'bottomnevigation.dart';
+import '../../../utils/glass_box.dart';
+import '../../bottomnevigation.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login';
@@ -34,8 +35,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    AuthController authController =
-    Get.put(AuthController());
+    AuthController authController = Get.put(AuthController());
+    LoginController loginController = Get.put(LoginController());
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -93,7 +94,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         SizedBox(
                                           height: 50.h,
                                           child: TextFormField(
-                                            controller: authController.mailController,
+                                            controller:
+                                                authController.mailController,
                                             style: TextStyle(
                                                 color: Colors.grey,
                                                 fontFamily: 'Poppins',
@@ -135,15 +137,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                           height: 50.h,
                                           child: Center(
                                             child: TextFormField(
-                                              controller:authController.passController,
+                                              controller:
+                                                  authController.passController,
                                               style: TextStyle(
                                                   color: Colors.grey,
                                                   fontFamily: 'Poppins',
                                                   fontSize: 15.sp),
                                               obscureText: !visiblepass,
                                               decoration: InputDecoration(
-                                                contentPadding: EdgeInsets.all(
-                                                    8.sp),
+                                                contentPadding:
+                                                    EdgeInsets.all(8.sp),
                                                 hintText: '*************',
                                                 hintStyle: TextStyle(
                                                     color: Colors.grey,
@@ -158,10 +161,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         borderSide: BorderSide(
                                                             color: Colors.grey,
                                                             width: 1.2)),
-                                                border: const OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Colors.grey,
-                                                        width: 1.2)),
+                                                border:
+                                                    const OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors.grey,
+                                                            width: 1.2)),
                                                 suffixIcon: visiblepass
                                                     ? IconButton(
                                                         onPressed: () {
@@ -236,30 +240,60 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ),
                                             child: ElevatedButton(
                                               onPressed: () {
-                                                if(authController.mailController.text==null ||authController.mailController.text=='' )
-                                                  {
-                                                    Fluttertoast.showToast(
-                                                      msg: 'Enter email address',
-                                                      toastLength: Toast.LENGTH_SHORT,
-                                                      gravity: ToastGravity.BOTTOM,
-                                                      backgroundColor: Colors.grey,
-                                                      textColor: Colors.white,
-                                                    );
-                                                  }
-                                                else if(authController.passController.text==null ||authController.passController.text=='' || authController.passController.text.length<6)
-                                                {
+                                                if (authController
+                                                            .mailController
+                                                            .text ==
+                                                        null ||
+                                                    authController
+                                                            .mailController
+                                                            .text ==
+                                                        '') {
                                                   Fluttertoast.showToast(
-                                                    msg: 'Enter valid password',
-                                                    toastLength: Toast.LENGTH_SHORT,
-                                                    gravity: ToastGravity.BOTTOM,
-                                                    backgroundColor: Colors.grey,
+                                                    msg: 'Enter email address',
+                                                    toastLength:
+                                                        Toast.LENGTH_SHORT,
+                                                    gravity:
+                                                        ToastGravity.BOTTOM,
+                                                    backgroundColor:
+                                                        Colors.grey,
                                                     textColor: Colors.white,
                                                   );
+                                                } else if (authController
+                                                            .passController
+                                                            .text ==
+                                                        null ||
+                                                    authController
+                                                            .passController
+                                                            .text ==
+                                                        '' 
+                                                    //     ||
+                                                    // authController
+                                                    //         .passController
+                                                    //         .text
+                                                    //         .length <
+                                                    //     6
+                                                        ) {
+                                                  Fluttertoast.showToast(
+                                                    msg: 'Enter valid password',
+                                                    toastLength:
+                                                        Toast.LENGTH_SHORT,
+                                                    gravity:
+                                                        ToastGravity.BOTTOM,
+                                                    backgroundColor:
+                                                        Colors.grey,
+                                                    textColor: Colors.white,
+                                                  );
+                                                } else {
+                                                  // authController.LogIn();
+                                                  loginController.login(
+                                                      email: emailController
+                                                          .text
+                                                          .trim(),
+                                                      password:
+                                                          passwordController
+                                                              .text
+                                                              .trim());
                                                 }
-                                                else{
-                                                  authController.LogIn();
-                                                }
-
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 backgroundColor:
@@ -294,7 +328,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           children: [
                                             Expanded(
                                               child: Container(
-                                                height:45.h,
+                                                height: 45.h,
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
                                                       color: Colors.grey),
@@ -312,7 +346,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       elevation: 0,
                                                     ),
                                                     child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
                                                       children: [
                                                         Image.asset(
                                                           'images/Google.png',
@@ -322,10 +358,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         Text(
                                                           'Google',
                                                           style: TextStyle(
-                                                            fontFamily: 'Poppins',
+                                                            fontFamily:
+                                                                'Poppins',
                                                             color: Colors.white,
                                                             fontSize: 14.0.sp,
-
                                                           ),
                                                         ),
                                                       ],
@@ -337,7 +373,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ),
                                             Expanded(
                                               child: Container(
-                                                height:45.h,
+                                                height: 45.h,
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
                                                       color: Colors.grey),
@@ -355,7 +391,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       elevation: 0,
                                                     ),
                                                     child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
                                                       children: [
                                                         Image.asset(
                                                           'images/Facebook.png',
@@ -365,7 +403,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         Text(
                                                           'Facebook',
                                                           style: TextStyle(
-                                                            fontFamily: 'Poppins',
+                                                            fontFamily:
+                                                                'Poppins',
                                                             color: Colors.white,
                                                             fontSize: 14.0.sp,
                                                           ),

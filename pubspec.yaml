@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.5 <4.0.0'
+  sdk: '>=3.0.3 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -40,6 +40,7 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   carousel_slider:
   smooth_page_indicator: ^1.1.0
+  dropdown_button2: ^2.3.4
   youtube_player_flutter:
   get: ^4.6.5
   curved_labeled_navigation_bar: ^2.0.2
@@ -54,6 +55,12 @@ dependencies:
   webview_flutter: ^4.0.2
   just_audio: ^0.9.34
   fluttertoast: ^8.0.8
+  http:
+  shared_preferences: ^2.1.2
+  provider:
+  image_picker:
+  audioplayers: ^4.1.0
+  audio_waveforms: ^1.0.4
 
 
 
