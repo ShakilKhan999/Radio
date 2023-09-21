@@ -120,11 +120,11 @@ class ChatScreen extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
+          Obx(()=>Expanded(
             child: ListView.builder(
-              itemCount: chatAccounts.length,
+              itemCount: chatController.chatuserlist.length,
               itemBuilder: (context, index) {
-                final chatAccount = chatAccounts[index];
+                final chatAccount = chatController.chatuserlist[index];
                 return GestureDetector(
                   onTap: () {
                     // Navigate to the conversation screen
@@ -136,24 +136,24 @@ class ChatScreen extends StatelessWidget {
                   },
                   child: ListTile(
                     leading: CircleAvatar(
-                      backgroundImage: AssetImage(chatAccount.imageUrl),
+                      backgroundImage: AssetImage(chatAccount.avatar==null?chatAccounts[0].imageUrl:chatAccount.avatar),
                     ),
                     title: Text(
-                      chatAccount.name,
+                      chatAccount.name==null?'':chatAccount.name,
                       style: const TextStyle(
                           color: Colors.white,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(
-                      chatAccount.lastMessage,
+                      '',
                       style: const TextStyle(
                         color: Colors.grey,
                         fontFamily: 'Poppins',
                       ),
                     ),
                     trailing: Text(
-                      chatAccount.time,
+                      '',
                       style: const TextStyle(
                         color: Colors.grey,
                         fontFamily: 'Poppins',
@@ -163,7 +163,7 @@ class ChatScreen extends StatelessWidget {
                 );
               },
             ),
-          ),
+          )),
         ],
       ),
     );
