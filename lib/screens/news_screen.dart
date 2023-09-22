@@ -118,7 +118,7 @@ late NewsApiProvider newsApiProvider;
                                 child: Column(
                                   children: [
                                     SizedBox(height: 15.h),
-                                    Container(
+                                   category != null ? Container(
                                       height: 40.h,
                                       width: MediaQuery.of(context).size.width,
                                       child: ListView.builder(
@@ -170,16 +170,16 @@ late NewsApiProvider newsApiProvider;
                                           );
                                         },
                                       ),
-                                    ),
+                                    ) : Container(height: 50, width: 50, child: CircularProgressIndicator(),),
                                     SizedBox(height: 10.h),
                                   ],
                                 ),
                               ),
                             ),
                           ),
-                          Expanded(
+                         newsData != null ? Expanded(
                             child: ListView.builder(
-                              itemCount: newsData!.length,
+                              itemCount: newsData.length,
                               itemBuilder: (context, index) {
                                 return InkWell(
                                   onTap: () {
@@ -207,7 +207,7 @@ late NewsApiProvider newsApiProvider;
                                 );
                               },
                             ),
-                          )
+                          ) : Expanded(child: CircularProgressIndicator())
                         ],
                       ),
                     );

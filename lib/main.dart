@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(),
-          initialRoute: OtpScreen.routeName,
+          initialRoute: SplashScreen.routeName,
           routes: {
             LauncherPage.routeName:(context) => LauncherPage(),
             SplashScreen.routeName:(context) => SplashScreen(),

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:relaks_media/controller/chat_controller.dart';
-
+import '../chat_controller.dart';
 import 'chat_screen.dart';
 
 class ConversationScreen extends StatefulWidget {
@@ -30,8 +29,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
   @override
   Widget build(BuildContext context) {
     ChatController chatController = Get.put(ChatController());
-    chatController.getChats();
-    final ChatAccount chatAccount = ModalRoute.of(context)!.settings.arguments as ChatAccount;
+    //chatController.getChats();
+    //final ChatAccount chatAccount = ModalRoute.of(context)!.settings.arguments as ChatAccount;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -53,8 +52,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                     alignment: Alignment.bottomRight,
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage(chatController.chatList[0].results[0].sender.avatar==null?chatAccount.imageUrl:
-                        chatController.chatList[0].results[0].sender.avatar),
+                        backgroundImage: NetworkImage("https://cdn-icons-png.flaticon.com/512/3135/3135715.png"),
                         radius: 20.0,
                       ),
                       const CircleAvatar(
@@ -68,8 +66,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        chatController.chatList[0].results[0].sender.name==null?"No Name":
-                        chatController.chatList[0].results[0].sender.name,
+                       '',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18.0.sp,
@@ -87,7 +84,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                 ],
               ),
             ),
-            Expanded(
+            Obx(()=>Expanded(
               child: ListView.builder(
                 itemCount: chatController.chatList[0].results.length==0?0:
                 chatController.chatList[0].results.length,
@@ -131,7 +128,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                   );
                 },
               ),
-            ),
+            )),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Stack(
@@ -157,6 +154,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                           horizontal: 12.0.h,
                         ),
                         child: TextField(
+                          controller: chatController.messageController,
                           decoration: InputDecoration(
                             hintText: 'Type your message here...',
                             hintStyle: const TextStyle(
@@ -177,7 +175,10 @@ class _ConversationScreenState extends State<ConversationScreen> {
                         child: IconButton(
                           icon: const Icon(Icons.send_outlined),
                           color: Colors.white,
-                          onPressed: () {},
+                          onPressed: () {
+                            chatController.sendMessage2(chatController.chatuserlist[chatController.selecteduserIndex.value].id);
+                            chatController.messageController.text='';
+                          },
                         ),
                       ),
                     ),
