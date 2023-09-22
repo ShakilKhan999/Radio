@@ -5,8 +5,14 @@ import 'package:relaks_media/screens/Chat/chat_controller.dart';
 import 'conversation_screen.dart';
 import '../../message_request_screen.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends StatefulWidget {
   static const String routeName = '/chat';
+
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
   final List<ChatAccount> chatAccounts = [
     ChatAccount(
       imageUrl: 'images/chat1.png',
@@ -23,9 +29,9 @@ class ChatScreen extends StatelessWidget {
     // Add more chat accounts here
   ];
 
+  ChatController chatController = Get.put(ChatController());
   @override
   Widget build(BuildContext context) {
-    ChatController chatController = Get.put(ChatController());
     chatController.getuserList();
     return Scaffold(
       backgroundColor: Colors.black,
@@ -120,13 +126,16 @@ class ChatScreen extends StatelessWidget {
               ],
             ),
           ),
-          Obx(()=>Expanded(
+          Obx(()=>SizedBox(
             child: ListView.builder(
+              shrinkWrap: true,
               itemCount: chatController.chatuserlist.length,
               itemBuilder: (context, index) {
                 final chatAccount = chatController.chatuserlist[index];
                 return GestureDetector(
                   onTap: () {
+                    chatController.selecteduserIndex.value=index;
+                    chatController.getChats(chatAccount.id);
                     // Navigate to the conversation screen
                     Navigator.pushNamed(
                       context,
@@ -136,7 +145,9 @@ class ChatScreen extends StatelessWidget {
                   },
                   child: ListTile(
                     leading: CircleAvatar(
-                      backgroundImage: AssetImage(chatAccount.avatar==null?chatAccounts[0].imageUrl:chatAccount.avatar),
+                      backgroundImage: NetworkImage(
+                          chatAccount.avatar==null?"https://cdn-icons-png.flaticon.com/512/3135/3135715.png":
+                      chatAccount.avatar),
                     ),
                     title: Text(
                       chatAccount.name==null?'':chatAccount.name,
@@ -146,19 +157,13 @@ class ChatScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(
-                      '',
+                      'Tap to start conversation',
                       style: const TextStyle(
                         color: Colors.grey,
                         fontFamily: 'Poppins',
                       ),
                     ),
-                    trailing: Text(
-                      '',
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
+
                   ),
                 );
               },
