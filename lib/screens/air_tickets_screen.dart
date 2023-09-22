@@ -81,9 +81,11 @@ class _AirTicketScreenState extends State<AirTicketScreen> {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: SizedBox(
-                              height: MediaQuery.of(context).size.height-340.h,
+                              height: MediaQuery.of(context).size.height-310.h,
                               width:MediaQuery.of(context).size.width-80,
-                              child: WebViewWidget(controller: controller,)),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(5.sp),
+                                  child: WebViewWidget(controller: controller,))),
                         ),
 
                       ),

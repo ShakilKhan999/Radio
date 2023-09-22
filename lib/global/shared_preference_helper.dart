@@ -1,12 +1,30 @@
 import 'package:relaks_media/global/constants.dart';
+import 'package:relaks_media/models/login_response.dart';
+import 'package:relaks_media/models/otp_response.dart';
 import 'package:relaks_media/models/signup_response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferenceHelper {
-  Future<void> saveMemberData(SignUpResponse signUpResponse) async {
+  Future<void> saveMemberData({required LoginResponse loginResponse}) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    prefs.setString(verificationToken, signUpResponse.results!.verificationToken!);
+    prefs.setString(token, loginResponse.results!.token!);
+    prefs.setInt(id, loginResponse.results!.user!.id!);
+    prefs.setString(email, loginResponse.results!.user!.email  ?? 'N/A');
+    prefs.setString(phone, loginResponse.results!.user!.phone ?? 'N/A');
+    prefs.setString(name, loginResponse.results!.user!.name ?? 'N/A');
+    prefs.setBool(isVerified, loginResponse.results!.user!.isVerified ?? false);
+
+  }
+    Future<void> saveMemberDataSignup({required OtpResponse otpResponse}) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setString(token, otpResponse.results!.token!);
+    prefs.setInt(id, otpResponse.results!.user!.id!);
+    prefs.setString(email, otpResponse.results!.user!.email  ?? 'N/A');
+    prefs.setString(phone, otpResponse.results!.user!.phone ?? 'N/A');
+    prefs.setString(name, otpResponse.results!.user!.name ?? 'N/A');
+    prefs.setBool(isVerified, otpResponse.results!.user!.isVerified ?? false);
 
   }
 

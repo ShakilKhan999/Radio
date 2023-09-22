@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:relaks_media/utils/relaks_premium.dart';
 import 'package:relaks_media/utils/suceess_screen.dart';
 
 import '../controller/home_controller.dart';
+import 'earn_coin.dart';
 import 'glass_box.dart';
 
 class PaymentWay extends StatelessWidget {
@@ -235,6 +237,7 @@ class PaymentWay extends StatelessWidget {
                               context: context,
                               builder: (BuildContext context) {
                                 return SucessScreen();
+                                // return RelaksPremium();
                               },
                             );
                           }

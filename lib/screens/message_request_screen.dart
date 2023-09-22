@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'conversation_screen.dart';
-import 'chat_screen.dart';
+import 'Chat/view/conversation_screen.dart';
+import 'Chat/view/chat_screen.dart';
 
 class MessageRequestScreen extends StatelessWidget {
   static const String routeName = '/message_requests';

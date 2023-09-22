@@ -19,8 +19,8 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
-  final conPasswordController = TextEditingController();
   final passwordController = TextEditingController();
+  final conPasswordController = TextEditingController();
   bool visiblepass = false;
   @override
   void dispose() {
@@ -91,7 +91,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                             height: 50.h,
                                             child: TextFormField(
                                               controller:
-                                                  authController.mailController,
+                                                  emailController,
                                               decoration: const InputDecoration(
                                                 hintText: 'example@gmail.com',
                                                 hintStyle: TextStyle(
@@ -170,7 +170,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                             height: 50.h,
                                             child: TextFormField(
                                               controller:
-                                                  authController.passController,
+                                                  passwordController,
                                               obscureText: !visiblepass,
                                               decoration: InputDecoration(
                                                 hintText: '*************',
@@ -312,14 +312,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                               ),
                                               child: ElevatedButton(
                                                 onPressed: () {
-                                                  if (authController
-                                                              .mailController
-                                                              .text ==
-                                                          null ||
-                                                      authController
-                                                              .mailController
-                                                              .text ==
-                                                          '') {
+                                                  if (emailController
+                                                              .text == '') {
                                                     Fluttertoast.showToast(
                                                       msg:
                                                           'Enter email address',
@@ -331,16 +325,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                                           Colors.grey,
                                                       textColor: Colors.white,
                                                     );
-                                                  } else if (authController
-                                                              .passController
-                                                              .text ==
-                                                          null ||
-                                                      authController
-                                                              .passController
+                                                  } else if (passwordController
                                                               .text ==
                                                           '' ||
-                                                      authController
-                                                              .passController
+                                                      passwordController
                                                               .text
                                                               .length <
                                                           6) {
@@ -355,8 +343,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                           Colors.grey,
                                                       textColor: Colors.white,
                                                     );
-                                                  } else if (authController
-                                                          .passController
+                                                  } else if (passwordController
                                                           .text !=
                                                       conPasswordController
                                                           .text) {

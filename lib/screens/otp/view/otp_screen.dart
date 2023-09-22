@@ -1,35 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:relaks_media/screens/otp/controller/otp_controller.dart';
 import 'package:relaks_media/screens/reset_password_screen.dart';
 
-import '../utils/glass_box.dart';
+import '../../../utils/glass_box.dart';
 
 class OtpScreen extends StatefulWidget {
-  static const String routeName='/otp';
+  static const String routeName = '/otp';
+  String from;
+  String verificationToken;
 
-
-  const OtpScreen({Key? key, }) : super(key: key);
+  OtpScreen({Key? key, this.from = '', this.verificationToken = ''})
+      : super(key: key);
 
   @override
   _OtpScreenState createState() => _OtpScreenState();
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  final emailController = TextEditingController();
+  final otpController = TextEditingController();
 
   @override
   void dispose() {
-    emailController.dispose();
+    otpController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    OtpController otpControllerPage = Get.put(OtpController());
     return SafeArea(
       child: Scaffold(
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('images/splash.png'),
               fit: BoxFit.cover,
@@ -49,7 +54,8 @@ class _OtpScreenState extends State<OtpScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: SizedBox(
-                              height: MediaQuery.of(context).size.height - 540.h,
+                              height:
+                                  MediaQuery.of(context).size.height - 540.h,
                               width: MediaQuery.of(context).size.width - 80,
                               child: Column(
                                 children: [
@@ -80,26 +86,28 @@ class _OtpScreenState extends State<OtpScreen> {
                                     height: 30.h,
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-
                                           SizedBox(height: 5.h),
                                           PinCodeTextField(
+                                            controller: otpController,
                                             appContext: context,
-                                            length: 4,
+                                            length: 6,
                                             textStyle: TextStyle(
                                               color: Colors.white,
                                               fontSize: 20.sp,
                                             ),
                                             pinTheme: PinTheme(
                                               shape: PinCodeFieldShape.box,
-                                              borderRadius: BorderRadius.circular(5.sp),
+                                              borderRadius:
+                                                  BorderRadius.circular(5.sp),
                                               fieldHeight: 45.h,
-                                              fieldWidth: 70.w,
+                                              fieldWidth: 40.w,
                                               inactiveColor: Colors.grey,
                                               activeColor: Colors.grey,
                                               selectedColor: Colors.grey,
@@ -127,26 +135,33 @@ class _OtpScreenState extends State<OtpScreen> {
                                               begin: Alignment.topLeft,
                                               end: Alignment.bottomRight,
                                             ),
-                                            borderRadius: BorderRadius.circular(9.0),
+                                            borderRadius:
+                                                BorderRadius.circular(9.0),
                                           ),
                                           child: ElevatedButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              if (widget.from == 'signup') {
+                                                otpControllerPage.verifyOtp(
+                                                    token: widget
+                                                        .verificationToken,
+                                                    otp: otpController.text
+                                                        .trim());
+                                              } else {
+                                                Navigator.pushNamed(context,
+                                                    ResetPassword.routeName);
+                                              }
+                                            },
                                             style: ElevatedButton.styleFrom(
-                                              backgroundColor: Colors.transparent,
+                                              backgroundColor:
+                                                  Colors.transparent,
                                               elevation: 0,
                                             ),
-                                            child: TextButton(
-                                              onPressed: (){
-                                                Navigator.pushNamed(context, ResetPassword.routeName);
-                                              },
-                                              child: Text(
-                                                'Submit',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16.0.sp,
-
-                                                  fontFamily: 'Poppins',
-                                                ),
+                                            child: Text(
+                                              'Submit',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16.0.sp,
+                                                fontFamily: 'Poppins',
                                               ),
                                             ),
                                           ),

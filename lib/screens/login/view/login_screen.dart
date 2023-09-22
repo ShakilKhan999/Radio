@@ -265,12 +265,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     authController
                                                             .passController
                                                             .text ==
-                                                        '' ||
-                                                    authController
-                                                            .passController
-                                                            .text
-                                                            .length <
-                                                        6) {
+                                                        '' 
+                                                    //     ||
+                                                    // authController
+                                                    //         .passController
+                                                    //         .text
+                                                    //         .length <
+                                                    //     6
+                                                        ) {
                                                   Fluttertoast.showToast(
                                                     msg: 'Enter valid password',
                                                     toastLength:

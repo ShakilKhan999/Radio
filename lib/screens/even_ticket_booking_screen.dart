@@ -27,29 +27,27 @@ class _EventTicketBookingState extends State<EventTicketBooking> {
             child: Column(
               children: [
                 SizedBox(
-                  height: 30.h,
+                  height: 10.h,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    IconButton(
+                        onPressed: () {
+                          homeController.eventstate.value=0;
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                        )),
                     Padding(
-                      padding: EdgeInsets.only(left: 15.0),
-                      child: IconButton(
-                          onPressed: () {
-                            homeController.eventstate.value=0;
-                          },
-                          icon: Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
-                          )),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 70.0.sp),
+                      padding:  EdgeInsets.only(right: 8.0.sp),
                       child: Text(
                         'Other Services',
                         style: TextStyle(color: Colors.white, fontSize: 30.sp),
                       ),
                     ),
+                    SizedBox()
                   ],
                 ),
                 SizedBox(
@@ -240,6 +238,7 @@ class _EventTicketBookingState extends State<EventTicketBooking> {
                                       mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                       children: [
+                                        SizedBox(),
                                         Text(
                                           'Select your Ticket ',
                                           style: TextStyle(
@@ -247,10 +246,14 @@ class _EventTicketBookingState extends State<EventTicketBooking> {
                                               fontWeight: FontWeight.w500,
                                               fontSize: 30.sp),
                                         ),
-                                        Icon(
-                                          Icons.cancel_presentation_rounded,
-                                          color: Colors.white,
-                                        )
+                                      Container(
+                                        height: 20.h,width: 20.w,
+                                        decoration: BoxDecoration(color: Colors.white.withOpacity(0.4),
+                                            borderRadius: BorderRadius.circular(5.sp),border: Border.all(color: Colors.transparent)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: ImageIcon(AssetImage('images/close.png'),size: 15.sp,color: Colors.white,),
+                                          ))
                                       ],
                                     ),
                                     SizedBox(
@@ -287,14 +290,19 @@ class _EventTicketBookingState extends State<EventTicketBooking> {
                                                           MainAxisAlignment
                                                               .center,
                                                           children: [
-                                                            Icon(
-                                                              Icons.remove,
-                                                              color:
-                                                              Colors.white,
-                                                              size: 30,
+                                                            Container(
+                                                              height: 25.h,width: 32.w,
+                                                              decoration: BoxDecoration(color: Colors.white.withOpacity(0.4),
+                                                                  borderRadius: BorderRadius.circular(5.sp),border: Border.all(color: Colors.transparent)),
+                                                              child: Icon(
+                                                                Icons.remove,
+                                                                color:
+                                                                Colors.white,
+                                                                size: 25,
+                                                              ),
                                                             ),
                                                             SizedBox(
-                                                              width: 5.w,
+                                                              width: 8.w,
                                                             ),
                                                             Text(
                                                               '2',
@@ -308,29 +316,42 @@ class _EventTicketBookingState extends State<EventTicketBooking> {
                                                                       .bold),
                                                             ),
                                                             SizedBox(
-                                                              width: 5.w,
+                                                              width: 8.w,
                                                             ),
-                                                            Icon(
-                                                              Icons.add,
-                                                              color:
-                                                              Colors.white,
-                                                              size: 30,
+                                                            Container(
+                                                              height: 25.h,width: 32.w,
+                                                              decoration: BoxDecoration(color: Colors.white.withOpacity(0.4),
+                                                                  borderRadius: BorderRadius.circular(5.sp),border: Border.all(color: Colors.transparent)),
+                                                              child: Icon(
+                                                                Icons.add,
+                                                                color:
+                                                                Colors.white,
+                                                                size: 25,
+                                                              ),
                                                             ),
                                                           ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 8.h,
                                                         ),
                                                         Text(
                                                           'Total',
                                                           style: TextStyle(
+                                                              fontFamily: 'Poppins',
                                                               color: Colors.grey
-                                                                  .shade600,
+                                                                  .shade400,fontWeight: FontWeight.w600,
                                                               fontSize: 20.sp),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 8.h,
                                                         ),
                                                         Text(
                                                           'BDT 400',
                                                           style: TextStyle(
+                                                            fontFamily: 'Poppins',
                                                               color:
                                                               Colors.white,
-                                                              fontSize: 30.sp),
+                                                              fontSize: 30.sp,fontWeight: FontWeight.w600),
                                                         ),
                                                       ],
                                                     ),

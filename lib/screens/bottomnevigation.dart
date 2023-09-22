@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:relaks_media/controller/home_controller.dart';
 import 'package:relaks_media/controller/radio_controller.dart';
-import 'package:relaks_media/screens/chat_screen.dart';
+import 'package:relaks_media/screens/Chat/view/chat_screen.dart';
 import 'package:relaks_media/screens/fund_raising.dart';
 import 'package:relaks_media/screens/home_screen.dart';
 import 'package:relaks_media/screens/news_screen.dart';
@@ -131,14 +131,15 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     pageIndex = index;
                   });
                 },
-                items: [
+                items: const [
                   Icon(
                     Icons.home,
                     color: Colors.white,
                   ),
-                  Icon(Icons.newspaper, color: Colors.white),
-                  Icon(Icons.chat, color: Colors.white),
-                  Icon(Icons.storefront, color: Colors.white),
+                  ImageIcon(AssetImage('images/news.png'),color: Colors.white,),
+                  ImageIcon(AssetImage('images/msg.png'),color: Colors.white,),
+                  ImageIcon(AssetImage('images/store.png'),color: Colors.white,),
+
                 ],
               ),
             ),
