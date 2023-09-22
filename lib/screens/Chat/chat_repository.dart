@@ -8,10 +8,9 @@ import 'package:relaks_media/screens/Chat/user_list_model.dart';
 import '../../models/chat_model.dart';
 
 class ChatRepo{
-
   Future<Chatmodel?> fetchChatData(int chatId) async {
     final String baseUrl = 'http://16.171.2.83/api/v1/chats/messages/';
-    final String token = 'e0e6b09f5a9b9734c44d039ea02d7630adee76d9';
+    final String token = '0b104116364581cc372075ca1ed028f6903c0036';
 
     final Uri url = Uri.parse('$baseUrl$chatId');
 
@@ -20,6 +19,7 @@ class ChatRepo{
     };
 
     final response = await http.get(url, headers: headers);
+    print(response.body);
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonResponse = json.decode(response.body);
@@ -29,7 +29,6 @@ class ChatRepo{
       return null;
     }
   }
-
   Future<UserListModel> fetchUsers() async {
     final headers = {
       'Authorization': 'Bearer e0e6b09f5a9b9734c44d039ea02d7630adee76d9'

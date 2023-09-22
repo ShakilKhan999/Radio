@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:relaks_media/controller/profile_Controller.dart';
 
 import '../controller/home_controller.dart';
 import 'glass_box.dart';
@@ -17,7 +21,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
   final passwordController = TextEditingController();
   final phoneController = TextEditingController();
   final addressController = TextEditingController();
-
+  File? _selectedImage;
   @override
   void dispose() {
     nameController.dispose();
@@ -32,6 +36,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.put(HomeController());
+    ProfileController profileController = Get.put(ProfileController());
     return SingleChildScrollView(
       child: Container(
         color: Colors.black,
@@ -50,7 +55,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                     onPressed: () {
                       homeController.mystorepagestate.value = 0;
                     },
-                    icon: Icon(Icons.arrow_back),
+                    icon: const Icon(Icons.arrow_back),
                   ),
                   SizedBox(
                     width: 75.w,
@@ -68,16 +73,29 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                 height: 5.h,
               ),
               GestureDetector(
-                onTap: () {
-                  // Handle profile picture edit
+                onTap: () async {
+                  final ImagePicker _picker = ImagePicker();
+                  final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+                  if (image != null) {
+                    setState(() {
+                      _selectedImage = File(image.path);
+                    });
+                  }
                 },
                 child: Stack(
                   children: [
                     CircleAvatar(
                       radius: 50,
-                      backgroundImage: AssetImage('images/profile.png'),
+                      // backgroundImage: _selectedImage != null? FileImage(_selectedImage!.path):AssetImage('images/profile.png'),
+                      child: _selectedImage != null ? ClipRRect(
+                          borderRadius:
+                          BorderRadius.circular(90),
+                          child: Image.file(File(_selectedImage!.path),width: 100.w,
+                            height: 120.h,
+                            fit: BoxFit.cover,)): Image.asset('images/profile.png'),
+
                     ),
-                    Positioned(
+                    const Positioned(
                       bottom: 7,
                       right: 13,
                       child: CircleAvatar(
@@ -92,6 +110,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                   ],
                 ),
               ),
+
               SizedBox(height: 20.h),
               Text('Edward Larry',
                   style: TextStyle(
@@ -374,12 +393,14 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                                     borderRadius:
                                     BorderRadius.circular(20)),
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    profileController.updateProfile(name: nameController.text.trim(), file: _selectedImage!.path);
+                                  },
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15),
                                     ),
-                                    backgroundColor: Color(0xffffEA1C24),
+                                    backgroundColor: const Color(0xffffEA1C24),
                                   ),
                                   child: Text(
                                     'Save Changes',

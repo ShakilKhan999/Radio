@@ -273,6 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     return InkWell(
                                       onTap: (){
                                         homeController.homestate.value = 9;
+                                        provider.setIndex(index: index);
                                         // Navigator.push(
                                         //   context,
                                         //   MaterialPageRoute(builder: (context) => AudioPlayerScreen()),

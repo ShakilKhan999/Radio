@@ -8,11 +8,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:provider/provider.dart';
 import 'package:relaks_media/controller/home_controller.dart';
 import 'package:relaks_media/controller/radio_controller.dart';
+import 'package:relaks_media/models/upcoming_show_model.dart';
+import 'package:relaks_media/provider/home_page_provider.dart';
 
 class AudioPlayerScreen extends StatefulWidget {
-  const AudioPlayerScreen({Key? key}) : super(key: key);
+  AudioPlayerScreen({Key? key}) : super(key: key);
 
   @override
   State<AudioPlayerScreen> createState() => _AudioPlayerScreenState();
@@ -31,6 +34,8 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
     super.dispose();
     audioPlayer.dispose();
   }
+  late ApiProvider upcomingShowProvider;
+  late Results audioData;
 
   late final RecorderController recorderController;
 
@@ -65,6 +70,9 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
 
   @override
   void initState() {
+        upcomingShowProvider = Provider.of<ApiProvider>(context, listen: false);
+    audioData = upcomingShowProvider.getIndex();
+    log(audioData.audioFile!);
     _initialiseControllers();
 
     // audioPlayer.onDurationChanged.listen((event) {
@@ -81,12 +89,13 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
       });
     });
 
+
+
     super.initState();
   }
 
   Future<void> du() async {
-    audioPlayer.setSourceUrl(
-        'https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg');
+    audioPlayer.setSourceUrl('http://16.171.2.83/media/audio_postings/rington-malibu-2021-16568.mp3');
     duration = (await audioPlayer.getDuration())!;
     log(duration.toString());
     setState(() {});
@@ -253,8 +262,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                               isPlaying = false;
                             });
                           } else {
-                            await audioPlayer.play(UrlSource(
-                                'https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg'));
+                            await audioPlayer.play(UrlSource('http://16.171.2.83/media/audio_postings/rington-malibu-2021-16568.mp3'));
                             setState(() {
                               isPlaying = true;
                             });
