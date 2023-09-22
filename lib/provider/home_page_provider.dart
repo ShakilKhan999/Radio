@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:relaks_media/global/constants.dart';
 import 'dart:convert';
 
 import '../models/upcoming_show_model.dart';
@@ -12,9 +13,9 @@ class UpcomingShowProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   final String apiUrl =
-      'http://devtriples.pythonanywhere.com/api/v1/posting/upcoming_show_list/';
+      '$baseUrl/api/v1/posting/upcoming_show_list/';
   final String authToken =
-      'dd88a40d63b744b9f777f03aad98b7460048f06a';
+      'e0e6b09f5a9b9734c44d039ea02d7630adee76d9';
 
   Future<void> fetchUpcomingShows() async {
     _isLoading = true;
@@ -46,8 +47,8 @@ class ApiProvider extends ChangeNotifier {
   List<Results>? get dataList => _dataList;
   bool get isLoading => _isLoading;
 
-  final String apiUrl = 'http://devtriples.pythonanywhere.com/api/v1/posting/audio_posting_by_category/1/'; // Replace with your API endpoint
-  final String authToken = 'dd88a40d63b744b9f777f03aad98b7460048f06a'; // Replace with your authentication token
+  final String apiUrl = '$baseUrl/api/v1/posting/audio_posting_by_category/1/'; // Replace with your API endpoint
+  final String authToken = 'e0e6b09f5a9b9734c44d039ea02d7630adee76d9'; // Replace with your authentication token
 
   Future<void> fetchData() async {
     _isLoading = true;
