@@ -127,6 +127,7 @@ class ChatScreen extends StatelessWidget {
                 final chatAccount = chatController.chatuserlist[index];
                 return GestureDetector(
                   onTap: () {
+                    chatController.getChats(chatAccount.id);
                     // Navigate to the conversation screen
                     Navigator.pushNamed(
                       context,

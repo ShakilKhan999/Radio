@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:relaks_media/controller/chat_controller.dart';
+import 'package:relaks_media/screens/Chat/chat_controller.dart';
 
 import 'chat_screen.dart';
 
@@ -30,8 +30,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
   @override
   Widget build(BuildContext context) {
     ChatController chatController = Get.put(ChatController());
-    chatController.getChats();
-    final ChatAccount chatAccount = ModalRoute.of(context)!.settings.arguments as ChatAccount;
+    chatController.getChats(2);
+   // final ChatAccount chatAccount = ModalRoute.of(context)!.settings.arguments as ChatAccount;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -49,89 +49,90 @@ class _ConversationScreenState extends State<ConversationScreen> {
                     },
                   ),
                   SizedBox(width: 16.0.w),
-                  Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: AssetImage(chatController.chatList[0].results[0].sender.avatar==null?chatAccount.imageUrl:
-                        chatController.chatList[0].results[0].sender.avatar),
-                        radius: 20.0,
-                      ),
-                      const CircleAvatar(
-                        radius: 6.0,
-                        backgroundColor: Colors.green,
-                      ),
-                    ],
-                  ),
+                 // Obx(()=> Stack(
+                 //   alignment: Alignment.bottomRight,
+                 //   children: [
+                 //     CircleAvatar(
+                 //       backgroundImage: NetworkImage(chatController.chatList[0].results[0].sender.avatar==null?
+                 //       "https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg":
+                 //       chatController.chatList[0].results[0].sender.avatar),
+                 //       radius: 20.0,
+                 //     ),
+                 //     const CircleAvatar(
+                 //       radius: 6.0,
+                 //       backgroundColor: Colors.green,
+                 //     ),
+                 //   ],
+                 // )),
                   SizedBox(width: 16.0.w),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        chatController.chatList[0].results[0].sender.name==null?"No Name":
-                        chatController.chatList[0].results[0].sender.name,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0.sp,
-                        ),
-                      ),
-                      Text(
-                        'Online',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 14.0.sp,
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Obx(()=>Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     Text(
+                  //       chatController.chatList[0].results[0].sender.name==null?"No Name":
+                  //       chatController.chatList[0].results[0].sender.name,
+                  //       style: TextStyle(
+                  //         color: Colors.white,
+                  //         fontSize: 18.0.sp,
+                  //       ),
+                  //     ),
+                  //     Text(
+                  //       'Online',
+                  //       style: TextStyle(
+                  //         color: Colors.grey,
+                  //         fontSize: 14.0.sp,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // )),
                 ],
               ),
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: chatController.chatList[0].results.length==0?0:
-                chatController.chatList[0].results.length,
-                itemBuilder: (context, index) {
-                  final message = chatController.chatList[0].results[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 8.0,
-                    ),
-                    child: Align(
-                      alignment: message.sender.id==1 ? Alignment.centerRight : Alignment.centerLeft,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: message.sender.id==1 ? Colors.grey.shade900 : Colors.black,
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        padding: EdgeInsets.all(12.0.sp),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              message.chat,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16.0.sp,
-                              ),
-                            ),
-                            SizedBox(height: 4.0.h),
-                            Text(
-                              message.createdAt.toString().substring(0,10),
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 12.0.sp,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+           Obx(()=> Expanded(
+             child: ListView.builder(
+               itemCount: chatController.chatList[0].results.length==0?0:
+               chatController.chatList[0].results.length,
+               itemBuilder: (context, index) {
+                 final message = chatController.chatList[0].results[index];
+                 return Padding(
+                   padding: const EdgeInsets.symmetric(
+                     horizontal: 16.0,
+                     vertical: 8.0,
+                   ),
+                   child: Align(
+                     alignment: message.sender.id==1 ? Alignment.centerRight : Alignment.centerLeft,
+                     child: Container(
+                       decoration: BoxDecoration(
+                         color: message.sender.id==1 ? Colors.grey.shade900 : Colors.black,
+                         borderRadius: BorderRadius.circular(8.0),
+                       ),
+                       padding: EdgeInsets.all(12.0.sp),
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           Text(
+                             message.chat,
+                             style: TextStyle(
+                               color: Colors.white,
+                               fontSize: 16.0.sp,
+                             ),
+                           ),
+                           SizedBox(height: 4.0.h),
+                           Text(
+                             message.createdAt.toString().substring(0,10),
+                             style: TextStyle(
+                               color: Colors.grey,
+                               fontSize: 12.0.sp,
+                             ),
+                           ),
+                         ],
+                       ),
+                     ),
+                   ),
+                 );
+               },
+             ),
+           )),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Stack(
