@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:provider/provider.dart';
+import 'package:relaks_media/screens/publish_news_success_screen.dart';
 import '../controller/home_controller.dart';
 import '../models/news_model.dart';
 import '../provider/news_api_provider.dart';
@@ -242,8 +244,9 @@ class _PublishNewsScreenState extends State<PublishNewsScreen> {
               );
 
               await formDataProvider.sendDataToApi(formData);
+              homeController.newsCurrentPage.value=0;
             },
-            child: Text('Send Data to API'),
+            child: Text('Publish'),
           );
         },
       )

@@ -59,7 +59,7 @@ dependencies:
   shared_preferences: ^2.1.2
   provider:
   image_picker:
-  audioplayers: ^4.1.0
+  audioplayers: ^5.1.0
   audio_waveforms: ^1.0.4
 
 

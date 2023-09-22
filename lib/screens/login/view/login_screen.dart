@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           height: 50.h,
                                           child: TextFormField(
                                             controller:
-                                                authController.mailController,
+                                                emailController,
                                             style: TextStyle(
                                                 color: Colors.grey,
                                                 fontFamily: 'Poppins',
@@ -138,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           child: Center(
                                             child: TextFormField(
                                               controller:
-                                                  authController.passController,
+                                                  passwordController,
                                               style: TextStyle(
                                                   color: Colors.grey,
                                                   fontFamily: 'Poppins',
@@ -240,12 +240,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ),
                                             child: ElevatedButton(
                                               onPressed: () {
-                                                if (authController
-                                                            .mailController
-                                                            .text ==
-                                                        null ||
-                                                    authController
-                                                            .mailController
+                                                if (
+                                                    emailController
                                                             .text ==
                                                         '') {
                                                   Fluttertoast.showToast(
@@ -258,12 +254,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         Colors.grey,
                                                     textColor: Colors.white,
                                                   );
-                                                } else if (authController
-                                                            .passController
-                                                            .text ==
-                                                        null ||
-                                                    authController
-                                                            .passController
+                                                } else if (
+                                                    passwordController
                                                             .text ==
                                                         '' 
                                                     //     ||

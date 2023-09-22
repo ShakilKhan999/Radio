@@ -1,7 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:relaks_media/screens/job/controller/job_controller.dart';
 
-import '../utils/glass_box.dart';
+import '../../../utils/glass_box.dart';
 
 class CareerScreen extends StatefulWidget {
   static const String routeName='/career';
@@ -20,6 +25,7 @@ class _CareerScreenState extends State<CareerScreen> {
   final noteController = TextEditingController();
   final skillController = TextEditingController();
   final officialMailController = TextEditingController();
+  String applyAs = '';
   @override
   void dispose() {
     emailController.dispose();
@@ -45,7 +51,7 @@ class _CareerScreenState extends State<CareerScreen> {
                 Row(
                   children: [
                     SizedBox(width: 10.w,),
-                    IconButton( onPressed: () {  }, icon: Icon(Icons.arrow_back,color: Colors.white,)),
+                    IconButton( onPressed: () {  }, icon: const Icon(Icons.arrow_back,color: Colors.white,)),
                     SizedBox(width: 75.w,),
                     Text('Apply to be a Career',style: TextStyle(color: Colors.white,fontSize: 25.sp,fontWeight: FontWeight.bold),),
                   ],
@@ -80,7 +86,7 @@ class _CareerScreenState extends State<CareerScreen> {
                                       SizedBox(
                                         height: 50.h,
                                         child: TextFormField(
-                                          controller: nameController,
+                                          controller: nameController,style: TextStyle(color: Colors.grey),
                                           decoration: const InputDecoration(
                                             hintText: 'Sagor Roy',hintStyle: TextStyle(color: Colors.grey),
                                             focusedBorder: OutlineInputBorder(
@@ -380,7 +386,7 @@ class _CareerScreenState extends State<CareerScreen> {
                                               padding: const EdgeInsets.all(8.0),
                                               child: DropdownButton<String>(
                                                 value: 'As a Rj',
-                                                items: [
+                                                items: const [
                                                   DropdownMenuItem<String>(
                                                     value: 'As a Rj',
                                                     child: Text('As a Rj'),
@@ -401,6 +407,7 @@ class _CareerScreenState extends State<CareerScreen> {
                                                 ],
                                                 onChanged: (value) {
                                                   // Handle the dropdown value change
+                                                  applyAs = value.toString();
                                                 },
                                                 style: TextStyle(
                                                   color: Colors.black,
@@ -434,7 +441,7 @@ class _CareerScreenState extends State<CareerScreen> {
                                       SizedBox(
                                         height: 50.h,
                                         child: TextFormField(
-                                          controller: skillController,
+                                          controller: officialMailController,
                                           decoration: const InputDecoration(
                                             hintText: 'career@relaksmedia.com',hintStyle: TextStyle(color: Colors.grey),
                                             focusedBorder: OutlineInputBorder(
@@ -461,12 +468,25 @@ class _CareerScreenState extends State<CareerScreen> {
                                     height: 40.h,
                                     width: MediaQuery.of(context).size.width-120.w,
                                     decoration: BoxDecoration(border: Border.all(),borderRadius: BorderRadius.circular(20)),
-                                    child: ElevatedButton(onPressed: (){},
+                                    child: ElevatedButton(onPressed: (){
+                                      JobController jobController = Get.put(JobController());
+                                      jobController.postJob(
+                                        name: nameController.text.trim(),
+                                        email: emailController.text.trim(),
+                                        phone: phoneController.text.trim(),
+                                        education: educationController.text.trim(),
+                                        experience: workController.text.trim(),
+                                        skill: skillController.text.trim(),
+                                        note: noteController.text.trim(),
+                                        applyAs: applyAs,
+                                        officialEmail: officialMailController.text.trim(),
+                                      );
+                                    },
                                         style: ElevatedButton.styleFrom(
                                             shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.circular(15),
                                             ),
-                                            backgroundColor: Color(0xffffEA1C24)
+                                            backgroundColor: const Color(0xffffEA1C24)
                                         ),
                                         child: Text('Apply',style: TextStyle(color: Colors.white,fontSize: 20.sp),)),
                                   )

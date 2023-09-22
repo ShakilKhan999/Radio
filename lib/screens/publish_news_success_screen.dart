@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:relaks_media/controller/home_controller.dart';
 
 import '../utils/glass_box.dart';
 
@@ -8,6 +10,7 @@ class PublishSuccessNews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.put(HomeController());
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -25,7 +28,7 @@ class PublishSuccessNews extends StatelessWidget {
                       padding: EdgeInsets.only(left: 15.0),
                       child: IconButton(
                           onPressed: () {
-                            Navigator.of(context).pop();
+                            homeController.newsCurrentPage.value=0;
                           },
                           icon: Icon(
                             Icons.arrow_back,

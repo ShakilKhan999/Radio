@@ -78,9 +78,11 @@ class _NewsScreenState extends State<NewsScreen> {
           "A former bookseller and a great orator from the English-speaking area of Cameroon, he founded the opposition Social Democratic Front (SDF) in 1990. His popularity led the regime to accept a multi-party system was inevitable. In fact his party believed he won the 1992 presidential election, but the  Supreme Court judge that heard its petition alleging fraud said his 'hands were tied' - and let the official results granting victory to incumbent Paul Biya, with 40% of the vote, stand. This caused great upset with SDF supporters and their leader was put under house arrest for three months in his home in the economic hub, Bamenda, and a state of emergency was declared.Still the US must have given credence to his claim to the presidency, inviting him and his wife to the inauguration of Bill Clinton in January 1993. Fru Ndi was not a supporter of the secessionist rebellion in Anglophone Cameroon that has claimed tens of thousands of lives over the last six years - and was even kidnapped and beaten up by militants in 2019, and part of his house was burnt down.",
     },
   ];*/
-
+late NewsApiProvider newsApiProvider;
   @override
   void initState() {
+    //newsApiProvider=Provider.of<NewsApiProvider>(context);
+    // newsApiProvider.fetchData();
     // TODO: implement initState
     super.initState();
   }
@@ -293,7 +295,7 @@ class NewsCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        title,
+                        title.length>10?title.substring(0,10)+'..':title,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18.0.sp,
@@ -303,7 +305,8 @@ class NewsCard extends StatelessWidget {
                       SizedBox(height: 8.0.h),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
-                        child: Row(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               subtitle,
@@ -313,14 +316,14 @@ class NewsCard extends StatelessWidget {
                               ),
                             ),
                             SizedBox(width: 3.0.w),
-                            Image.network(
-                              subImage,
-                              height: 5.h,
-                              width: 5.w,
-                            ),
+                            // Image.network(
+                            //   subImage,
+                            //   height: 5.h,
+                            //   width: 5.w,
+                            // ),
                             SizedBox(width: 3.0.w),
                             Text(
-                              subtitle1,
+                              description.length>45?description.substring(0,45)+'..':description,
                               style: TextStyle(
                                 fontSize: 12.0.sp,
                                 color: Colors.grey,

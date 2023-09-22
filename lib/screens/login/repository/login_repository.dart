@@ -23,7 +23,9 @@ class LoginRepository {
 
     // if (response.statusCode == 200) {
       // print(await response.stream.bytesToString());
-      return loginResponseFromJson(await response.stream.bytesToString());
+      var res = await response.stream.bytesToString();
+      log(res.toString());
+      return loginResponseFromJson(res);
     // } 
   }
 }

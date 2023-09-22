@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 import 'package:relaks_media/controller/radio_controller.dart';
-import 'package:relaks_media/screens/career_screen.dart';
+import 'package:relaks_media/global/constants.dart';
+import 'package:relaks_media/screens/job/view/career_screen.dart';
 import 'package:relaks_media/screens/downlode_screen.dart';
 import 'package:relaks_media/screens/live_radio_screen.dart';
 import 'package:relaks_media/screens/others_services_screen.dart';
@@ -273,7 +274,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     return InkWell(
                                       onTap: (){
                                         homeController.homestate.value = 9;
-                                        provider.setIndex(index: index);
+                                        // provider.setIndex(index: index);
+                                        audioIndex = index;
+                                        setState(() {
+                                          
+                                        });
                                         // Navigator.push(
                                         //   context,
                                         //   MaterialPageRoute(builder: (context) => AudioPlayerScreen()),
@@ -391,10 +396,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                     final Results data = dataList![index];
                                     return InkWell(
                                       onTap: (){
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(builder: (context) => AudioPlayerScreen()),
-                                        );
+
+                                        homeController.homestate.value = 9;
+                                        // provider.setIndex(index: index);
+                                        audioIndex = index;
+                                        setState(() {
+                                          
+                                        });
+                                        // ff
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(builder: (context) => AudioPlayerScreen()),
+                                        // );
                                       },
                                       child: Container(
                                         margin:

@@ -5,7 +5,9 @@
     <application
         android:label="relaks_media"
         android:name="${applicationName}"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
+        <!-- <uses-library android:name="org.apache.http.legacy" android:required="false"/> -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
