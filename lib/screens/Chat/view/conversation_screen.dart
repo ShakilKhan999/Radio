@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:relaks_media/controller/chat_controller.dart';
 
 import 'chat_screen.dart';
 
@@ -27,8 +29,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ChatController chatController = Get.put(ChatController());
+    chatController.getChats();
     final ChatAccount chatAccount = ModalRoute.of(context)!.settings.arguments as ChatAccount;
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -50,7 +53,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
                     alignment: Alignment.bottomRight,
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage(chatAccount.imageUrl),
+                        backgroundImage: AssetImage(chatController.chatList[0].results[0].sender.avatar==null?chatAccount.imageUrl:
+                        chatController.chatList[0].results[0].sender.avatar),
                         radius: 20.0,
                       ),
                       const CircleAvatar(
@@ -64,7 +68,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        chatAccount.name,
+                        chatController.chatList[0].results[0].sender.name==null?"No Name":
+                        chatController.chatList[0].results[0].sender.name,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18.0.sp,
@@ -84,19 +89,20 @@ class _ConversationScreenState extends State<ConversationScreen> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: _messages.length,
+                itemCount: chatController.chatList[0].results.length==0?0:
+                chatController.chatList[0].results.length,
                 itemBuilder: (context, index) {
-                  final message = _messages[index];
+                  final message = chatController.chatList[0].results[index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16.0,
                       vertical: 8.0,
                     ),
                     child: Align(
-                      alignment: message.isMe ? Alignment.centerRight : Alignment.centerLeft,
+                      alignment: message.sender.id==1 ? Alignment.centerRight : Alignment.centerLeft,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: message.isMe ? Colors.grey.shade900 : Colors.black,
+                          color: message.sender.id==1 ? Colors.grey.shade900 : Colors.black,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         padding: EdgeInsets.all(12.0.sp),
@@ -104,7 +110,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              message.content,
+                              message.chat,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16.0.sp,
@@ -112,7 +118,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                             ),
                             SizedBox(height: 4.0.h),
                             Text(
-                              message.time,
+                              message.createdAt.toString().substring(0,10),
                               style: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 12.0.sp,

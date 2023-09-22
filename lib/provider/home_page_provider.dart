@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:relaks_media/global/constants.dart';
 import 'dart:convert';
 
-import '../global/constants.dart';
 import '../models/upcoming_show_model.dart';
 
 class UpcomingShowProvider extends ChangeNotifier {
@@ -13,7 +13,7 @@ class UpcomingShowProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   final String apiUrl =
-      '${baseUrl}api/v1/posting/upcoming_show_list/';
+      '$baseUrl/api/v1/posting/upcoming_show_list/';
   final String authToken =
       'e0e6b09f5a9b9734c44d039ea02d7630adee76d9';
 
@@ -47,7 +47,7 @@ class ApiProvider extends ChangeNotifier {
   List<Results>? get dataList => _dataList;
   bool get isLoading => _isLoading;
 
-  final String apiUrl = '${baseUrl}api/v1/posting/audio_posting_by_category/1/'; // Replace with your API endpoint
+  final String apiUrl = '$baseUrl/api/v1/posting/audio_posting_by_category/1/'; // Replace with your API endpoint
   final String authToken = 'e0e6b09f5a9b9734c44d039ea02d7630adee76d9'; // Replace with your authentication token
 
   Future<void> fetchData() async {
