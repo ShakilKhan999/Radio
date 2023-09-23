@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
+          title: 'Relaks Media',
           theme: ThemeData(),
           initialRoute: SplashScreen.routeName,
           routes: {
