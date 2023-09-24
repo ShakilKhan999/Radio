@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:relaks_media/screens/live_radio_screen.dart';
 import 'package:relaks_media/screens/maintaince_screen.dart';
 
 import '../controller/radio_controller.dart';
@@ -107,6 +108,9 @@ class StationScreen extends StatelessWidget {
                                               onPressed: () {
                                                 radioController.selectedChannel.value=0;
                                                 radioController.selectedRadioLink.value='https://s3.voscast.com:9893/live';
+                                                 Get.off(LiveRadioScreen(),
+                                                transition:
+                                                    Transition.noTransition);
                                               },
                                               child: Row(
                                                 children: [
@@ -149,6 +153,7 @@ class StationScreen extends StatelessWidget {
                                               onPressed: () {
                                                 radioController.selectedChannel.value=1;
                                                 radioController.selectedRadioLink.value='https://s3.voscast.com:9893/live';
+                                                Get.off(LiveRadioScreen());
                                               },
                                               child: Row(
                                                 children: [
@@ -195,6 +200,7 @@ class StationScreen extends StatelessWidget {
                                               onPressed: () {
                                                 radioController.selectedChannel.value=2;
                                                 radioController.selectedRadioLink.value='https://s1.voscast.com:11349/live';
+                                                Get.off(LiveRadioScreen());
                                               },
                                               child: Row(
                                                 children: [
@@ -237,6 +243,7 @@ class StationScreen extends StatelessWidget {
                                               onPressed: () {
                                                 radioController.selectedChannel.value=3;
                                                 radioController.selectedRadioLink.value='https://s3.voscast.com:10859/live';
+                                                Get.off(LiveRadioScreen());
                                               },
                                               child: Row(
                                                 children: [
@@ -283,6 +290,7 @@ class StationScreen extends StatelessWidget {
                                               onPressed: () {
                                                 radioController.selectedChannel.value=4;
                                                 radioController.selectedRadioLink.value='https://s3.voscast.com:10885/live';
+                                                Get.off(LiveRadioScreen());
                                               },
                                               child: Row(
                                                 children: [
@@ -325,6 +333,7 @@ class StationScreen extends StatelessWidget {
                                               onPressed: () {
                                                 radioController.selectedChannel.value=5;
                                                 radioController.selectedRadioLink.value='https://s3.voscast.com:10769/live';
+                                                Get.off(LiveRadioScreen());
                                               },
                                               child: Row(
                                                 children: [
@@ -371,6 +380,7 @@ class StationScreen extends StatelessWidget {
                                               onPressed: () {
                                                 radioController.selectedChannel.value=6;
                                                 radioController.selectedRadioLink.value='https://s3.voscast.com:10821/live';
+                                                Get.off(LiveRadioScreen());
                                               },
                                               child: Row(
                                                 children: [
@@ -458,6 +468,7 @@ class StationScreen extends StatelessWidget {
                                               onPressed: () {
                                                 radioController.selectedChannel.value=8;
                                                 radioController.selectedRadioLink.value='https://s3.voscast.com:10071/live';
+                                                Get.off(LiveRadioScreen());
                                               },
                                               child: Row(
                                                 children: [

@@ -279,7 +279,7 @@ class _MainDrawerState extends State<MainDrawer> {
 class GlassBox extends StatelessWidget {
   final Widget child;
 
-  const GlassBox({Key? key, required this.child}) : super(key: key);
+  const GlassBox({Key? key, required this.child, double radius = 0.0}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

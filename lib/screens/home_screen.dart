@@ -191,8 +191,10 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    homeController.homestate.value =
-                    8;
+                    // homeController.homestate.value =
+                    // 8;
+                    Get.to(LiveRadioScreen(),
+                        transition: Transition.noTransition);
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red),

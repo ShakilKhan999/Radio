@@ -1,5 +1,3 @@
-import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -11,6 +9,7 @@ import 'package:relaks_media/screens/home_screen.dart';
 import 'package:relaks_media/screens/news_screen.dart';
 import 'package:relaks_media/screens/station_screen.dart';
 import '../demo.dart';
+import '../utils/earn_coin.dart';
 import '../utils/main_drawer.dart';
 import 'maintaince_screen.dart';
 import 'my_store_screen.dart';
@@ -40,8 +39,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
     MyStoreScreen()
   ];
   GlobalKey<ScaffoldState> _key = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.put(HomeController());
     RadioController radioController = Get.put(RadioController());
     return Obx(
       () => Scaffold(
@@ -87,7 +88,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
                       ),
                     ),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(context: context, builder: (context) {
+                            return EarCoins();
+                          },);
+                        },
                         icon: Image.asset(
                           'images/Referral Icon.png',
                         )),
