@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Relaks Media',
           theme: ThemeData(),
-          initialRoute: SplashScreen.routeName,
+          initialRoute: LauncherPage.routeName,
           routes: {
             LauncherPage.routeName:(context) => LauncherPage(),
             SplashScreen.routeName:(context) => SplashScreen(),

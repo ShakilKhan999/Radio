@@ -1,15 +1,18 @@
-
 import 'dart:developer';
 
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:relaks_media/controller/home_controller.dart';
+import 'package:relaks_media/controller/radio_controller.dart';
 import 'package:relaks_media/screens/publish_news_screen.dart';
 
+import '../global/my_app_bar.dart';
 import '../models/news_model.dart';
 import '../provider/news_api_provider.dart';
+import 'bottomnevigation.dart';
 import 'news_details_screen.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -78,7 +81,7 @@ class _NewsScreenState extends State<NewsScreen> {
           "A former bookseller and a great orator from the English-speaking area of Cameroon, he founded the opposition Social Democratic Front (SDF) in 1990. His popularity led the regime to accept a multi-party system was inevitable. In fact his party believed he won the 1992 presidential election, but the  Supreme Court judge that heard its petition alleging fraud said his 'hands were tied' - and let the official results granting victory to incumbent Paul Biya, with 40% of the vote, stand. This caused great upset with SDF supporters and their leader was put under house arrest for three months in his home in the economic hub, Bamenda, and a state of emergency was declared.Still the US must have given credence to his claim to the presidency, inviting him and his wife to the inauguration of Bill Clinton in January 1993. Fru Ndi was not a supporter of the secessionist rebellion in Anglophone Cameroon that has claimed tens of thousands of lives over the last six years - and was even kidnapped and beaten up by militants in 2019, and part of his house was burnt down.",
     },
   ];*/
-late NewsApiProvider newsApiProvider;
+  late NewsApiProvider newsApiProvider;
   @override
   void initState() {
     //newsApiProvider=Provider.of<NewsApiProvider>(context);
@@ -90,17 +93,22 @@ late NewsApiProvider newsApiProvider;
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.put(HomeController());
-    return Obx( () =>
-      Scaffold(
+    RadioController radioController = Get.put(RadioController());
+    return Obx(
+      () => Scaffold(
         backgroundColor: Colors.black,
+        // appBar: myAppBar(context, radioController),
+       
         body: Obx(
           () {
             if (homeController.newsCurrentPage.value == 0) {
               return Consumer<NewsApiProvider>(
                 builder: (context, provider, child) {
                   if (provider.isLoading & provider.isLoadingCat) {
-                    Provider.of<NewsApiProvider>(context, listen: false).fetchData();
-                    Provider.of<NewsApiProvider>(context, listen: false).fetchCategory();
+                    Provider.of<NewsApiProvider>(context, listen: false)
+                        .fetchData();
+                    Provider.of<NewsApiProvider>(context, listen: false)
+                        .fetchCategory();
                     return const Center(child: CircularProgressIndicator());
                   } else {
                     final List<News>? newsData = provider.dataList;
@@ -118,96 +126,149 @@ late NewsApiProvider newsApiProvider;
                                 child: Column(
                                   children: [
                                     SizedBox(height: 15.h),
-                                   category != null ? Container(
-                                      height: 40.h,
-                                      width: MediaQuery.of(context).size.width,
-                                      child: ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount:category!.length,
-                                        itemBuilder: (context, index) {
-                                          return Container(
-                                            margin:
-                                            EdgeInsets.symmetric(horizontal: 5.w),
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(15),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      Colors.grey,
-                                                      Colors.black.withOpacity(0.4),
-                                                    ],
-                                                    stops: [0.0, 1.0],
-                                                    begin: Alignment.centerLeft,
-                                                    end: Alignment.topRight,
-                                                  ),
-                                                  borderRadius:
-                                                  BorderRadius.circular(15),
-                                                ),
-                                                child: ElevatedButton(
-                                                  onPressed: () {
-                                                    Provider.of<NewsApiProvider>(context, listen: false).fetchDataCategoryBasedNews(index+1);
-                                                  },
-                                                  style: ElevatedButton.styleFrom(
-                                                    primary: Colors.transparent,
-                                                    elevation: 0,
-                                                    padding: EdgeInsets.all(10),
-                                                    shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                      BorderRadius.circular(15),
+                                    category != null
+                                        ? Container(
+                                            height: 40.h,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: ListView.builder(
+                                              scrollDirection: Axis.horizontal,
+                                              itemCount: category!.length,
+                                              itemBuilder: (context, index) {
+                                                return Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 5.w),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        gradient:
+                                                            LinearGradient(
+                                                          colors: [
+                                                            Colors.grey,
+                                                            Colors.black
+                                                                .withOpacity(
+                                                                    0.4),
+                                                          ],
+                                                          stops: [0.0, 1.0],
+                                                          begin: Alignment
+                                                              .centerLeft,
+                                                          end: Alignment
+                                                              .topRight,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15),
+                                                      ),
+                                                      child: ElevatedButton(
+                                                        onPressed: () {
+                                                          Provider.of<NewsApiProvider>(
+                                                                  context,
+                                                                  listen: false)
+                                                              .fetchDataCategoryBasedNews(
+                                                                  index + 1);
+                                                        },
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                          primary: Colors
+                                                              .transparent,
+                                                          elevation: 0,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10),
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15),
+                                                          ),
+                                                          textStyle: TextStyle(
+                                                              fontSize: 16.sp),
+                                                        ),
+                                                        child: Text(
+                                                          category[index].name!,
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                      ),
                                                     ),
-                                                    textStyle:
-                                                    TextStyle(fontSize: 16.sp),
                                                   ),
-                                                  child: Text(
-                                                    category[index].name!,
-                                                    style:
-                                                    TextStyle(color: Colors.white),
-                                                  ),
-                                                ),
-                                              ),
+                                                );
+                                              },
                                             ),
-                                          );
-                                        },
-                                      ),
-                                    ) : Container(height: 50, width: 50, child: CircularProgressIndicator(),),
+                                          )
+                                        : Container(
+                                            height: 50,
+                                            width: 50,
+                                            child: CircularProgressIndicator(),
+                                          ),
                                     SizedBox(height: 10.h),
                                   ],
                                 ),
                               ),
                             ),
                           ),
-                         newsData != null ? Expanded(
-                            child: ListView.builder(
-                              itemCount: newsData.length,
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                  onTap: () {
-                                    /*homeController.newsCurrentPage.value  = 1;
+                          newsData != null
+                              ? Expanded(
+                                  child: ListView.builder(
+                                    itemCount: newsData.length,
+                                    itemBuilder: (context, index) {
+                                      return InkWell(
+                                        onTap: () {
+                                          /*homeController.newsCurrentPage.value  = 1;
                                     homeController.currentIndex.value  = index;
                                     log('clicked');*/
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => NewsDetailsScreen(
-                                            imageUrl: newsData[index].image ?? '',
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      NewsDetailsScreen(
+                                                          imageUrl: newsData[
+                                                                      index]
+                                                                  .image ??
+                                                              '',
+                                                          title:
+                                                              newsData[
+                                                                          index]
+                                                                      .title ??
+                                                                  '',
+                                                          subtitle: newsData[
+                                                                      index]
+                                                                  .subtitle ??
+                                                              '',
+                                                          subtitle1: newsData[
+                                                                      index]
+                                                                  .subtitle ??
+                                                              '',
+                                                          description: newsData[
+                                                                      index]
+                                                                  .description ??
+                                                              '' // Replace AnotherPage() with your actual page
+                                                          )));
+                                        },
+                                        child: NewsCard(
+                                            imageUrl:
+                                                newsData[index].image ?? '',
                                             title: newsData[index].title ?? '',
-                                            subtitle: newsData[index].subtitle ?? '',
-                                            subtitle1: newsData[index].subtitle ?? '',
-                                            description: newsData[index].description ?? '' // Replace AnotherPage() with your actual page
-                                        )));
-                                  },
-                                  child: NewsCard(
-                                      imageUrl: newsData[index].image ?? '',
-                                      title: newsData[index].title ?? '',
-                                      subtitle: newsData[index].subtitle ?? '',
-                                      subImage: newsData[index].image ?? '',
-                                      subtitle1: newsData[index].subtitle ?? '',
-                                      description: newsData[index].description ?? ''
+                                            subtitle:
+                                                newsData[index].subtitle ?? '',
+                                            subImage:
+                                                newsData[index].image ?? '',
+                                            subtitle1:
+                                                newsData[index].subtitle ?? '',
+                                            description:
+                                                newsData[index].description ??
+                                                    ''),
+                                      );
+                                    },
                                   ),
-                                );
-                              },
-                            ),
-                          ) : Expanded(child: CircularProgressIndicator())
+                                )
+                              : Expanded(child: CircularProgressIndicator())
                         ],
                       ),
                     );
@@ -228,20 +289,69 @@ late NewsApiProvider newsApiProvider;
             }
           },
         ),
-        floatingActionButton: homeController.newsCurrentPage.value == 0 ? FloatingActionButton.extended(
-          onPressed: () {
-            homeController.newsCurrentPage.value  = 2;
+        floatingActionButton: homeController.newsCurrentPage.value == 0
+            ? FloatingActionButton.extended(
+                onPressed: () {
+                  homeController.newsCurrentPage.value = 2;
 
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => PublishNewsScreen(),
-            //   ),
-            // );
-          },
-          label: Text('Publish News',style: TextStyle(fontSize: 14.sp,fontFamily: 'Poppins',fontWeight: FontWeight.w600),),
-          backgroundColor: Color(0xffffEA1C24),
-        ) : Container(),
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => PublishNewsScreen(),
+                  //   ),
+                  // );
+                },
+                label: Text(
+                  'Publish News',
+                  style: TextStyle(
+                      fontSize: 14.sp,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600),
+                ),
+                backgroundColor: Color(0xffffEA1C24),
+              )
+            : Container(),
+        // bottomNavigationBar: Padding(
+        //   padding: EdgeInsets.all(8.sp),
+        //   child: ClipRRect(
+        //     borderRadius: BorderRadius.circular(15),
+        //     child: Container(
+        //       height: 80.h,
+        //       child: CurvedNavigationBar(
+        //         index: radioController.bottomNavigationSelectedIndex.value,
+        //         height: 70.h,
+        //         animationDuration: Duration(),
+        //         color: Colors.grey,
+        //         backgroundColor: Colors.black,
+        //         onTap: (index) {
+        //           radioController.bottomNavigationSelectedIndex.value = index;
+
+        //           Get.offAll(BottomNavigation(),
+        //               transition: Transition.noTransition);
+        //         },
+        //         items: const [
+        //           Icon(
+        //             Icons.home,
+        //             color: Colors.white,
+        //           ),
+        //           ImageIcon(
+        //             AssetImage('images/news.png'),
+        //             color: Colors.white,
+        //           ),
+        //           ImageIcon(
+        //             AssetImage('images/msg.png'),
+        //             color: Colors.white,
+        //           ),
+        //           ImageIcon(
+        //             AssetImage('images/store.png'),
+        //             color: Colors.white,
+        //           ),
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // ),
+     
       ),
     );
   }
@@ -295,7 +405,9 @@ class NewsCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        title.length>10?title.substring(0,10)+'..':title,
+                        title.length > 10
+                            ? title.substring(0, 10) + '..'
+                            : title,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18.0.sp,
@@ -323,7 +435,9 @@ class NewsCard extends StatelessWidget {
                             // ),
                             SizedBox(width: 3.0.w),
                             Text(
-                              description.length>45?description.substring(0,45)+'..':description,
+                              description.length > 45
+                                  ? description.substring(0, 45) + '..'
+                                  : description,
                               style: TextStyle(
                                 fontSize: 12.0.sp,
                                 color: Colors.grey,

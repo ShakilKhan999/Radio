@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:relaks_media/controller/home_controller.dart';
 import 'package:relaks_media/global/constants.dart';
 import 'package:relaks_media/global/shared_preference_helper.dart';
+import 'package:relaks_media/screens/bottomnevigation.dart';
 import 'package:relaks_media/screens/job/repository/job_repository.dart';
 
 class JobController extends GetxController {
@@ -37,8 +38,7 @@ class JobController extends GetxController {
         backgroundColor: Colors.grey,
         textColor: Colors.white,
       );
-      HomeController homeController = Get.find();
-      homeController.homestate.value = 0;
+      Get.offAll(BottomNavigation());
     }
   }
 }

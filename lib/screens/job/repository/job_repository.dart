@@ -1,5 +1,8 @@
 import 'dart:developer';
 
+import 'package:relaks_media/global/constants.dart';
+import 'package:relaks_media/global/shared_preference_helper.dart';
+
 import '../../../models/job_response.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,8 +22,9 @@ class JobRepository {
 
     }
   ) async {
+    String? accessToken = await SharedPreferenceHelper().getString(key: token);
     var headers = {
-      'Authorization': 'Bearer e0e6b09f5a9b9734c44d039ea02d7630adee76d9'
+      'Authorization': 'Bearer $accessToken'
     };
     var request = http.MultipartRequest(
         'POST', Uri.parse('http://16.171.2.83/api/v1/users/career/create/'));

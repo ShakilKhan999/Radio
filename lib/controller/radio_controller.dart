@@ -128,4 +128,10 @@ class RadioController extends GetxController{
       print("play123:"+playing.value.toString());
     }
   }
+
+  var bottomNavigationSelectedIndex = 0.obs;
+
+
+
+
 }
