@@ -101,18 +101,23 @@ class EarCoins extends StatelessWidget {
               top: 20,
               left: 280,
               child: GlassBox(
-                child: Container(
-                  height: 25.h,
-                  width: 25.w,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.transparent),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: ImageIcon(
-                      AssetImage('images/close.png'),
-                      size: 15.sp,
-                      color: Colors.white,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 25.h,
+                    width: 25.w,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: ImageIcon(
+                        AssetImage('images/close.png'),
+                        size: 15.sp,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
