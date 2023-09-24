@@ -16,35 +16,39 @@ class EarCoins extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.sp),
             child: GlassBox(
               child: Container(
-                height: 390.h,
+                height:MediaQuery.of(context).size.height-450.h,
                 width: MediaQuery.of(context).size.width - 70.w,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 170.h,
-                          child: Image.asset('images/earncoins.png',
-                              height: 200.h, width: 200.w),
-                        ),
-                        SizedBox(height: 10.h),
-                        Container(
-                          width: 200.w,
-                          child: Text(
-                            'Earn Coins by \nreferring your friends',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: 'Poppins'),
-                            textAlign: TextAlign.center,
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            // color: Colors.red,
+                            height: 150.h,
+                            child: Image.asset('images/earncoins.png',
+                                height: 150.h, width: 200.w),
                           ),
-                        ),
-                        SizedBox(height: 30.h),
-                      ],
+                          SizedBox(height: 10.h),
+                          Container(
+                            height: 50.h,
+                            width: 200.w,
+                            child: Text(
+                              'Earn Coins by \nreferring your friends',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Poppins'),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+
+                        ],
+                      ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,8 +102,8 @@ class EarCoins extends StatelessWidget {
             ),
           ),
           Positioned(
-              top: 20,
-              left: 280,
+              top: 20.h,
+              left: 280.w,
               child: GlassBox(
                 child: GestureDetector(
                   onTap: () {
