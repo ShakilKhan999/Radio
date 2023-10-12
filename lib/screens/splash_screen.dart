@@ -2,10 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:relaks_media/screens/bottomnevigation.dart';
 import 'package:relaks_media/screens/login/view/login_screen.dart';
 import 'package:relaks_media/screens/singup/view/signup_screen.dart';
 
+import '../controller/home_controller.dart';
 import '../utils/glass_box.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -16,6 +18,8 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.put(HomeController());
+    homeController.getImageUrl();
     double sch=MediaQuery.of(context).size.height;
     double scw=MediaQuery.of(context).size.width;
     print("height"+sch.toString()+"width"+scw.toString());
