@@ -44,6 +44,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     HomeController homeController = Get.put(HomeController());
     RadioController radioController = Get.put(RadioController());
+    homeController.getUserData();
     return Obx(
       () => Scaffold(
           // key: _key,
