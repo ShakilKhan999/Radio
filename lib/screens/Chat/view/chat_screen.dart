@@ -35,61 +35,19 @@ class _ChatScreenState extends State<ChatScreen> {
     chatController.getuserList();
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(16.0.sp),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      'Active',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Poppins',
-                        fontSize: 18.0.sp,
-                      ),
-                    ),
-                    SizedBox(width: 5.0.w),
-                    Container(
-                      height: 25.sp,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                          colors: [Colors.grey, Colors.black],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                      ),
-                      child: CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        child: Text(
-                          '${chatAccounts.length}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Poppins',
-                            fontSize: 18.0.sp,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      MessageRequestScreen.routeName,
-                      arguments: chatAccounts,
-                    );
-                  },
-                 child: Row(
+      body: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(16.0.sp),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
                     children: [
                       Text(
-                        'Message Request',
+                        'Active',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'Poppins',
@@ -110,7 +68,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         child: CircleAvatar(
                           backgroundColor: Colors.transparent,
                           child: Text(
-                            '2',
+                            '${chatAccounts.length}',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Poppins',
@@ -122,54 +80,100 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          ),
-          Obx(()=>SizedBox(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: chatController.chatuserlist.length,
-              itemBuilder: (context, index) {
-                final chatAccount = chatController.chatuserlist[index];
-                return GestureDetector(
-                  onTap: () {
-                    chatController.selecteduserIndex.value=index;
-                    chatController.getChats(chatAccount.id);
-                    // Navigate to the conversation screen
-                    Navigator.pushNamed(
-                      context,
-                      ConversationScreen.routeName,
-                      arguments: chatAccount,
-                    );
-                  },
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          chatAccount.avatar==null?"https://cdn-icons-png.flaticon.com/512/3135/3135715.png":
-                      chatAccount.avatar),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        MessageRequestScreen.routeName,
+                        arguments: chatAccounts,
+                      );
+                    },
+                   child: Row(
+                      children: [
+                        Text(
+                          'Message Request',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Poppins',
+                            fontSize: 18.0.sp,
+                          ),
+                        ),
+                        SizedBox(width: 5.0.w),
+                        Container(
+                          height: 25.sp,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: LinearGradient(
+                              colors: [Colors.grey, Colors.black],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                            ),
+                          ),
+                          child: CircleAvatar(
+                            backgroundColor: Colors.transparent,
+                            child: Text(
+                              '2',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Poppins',
+                                fontSize: 18.0.sp,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    title: Text(
-                      chatAccount.name==null?'':chatAccount.name,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                      'Tap to start conversation',
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
-
                   ),
-                );
-              },
+                ],
+              ),
             ),
-          )),
-        ],
+            Obx(()=>SizedBox(
+              height: MediaQuery.of(context).size.height-250.w,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: chatController.chatuserlist.length,
+                itemBuilder: (context, index) {
+                  final chatAccount = chatController.chatuserlist[index];
+                  return GestureDetector(
+                    onTap: () {
+                      chatController.selecteduserIndex.value=index;
+                      chatController.getChats(chatAccount.id);
+                      // Navigate to the conversation screen
+                      Navigator.pushNamed(
+                        context,
+                        ConversationScreen.routeName,
+                        arguments: chatAccount,
+                      );
+                    },
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            chatAccount.avatar==null?"https://cdn-icons-png.flaticon.com/512/3135/3135715.png":
+                        chatAccount.avatar),
+                      ),
+                      title: Text(
+                        chatAccount.name==null?'':chatAccount.name,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+                        'Tap to start conversation',
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontFamily: 'Poppins',
+                        ),
+                      ),
+
+                    ),
+                  );
+                },
+              ),
+            )),
+          ],
+        ),
       ),
     );
   }
