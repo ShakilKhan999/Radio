@@ -6,6 +6,7 @@ import 'package:relaks_media/global/constants.dart';
 import 'package:relaks_media/global/shared_preference_helper.dart';
 import 'package:relaks_media/screens/splash_screen.dart';
 
+import '../controller/home_controller.dart';
 import '../controller/radio_controller.dart';
 import 'bottomnevigation.dart';
 
@@ -19,6 +20,7 @@ class LauncherPage extends StatefulWidget {
 
 class _LauncherPageState extends State<LauncherPage> {
   void initState() {
+
     Future.delayed(Duration(milliseconds: 100)).then((value) => checklog());
     super.initState();
   }
