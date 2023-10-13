@@ -62,6 +62,8 @@ class User {
     String? phone;
     dynamic avatar;
     dynamic name;
+    dynamic referralId;
+    dynamic totalCoins;
     bool? isVerified;
     dynamic dob;
 
@@ -71,6 +73,8 @@ class User {
         this.phone,
         this.avatar,
         this.name,
+        this.referralId,
+        this.totalCoins,
         this.isVerified,
         this.dob,
     });
@@ -81,6 +85,8 @@ class User {
         phone: json["phone"],
         avatar: json["avatar"],
         name: json["name"],
+        referralId: json["referral_id"],
+        totalCoins: json["total_coins"],
         isVerified: json["is_verified"],
         dob: json["dob"],
     );
@@ -91,6 +97,8 @@ class User {
         "phone": phone,
         "avatar": avatar,
         "name": name,
+        "referral_id": referralId,
+        "total_coins": totalCoins,
         "is_verified": isVerified,
         "dob": dob,
     };

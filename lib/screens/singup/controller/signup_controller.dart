@@ -12,12 +12,14 @@ class SignUpController extends GetxController {
   void signUp(
       {required String email,
       required String phone,
-      required String password}) async {
+      required String password,
+      required String referralNumber,
+      }) async {
     isSignupCompeleted.value = false;
 
     EasyLoading.show();
     await SignUpRepository()
-        .signup(email: email, phone: phone, password: password)
+        .signup(email: email, phone: phone, password: password, referralNumber: referralNumber)
         .then((value) {
       EasyLoading.dismiss();
       isSignupCompeleted.value = true;

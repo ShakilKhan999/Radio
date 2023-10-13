@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:relaks_media/controller/home_controller.dart';
 
 import 'glass_box.dart';
 
 class CoinCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.find();
     return Card(
       elevation: 5.0,
       shape: RoundedRectangleBorder(
@@ -39,13 +44,15 @@ class CoinCard extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10.0.h),
-            Text(
-              '1,000 Coin',
-              style: TextStyle(
-                fontSize: 23.sp,
-                fontFamily: 'Poppins',
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+            Obx(() => 
+              Text(
+                '${homeController.totalCoin2.value} Coin',
+                style: TextStyle(
+                  fontSize: 23.sp,
+                  fontFamily: 'Poppins',
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             SizedBox(height: 10.0.h),

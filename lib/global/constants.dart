@@ -9,6 +9,9 @@ const String name = "name";
 const String isVerified = "isVerified";
 const String isLogin = "isLogin";
 
+const String referralNumber = "referralNumber";
+const String totalCoin = "totalCoin";
+
 
 int audioIndex = 0;
 

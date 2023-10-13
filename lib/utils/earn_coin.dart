@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:relaks_media/controller/home_controller.dart';
 
 import 'glass_box.dart';
 
@@ -8,6 +13,7 @@ class EarCoins extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.find();
     return Padding(
       padding: EdgeInsets.only(left: 40.0.sp, top: 180.h),
       child: Stack(
@@ -72,22 +78,27 @@ class EarCoins extends StatelessWidget {
                               Expanded(
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 8.0),
-                                  child: Text(
-                                    'relaks.media/609343IsZ.Uso90',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'Poppins',
-                                      fontSize: 14.0.sp,
+                                  child: Obx( () => 
+                                    Text(
+                                      homeController.refferalId2.value,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Poppins',
+                                        fontSize: 14.0.sp,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                 ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(right: 8.0),
-                                child: ImageIcon(
-                                  AssetImage('images/file.png'),
-                                  color: Colors.white,
-                                  size: 24.0.sp,
+                                child: IconButton(
+                                  onPressed:() {
+                                    Clipboard.setData(ClipboardData(text: homeController.refferalId2.value));
+                                  },
+                                  icon: Icon(Icons.copy, color: Colors.white,),
                                 ),
                               ),
                             ],
