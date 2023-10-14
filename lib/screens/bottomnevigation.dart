@@ -1,5 +1,3 @@
-import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -11,6 +9,7 @@ import 'package:relaks_media/screens/home_screen.dart';
 import 'package:relaks_media/screens/news_screen.dart';
 import 'package:relaks_media/screens/station_screen.dart';
 import '../demo.dart';
+import '../utils/earn_coin.dart';
 import '../utils/main_drawer.dart';
 import 'maintaince_screen.dart';
 import 'my_store_screen.dart';
@@ -40,46 +39,41 @@ class _BottomNavigationState extends State<BottomNavigation> {
     MyStoreScreen()
   ];
   GlobalKey<ScaffoldState> _key = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.put(HomeController());
     RadioController radioController = Get.put(RadioController());
-    return Scaffold(
-      // key: _key,
-        backgroundColor: Colors.black,
-        drawer: const MainDrawer(),
-        appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.white),
+    homeController.getUserData();
+    return Obx(
+      () => Scaffold(
+          // key: _key,
           backgroundColor: Colors.black,
-          elevation: 0,
-          // leading: IconButton(
-          //   icon: Icon(Icons.menu),
-          //   onPressed: () {
-          //     MainDrawer();
-          //     Scaffold.of(context).openDrawer();
-          //   },
-          // ),
-
-          flexibleSpace:Center(
-            child:  Column(
-              children: [
-                SizedBox(height: 30.h,),
-                Container(
-                  height: 60.h,
-                  width: MediaQuery.of(context).size.width-10.w,
-                  // color: Colors.red,
-                  child: Row(
-                    // crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(width: 30.w,),
-                      Container(
+          drawer: const MainDrawer(),
+          appBar: AppBar(
+            toolbarHeight: 60,
+            iconTheme: const IconThemeData(color: Colors.white),
+            backgroundColor: Colors.black,
+            elevation: 0,
+            flexibleSpace: SafeArea(
+              child: Container(
+                height: 60.h,
+                width: MediaQuery.of(context).size.width - 10.w,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 50.w,
+                    ),
+                    Expanded(
+                      child: Container(
                         height: 45.h,
-                        width: MediaQuery.of(context).size.width - 150.w,
                         decoration: BoxDecoration(
                           color: Colors.grey.shade900,
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        child:  TextField(
+                        child: TextField(
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             prefixIcon: Padding(
@@ -87,66 +81,134 @@ class _BottomNavigationState extends State<BottomNavigation> {
                               child: Icon(Icons.search, color: Colors.grey),
                             ),
                             hintText:
-                            'Search for audio content,radio chanel,news..',
+                                'Search for audio content,radio chanel,news..',
                             hintStyle: TextStyle(color: Colors.grey[700]),
                             border: InputBorder.none,
                           ),
                         ),
                       ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: Image.asset(
-                            'images/Referral Icon.png',
-                          )),
-                      Obx(
-                            () => IconButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, StationScreen.routeName);
-                            },
-                            icon: Image.asset(radioController.getSelectedChImg())),
-                      )
-                    ],
-                  ),
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          showDialog(context: context, builder: (context) {
+                            return EarCoins();
+                          },);
+                        },
+                        icon: Image.asset(
+                          'images/Referral Icon.png',
+                        )),
+                    Obx(
+                      () => IconButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, StationScreen.routeName);
+                          },
+                          icon:
+                              Image.asset(radioController.getSelectedChImg())),
+                    )
+                  ],
                 ),
-              ],
-            ),
-          ),
-
-
-        ),
-
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.all(8.sp),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Container(
-              height: 80.h,
-              child: CurvedNavigationBar(
-                height: 70.h,
-                animationDuration: Duration(),
-                color: Colors.grey,
-                backgroundColor: Colors.black,
-                onTap: (index) {
-                  setState(() {
-                    pageIndex = index;
-                  });
-                },
-                items: const [
-                  Icon(
-                    Icons.home,
-                    color: Colors.white,
-                  ),
-                  ImageIcon(AssetImage('images/news.png'),color: Colors.white,),
-                  ImageIcon(AssetImage('images/msg.png'),color: Colors.white,),
-                  ImageIcon(AssetImage('images/store.png'),color: Colors.white,),
-
-                ],
               ),
             ),
           ),
-        ),
-        body: Center(
-          child: widgetList[pageIndex],
-        ));
+
+          // bottomNavigationBar: Padding(
+          //   padding: EdgeInsets.all(8.sp),
+          //   child: ClipRRect(
+          //     borderRadius: BorderRadius.circular(15),
+          //     child: Container(
+          //       height: 80.h,
+          //       child: CurvedNavigationBar(
+          //         index: radioController.bottomNavigationSelectedIndex.value,
+          //         height: 70.h,
+          //         animationDuration: Duration(),
+          //         color: Colors.grey,
+          //         backgroundColor: Colors.black,
+          //         onTap: (index) {
+          //           radioController.bottomNavigationSelectedIndex.value = index;
+          //           // setState(() {
+          //           //   pageIndex = index;
+          //           // });
+          //         },
+          //         items: const [
+          //           Icon(
+          //             Icons.home,
+          //             color: Colors.white,
+          //           ),
+          //           ImageIcon(
+          //             AssetImage('images/news.png'),
+          //             color: Colors.white,
+          //           ),
+          //           ImageIcon(
+          //             AssetImage('images/msg.png'),
+          //             color: Colors.white,
+          //           ),
+          //           ImageIcon(
+          //             AssetImage('images/store.png'),
+          //             color: Colors.white,
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
+
+          bottomNavigationBar: Theme(
+            data: Theme.of(context).copyWith(
+              canvasColor: Colors.transparent,
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Colors.grey,
+                      Colors.black
+                    ], // Replace with your desired gradient colors
+                  ),
+                ),
+                child: BottomNavigationBar(
+                  // backgroundColor: Colors.yellow,
+                  showUnselectedLabels: true,
+                  selectedItemColor: Colors.white,
+                  unselectedItemColor: Colors.grey,
+                  currentIndex:
+                      radioController.bottomNavigationSelectedIndex.value,
+                  onTap: (index) {
+                    setState(() {
+                      radioController.bottomNavigationSelectedIndex.value =
+                          index;
+                    });
+                  },
+                  items: const [
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.home),
+                      label: 'Home',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: ImageIcon(AssetImage('images/news.png')),
+                      label: 'News',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: ImageIcon(AssetImage('images/msg.png')),
+                      label: 'Chat',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: ImageIcon(AssetImage('images/store.png')),
+                      label: 'Store',
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          body: Center(
+            child:
+                widgetList[radioController.bottomNavigationSelectedIndex.value],
+          )),
+    );
   }
 }

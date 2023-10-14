@@ -2,10 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:relaks_media/screens/bottomnevigation.dart';
 import 'package:relaks_media/screens/login/view/login_screen.dart';
 import 'package:relaks_media/screens/singup/view/signup_screen.dart';
 
+import '../controller/home_controller.dart';
 import '../utils/glass_box.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -16,15 +18,18 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.put(HomeController());
+    homeController.getImageUrl();
     double sch=MediaQuery.of(context).size.height;
     double scw=MediaQuery.of(context).size.width;
     print("height"+sch.toString()+"width"+scw.toString());
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
+        body: Obx(()=>Container(
+          decoration:  BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('images/splash.png'),
+              image: NetworkImage(homeController.bgImage.value==''?'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Black_colour.jpg/640px-Black_colour.jpg'
+                  :homeController.bgImage.value),
               fit: BoxFit.cover,
             ),
           ),
@@ -40,7 +45,7 @@ class SplashScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15.sp),
                         child: GlassBox(
                           child: Container(
-                            color: Colors.black.withOpacity(0.6),
+                              color: Colors.black.withOpacity(0.6),
                               height: 150.h,
 
                               child: Padding(
@@ -161,7 +166,7 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        )),
       ),
     );
   }

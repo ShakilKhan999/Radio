@@ -16,7 +16,7 @@ class NewsApiProvider extends ChangeNotifier {
   bool get isLoadingCat => _isLoadingCat;
 
   final String apiUrl = '${baseUrl}api/v1/posting/news_posting_list/'; // Replace with your API endpoint
-  final String authToken = 'dd88a40d63b744b9f777f03aad98b7460048f06a'; // Replace with your authentication token
+  final String authToken = 'e0e6b09f5a9b9734c44d039ea02d7630adee76d9'; // Replace with your authentication token
 
   Future<void> fetchData() async {
     _isLoading = true;
@@ -27,17 +27,14 @@ class NewsApiProvider extends ChangeNotifier {
         'Authorization': 'Bearer $authToken',
       },
     );
-
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonData = jsonDecode(response.body);
       final List<dynamic> jsonList = jsonData['results'];
       _dataList = jsonList.map((json) => News.fromJson(json)).toList();
     }
-
     _isLoading = false;
     notifyListeners();
   }
-
 
   Future<void> fetchDataCategoryBasedNews(int index) async {
      String api = '${baseUrl}api/v1/posting/news_posting_by_category/$index/'; // Replace with your API endpoint
@@ -87,11 +84,11 @@ class NewsApiProvider extends ChangeNotifier {
 
 
   Future<void> sendDataToApi(CreateNewsModel formData) async {
-    String authToken =  'dd88a40d63b744b9f777f03aad98b7460048f06a';
+    String authToken =  'e0e6b09f5a9b9734c44d039ea02d7630adee76d9';
     final url = Uri.parse('${baseUrl}api/v1/posting/news_posting/create/');
 
     final request = http.MultipartRequest('POST', url);
-    request.fields['category'] = formData.category;
+    request.fields['category'] = '1';
     request.fields['user'] = formData.user;
     request.fields['title'] = formData.title;
     request.fields['subtitle'] = formData.subtitle;
@@ -105,7 +102,9 @@ class NewsApiProvider extends ChangeNotifier {
 
     final response = await request.send();
     print('>>>>>>>>>>>>>>>>>${response.statusCode}');
+    fetchData();
     if (response.statusCode == 200) {
+      fetchData();
       // Success, you can handle the response here
     } else {
       // Handle the error

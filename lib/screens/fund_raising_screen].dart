@@ -1,18 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:relaks_media/controller/radio_controller.dart';
+import 'package:relaks_media/global/my_app_bar.dart';
+import 'package:relaks_media/global/my_bottom_nav_bat.dart';
+import 'package:relaks_media/screens/bottomnevigation.dart';
+import 'package:relaks_media/utils/main_drawer.dart';
 
 import '../controller/home_controller.dart';
 import '../utils/glass_box.dart';
 
 class FundRaisingScreen extends StatelessWidget {
-  const FundRaisingScreen({super.key});
+  FundRaisingScreen({super.key});
+
+  final List<String> country = [
+    'United States',
+    'Bangladesh',
+  ];
+
+  final List<String> currency = [
+    'USD',
+    'TK',
+  ];
+
+  String? selectedCountry;
+  String? selectedCurrency;
 
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.put(HomeController());
+    RadioController radioController = Get.put(RadioController());
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: myAppBar(context, radioController),
+      drawer: MainDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -21,9 +42,16 @@ class FundRaisingScreen extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
+                  child: InkWell(
+                    onTap: () {
+                      Get.offAll(BottomNavigation(),
+                          transition: Transition.noTransition);
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                      
+                      color: Colors.white,
+                    ),
                   ),
                 ),
                 Text('Fund Raising',
@@ -100,20 +128,15 @@ class FundRaisingScreen extends StatelessWidget {
                                                         DropdownButton<String>(
                                                       icon: Icon(Icons
                                                           .keyboard_arrow_down),
-                                                      items: <String>[
-                                                        'Option 1',
-                                                        'Option 2',
-                                                        'Option 3',
-                                                        'Option 4'
-                                                      ].map((String value) {
+                                                      items: country
+                                                          .map((String value) {
                                                         return DropdownMenuItem<
                                                             String>(
                                                           value: value,
                                                           child: Text(value),
                                                         );
                                                       }).toList(),
-                                                      onChanged:
-                                                          (String? newValue) {},
+                                                      onChanged: (value) {},
                                                       hint: Text(
                                                         'Select an option',
                                                         style: TextStyle(
@@ -142,12 +165,8 @@ class FundRaisingScreen extends StatelessWidget {
                                                       icon: Icon(Icons
                                                           .keyboard_arrow_down),
                                                       // Custom dropdown icon
-                                                      items: <String>[
-                                                        'Choice A',
-                                                        'Choice B',
-                                                        'Choice C',
-                                                        'Choice D'
-                                                      ].map((String value) {
+                                                      items: currency
+                                                          .map((String value) {
                                                         return DropdownMenuItem<
                                                             String>(
                                                           value: value,
@@ -332,7 +351,7 @@ class FundRaisingScreen extends StatelessWidget {
                                                           child: Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     left: 20.0),
                                                             child: TextField(
                                                               decoration:
@@ -498,23 +517,29 @@ class FundRaisingScreen extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Container(
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Row(
                                               children: [
                                                 CircleAvatar(
-                                                  child: Image.asset('images/chat1.png')
+                                                    child: Image.asset(
+                                                        'images/chat1.png')),
+                                                SizedBox(
+                                                  width: 15.w,
                                                 ),
-                                                SizedBox(width: 15.w,),
                                                 Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       'Donated \$34',
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontFamily: 'Poppins',
-                                                          fontSize: 15.sp,fontWeight: FontWeight.w600),
+                                                          fontSize: 15.sp,
+                                                          fontWeight:
+                                                              FontWeight.w600),
                                                     ),
                                                     Text(
                                                       'William Rude From',
@@ -527,7 +552,11 @@ class FundRaisingScreen extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                            Image.asset('images/flag.png',height: 30.h,width: 30.w,)
+                                            Image.asset(
+                                              'images/flag.png',
+                                              height: 30.h,
+                                              width: 30.w,
+                                            )
                                           ],
                                         ),
                                       ),
@@ -545,6 +574,7 @@ class FundRaisingScreen extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: myBottomNavBar(radioController),
     );
   }
 }

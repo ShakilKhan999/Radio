@@ -5,6 +5,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:relaks_media/screens/otp/controller/otp_controller.dart';
 import 'package:relaks_media/screens/reset_password_screen.dart';
 
+import '../../../controller/home_controller.dart';
 import '../../../utils/glass_box.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -30,13 +31,16 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.put(HomeController());
+    homeController.getImageUrl();
     OtpController otpControllerPage = Get.put(OtpController());
     return SafeArea(
       child: Scaffold(
         body: Container(
-          decoration: const BoxDecoration(
+          decoration:  BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('images/splash.png'),
+              image: NetworkImage(homeController.bgImage.value==''?'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Black_colour.jpg/640px-Black_colour.jpg'
+                  :homeController.bgImage.value),
               fit: BoxFit.cover,
             ),
           ),

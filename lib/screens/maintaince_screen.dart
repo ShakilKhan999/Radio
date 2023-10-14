@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
+import '../controller/home_controller.dart';
 import '../utils/glass_box.dart';
 
 class MaintainceScreen extends StatelessWidget {
@@ -9,12 +11,15 @@ class MaintainceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.put(HomeController());
+    homeController.getImageUrl();
     return SafeArea(
       child: Scaffold(
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('images/splash.png'),
+              image: NetworkImage(homeController.bgImage.value==''?'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Black_colour.jpg/640px-Black_colour.jpg'
+                  :homeController.bgImage.value),
               fit: BoxFit.cover,
             ),
           ),

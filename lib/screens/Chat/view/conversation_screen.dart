@@ -84,50 +84,48 @@ class _ConversationScreenState extends State<ConversationScreen> {
                 ],
               ),
             ),
-            Obx(()=>Expanded(
-              child: ListView.builder(
-                itemCount: chatController.chatList[0].results.length==0?0:
-                chatController.chatList[0].results.length,
-                itemBuilder: (context, index) {
-                  final message = chatController.chatList[0].results[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 8.0,
-                    ),
-                    child: Align(
-                      alignment: message.sender.id==1 ? Alignment.centerRight : Alignment.centerLeft,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: message.sender.id==1 ? Colors.grey.shade900 : Colors.black,
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        padding: EdgeInsets.all(12.0.sp),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              message.chat,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16.0.sp,
-                              ),
+            Obx(()=>ListView.builder(
+              itemCount: chatController.chatList[0].results.length==0?0:
+              chatController.chatList[0].results.length,
+              itemBuilder: (context, index) {
+                final message = chatController.chatList[0].results[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 8.0,
+                  ),
+                  child: Align(
+                    alignment: message.sender.id==1 ? Alignment.centerRight : Alignment.centerLeft,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: message.sender.id==1 ? Colors.grey.shade900 : Colors.black,
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      padding: EdgeInsets.all(12.0.sp),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            message.chat,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0.sp,
                             ),
-                            SizedBox(height: 4.0.h),
-                            Text(
-                              message.createdAt.toString().substring(0,10),
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 12.0.sp,
-                              ),
+                          ),
+                          SizedBox(height: 4.0.h),
+                          Text(
+                            message.createdAt.toString().substring(0,10),
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12.0.sp,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             )),
             Padding(
               padding: const EdgeInsets.all(8.0),

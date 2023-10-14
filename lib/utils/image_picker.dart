@@ -49,7 +49,8 @@ class _NewsImagePickerState extends State<NewsImagePicker> {
                 widget.setImagePath(selectedImagePath);
               }
             },
-            child: Column(
+            child: selectedImagePath!=''? Image.file(File(selectedImagePath)):
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ImageIcon(

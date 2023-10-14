@@ -11,7 +11,7 @@ import 'package:relaks_media/screens/air_tickets_screen.dart';
 import 'package:relaks_media/screens/bottomnevigation.dart';
 import 'package:relaks_media/screens/bus_service_screen.dart';
 import 'package:relaks_media/screens/bus_ticket_screen.dart';
-import 'package:relaks_media/screens/career_screen.dart';
+import 'package:relaks_media/screens/job/view/career_screen.dart';
 import 'package:relaks_media/screens/Chat/view/chat_screen.dart';
 import 'package:relaks_media/screens/Chat/view/conversation_screen.dart';
 import 'package:relaks_media/screens/even_ticket_booking_screen.dart';
@@ -66,9 +66,9 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
+          title: 'Relaks Media',
           theme: ThemeData(),
-          initialRoute: OtpScreen.routeName,
+          initialRoute: SplashScreen.routeName,
           routes: {
             LauncherPage.routeName:(context) => LauncherPage(),
             SplashScreen.routeName:(context) => SplashScreen(),
