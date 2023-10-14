@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:relaks_media/utils/coin_card.dart';
 import 'package:relaks_media/utils/glass_box.dart';
@@ -87,13 +88,19 @@ class MyStoreScreen extends StatelessWidget {
                                 color: Colors.white,
                                 fontFamily: 'Poppins',
                                 fontSize: 16.sp),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        IconButton(onPressed: (){
-                          Clipboard.setData(ClipboardData(text: homeController.refferalId2.value));
-                        }, icon: Icon(Icons.copy, color: Colors.white,))
+                        IconButton(
+                            onPressed: () {
+                              Clipboard.setData(ClipboardData(
+                                  text: homeController.refferalId2.value));
+                            },
+                            icon: Icon(
+                              Icons.copy,
+                              color: Colors.white,
+                            ))
                       ],
                     ),
 
@@ -259,13 +266,24 @@ class MyStoreScreen extends StatelessWidget {
                       border: Border.all(color: Colors.transparent),
                       borderRadius: BorderRadius.circular(20)),
                   child: ElevatedButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return PaymentWay();
-                          },
-                        );
+                      onPressed: () async {
+                        if (await homeController.withdrawAvailability()) {
+                          homeController.paymentmethodstate.value = 0;
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return PaymentWay();
+                            },
+                          );
+                        } else {
+                          Fluttertoast.showToast(
+                            msg: 'Insuficient coin',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.grey,
+                            textColor: Colors.white,
+                          );
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(

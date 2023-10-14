@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:relaks_media/global/constants.dart';
 import 'package:relaks_media/global/shared_preference_helper.dart';
 import 'package:relaks_media/models/audio_post_response.dart';
+import 'package:relaks_media/models/post_wiithdarw_response.dart';
 import 'package:relaks_media/models/user_audio_response.dart';
 
 class HomeRepository {
@@ -37,10 +38,30 @@ class HomeRepository {
 
     http.StreamedResponse response = await request.send();
     return audioPostResponseFromJson(await response.stream.bytesToString());
-    // if (response.statusCode == 200) {
-    //   print(await response.stream.bytesToString());
-    // } else {
-    //   print(response.reasonPhrase);
-    // }
+  }
+
+  Future<PostWithdrawResponse> withdrawRequest(
+      {required String balance,
+      required String coin,
+      required String paymentType,
+      required String number}) async {
+    int? userId = await SharedPreferenceHelper().getInt(key: id);
+    String? userToken = await SharedPreferenceHelper().getString(key: token);
+    var headers = {'Authorization': 'Bearer $userToken'};
+    var request = http.MultipartRequest('POST',
+        Uri.parse('http://16.171.2.83/api/v1/posting/withdraw/create/'));
+    request.fields.addAll({
+      'user': userId.toString(),
+      'amount': '$balance',
+      'coins': coin,
+      'withdraw_type': paymentType,
+      'withdraw_number': number
+    });
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    return postWithdrawResponseFromJson(await response.stream.bytesToString());
   }
 }

@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:relaks_media/global/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -9,7 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:relaks_media/Repo/home_repository.dart';
 
 import 'package:relaks_media/global/shared_preference_helper.dart';
-import 'package:relaks_media/global/constants.dart';
 
 class HomeController extends GetxController {
   var homestate = 0.obs;
@@ -35,8 +33,10 @@ class HomeController extends GetxController {
   var totalCoin2 = 0.obs;
   getUserData() async {
     refferalId2.value =
-        (await SharedPreferenceHelper().getString(key: referralNumber))!;
-    totalCoin2.value = (await SharedPreferenceHelper().getInt(key: totalCoin))!;
+        (await SharedPreferenceHelper().getString(key: referralNumber)) ??
+            'N/A';
+    totalCoin2.value =
+        (await SharedPreferenceHelper().getInt(key: totalCoin)) ?? 0;
   }
 
   Future<void> getImageUrl() async {
@@ -108,4 +108,44 @@ class HomeController extends GetxController {
       getUserSubscribedAudio();
     }
   }
+
+  Future<bool> withdrawAvailability() async {
+    int? totalCoin2 = await SharedPreferenceHelper().getInt(key: totalCoin);
+    if (totalCoin2 != null) {
+      if (totalCoin2 >= 1000) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  var balance = 0.0.obs;
+  availableBalance() async {
+    int? totalCoin2 = await SharedPreferenceHelper().getInt(key: totalCoin);
+    balance.value = totalCoin2! / 10;
+  }
+
+  Future<void> withdrawRequest(
+      {required String paymentType, required String phoneNumber}) async {
+    int? totalCoin2 = await SharedPreferenceHelper().getInt(key: totalCoin) ?? 0;
+    var response = await HomeRepository().withdrawRequest(
+        balance: balance.value.toString(),
+        coin: totalCoin2.toString(),
+        paymentType: paymentType,
+        number: phoneNumber);
+
+    if (response.success!) {
+      Fluttertoast.showToast(
+        msg: 'Paymet request sent successfully',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.grey,
+        textColor: Colors.white,
+      );
+    }
+  }
+  var phoneController = TextEditingController().obs;
 }

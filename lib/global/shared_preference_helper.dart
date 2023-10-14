@@ -1,7 +1,6 @@
 import 'package:relaks_media/global/constants.dart';
 import 'package:relaks_media/models/login_response.dart';
 import 'package:relaks_media/models/otp_response.dart';
-import 'package:relaks_media/models/signup_response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferenceHelper {
@@ -14,6 +13,9 @@ class SharedPreferenceHelper {
     prefs.setString(phone, loginResponse.results!.user!.phone ?? 'N/A');
     prefs.setString(name, loginResponse.results!.user!.name ?? 'N/A');
     prefs.setBool(isVerified, loginResponse.results!.user!.isVerified ?? false);
+    prefs.setString(
+        referralNumber, loginResponse.results!.user!.referralId ?? 'N/A');
+    prefs.setInt(totalCoin, loginResponse.results!.user!.totalCoins ?? 0);
   }
 
   Future<void> saveMemberDataSignup({required OtpResponse otpResponse}) async {
