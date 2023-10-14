@@ -8,9 +8,40 @@ import 'package:relaks_media/screens/Chat/user_list_model.dart';
 import '../../models/chat_model.dart';
 
 class ChatRepo{
+
+  Future<void> sendMessagetoApi(String senderId, String receiverId, String chat) async {
+    var headers = {
+      'Authorization': 'Bearer e0e6b09f5a9b9734c44d039ea02d7630adee76d9',
+    };
+    var url = Uri.parse('http://16.171.2.83/api/v1/chats/messages/create/');
+    var request = http.MultipartRequest('POST', url);
+
+    // Add form fields to the request
+    request.fields.addAll({
+      'sender': senderId,
+      'receiver': receiverId,
+      'chat': chat,
+    });
+
+    request.headers.addAll(headers);
+
+    try {
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        print(await response.stream.bytesToString());
+      } else {
+        print(response.reasonPhrase);
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+
   Future<Chatmodel?> fetchChatData(int chatId) async {
     final String baseUrl = 'http://16.171.2.83/api/v1/chats/messages/';
-    final String token = '0b104116364581cc372075ca1ed028f6903c0036';
+    final String token = 'e0e6b09f5a9b9734c44d039ea02d7630adee76d9';
 
     final Uri url = Uri.parse('$baseUrl$chatId');
 

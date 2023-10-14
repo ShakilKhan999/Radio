@@ -1,11 +1,22 @@
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 
+import '../Repo/radio_repo.dart';
+
 class RadioController extends GetxController{
   var playing=false.obs;
   var selectedRadioLink='https://s3.voscast.com:9893/live'.obs;
   var selectedChannel=0.obs;
+  var selectedstationIndex=0.obs;
+  var stations=[].obs;
+
   final AudioPlayer _audioPlayer = AudioPlayer();
+
+  @override
+  void onInit() {
+    getstations();
+    super.onInit();
+  }
 
   String getSelectedChImg() {
     String img='';
@@ -111,7 +122,14 @@ class RadioController extends GetxController{
     return name;
   }
 
+  Future<void> getstations() async{
+    print("stationfetchcalled2323");
+    stations.value=await RadioRepository().fetchRadioStations();
+    print("stations234234:"+stations.length.toString());
+  }
+
   Future<void> playRadio() async{
+    print("nowurloflive:"+selectedRadioLink.toString());
     playing.value=playing.value?false:true;
     await _audioPlayer.setUrl('$selectedRadioLink');
     if(playing.value==false)

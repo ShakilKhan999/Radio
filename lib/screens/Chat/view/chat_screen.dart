@@ -138,13 +138,14 @@ class _ChatScreenState extends State<ChatScreen> {
                   return GestureDetector(
                     onTap: () {
                       chatController.selecteduserIndex.value=index;
-                      chatController.getChats(chatAccount.id);
-                      // Navigate to the conversation screen
-                      Navigator.pushNamed(
-                        context,
-                        ConversationScreen.routeName,
-                        arguments: chatAccount,
+                      chatController.getChats(chatAccount.id).then((value) =>
+                          Navigator.pushNamed(
+                            context,
+                            ConversationScreen.routeName,
+                            arguments: chatAccount,
+                          )
                       );
+                      // Navigate to the conversation screen
                     },
                     child: ListTile(
                       leading: CircleAvatar(

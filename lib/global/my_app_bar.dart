@@ -61,7 +61,7 @@ AppBar myAppBar(BuildContext context, RadioController radioController) {
                   onPressed: () {
                     Navigator.pushNamed(context, StationScreen.routeName);
                   },
-                  icon: Image.asset(radioController.getSelectedChImg())),
+                  icon: Image.network(radioController.stations[radioController.selectedstationIndex.value].channelImage)),
             )
           ],
         ),

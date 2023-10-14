@@ -45,578 +45,725 @@ class StationScreen extends StatelessWidget {
                                 height:
                                     MediaQuery.of(context).size.height - 380.h,
                                 width: MediaQuery.of(context).size.width - 70.w,
-                                child: Column(
+                                child:Column(
                                   children: [
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Text(
-                                          'Switch Your Station',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: 'Poppins',
-                                              fontSize: 25.sp),
-                                        ),
-                                        SizedBox(
-                                          width: 15.w,
-                                        ),
-                                        Container(
-                                          height: 30.h,
-                                          width: 30.w,
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey.shade700,
-                                              border: Border.all(
-                                                  color: Colors.transparent),
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          child: IconButton(
-                                            icon: ImageIcon(
-                                              AssetImage('images/close.png'),
-                                              color: Colors.white,
-                                              size: 20.sp,
-                                            ),
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 30.h,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              240.w,
-                                          height: 50.h,
-                                          decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.grey.shade500,
-                                                  Colors.grey.shade700,
-                                                ],
-                                                stops: [0.3, 1.0],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                              ),
-                                              border: Border.all(
-                                                  color: Colors.transparent),
-                                              borderRadius:
-                                                  BorderRadius.circular(25)),
-                                          child: TextButton(
-                                              onPressed: () {
-                                                radioController.selectedChannel.value=0;
-                                                radioController.selectedRadioLink.value='https://s3.voscast.com:9893/live';
-                                                 Get.off(LiveRadioScreen(),
-                                                transition:
-                                                    Transition.noTransition);
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                    'images/Relaks Radio.png',
-                                                    height: 30.h,
-                                                    width: 35.w,
-                                                  ),
-                                                  Text(
-                                                    'Relaks Radio',
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )
-                                                ],
-                                              )),
-                                        ),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              240.w,
-                                          decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.grey.shade500,
-                                                  Colors.grey.shade700,
-                                                ],
-                                                stops: [0.3, 1.0],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                              ),
-                                              border: Border.all(
-                                                  color: Colors.transparent),
-                                              borderRadius:
-                                                  BorderRadius.circular(25)),
-                                          child: TextButton(
-                                              onPressed: () {
-                                                radioController.selectedChannel.value=1;
-                                                radioController.selectedRadioLink.value='https://s3.voscast.com:9893/live';
-                                                Get.off(LiveRadioScreen());
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                    'images/Relaks Radio Bangla.png',
-                                                    height: 30.h,
-                                                    width: 35.w,
-                                                  ),
-                                                  Text(
-                                                    'Relaks Radio \nBangla',
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )
-                                                ],
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              240.w,
-                                          decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.grey.shade500,
-                                                  Colors.grey.shade700,
-                                                ],
-                                                stops: [0.3, 1.0],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                              ),
-                                              border: Border.all(
-                                                  color: Colors.transparent),
-                                              borderRadius:
-                                                  BorderRadius.circular(25)),
-                                          child: TextButton(
-                                              onPressed: () {
-                                                radioController.selectedChannel.value=2;
-                                                radioController.selectedRadioLink.value='https://s1.voscast.com:11349/live';
-                                                Get.off(LiveRadioScreen());
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                    'images/Relaks Radio Lanka.png',
-                                                    height: 30.h,
-                                                    width: 35.w,
-                                                  ),
-                                                  Text(
-                                                    'Relaks Radio \nLanka',
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )
-                                                ],
-                                              )),
-                                        ),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              240.w,
-                                          decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.grey.shade500,
-                                                  Colors.grey.shade700,
-                                                ],
-                                                stops: [0.3, 1.0],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                              ),
-                                              border: Border.all(
-                                                  color: Colors.transparent),
-                                              borderRadius:
-                                                  BorderRadius.circular(25)),
-                                          child: TextButton(
-                                              onPressed: () {
-                                                radioController.selectedChannel.value=3;
-                                                radioController.selectedRadioLink.value='https://s3.voscast.com:10859/live';
-                                                Get.off(LiveRadioScreen());
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                    'images/Relaks Radio EU.png',
-                                                    height: 30.h,
-                                                    width: 35.w,
-                                                  ),
-                                                  Text(
-                                                    'Relaks Radio \nEU',
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )
-                                                ],
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              240.w,
-                                          decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.grey.shade500,
-                                                  Colors.grey.shade700,
-                                                ],
-                                                stops: [0.3, 1.0],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                              ),
-                                              border: Border.all(
-                                                  color: Colors.transparent),
-                                              borderRadius:
-                                                  BorderRadius.circular(25)),
-                                          child: TextButton(
-                                              onPressed: () {
-                                                radioController.selectedChannel.value=4;
-                                                radioController.selectedRadioLink.value='https://s3.voscast.com:10885/live';
-                                                Get.off(LiveRadioScreen());
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                    'images/Relaks Radio Tamil.png',
-                                                    height: 30.h,
-                                                    width: 35.w,
-                                                  ),
-                                                  Text(
-                                                    'Relaks Radio \nTamil',
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )
-                                                ],
-                                              )),
-                                        ),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              240.w,
-                                          decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.grey.shade500,
-                                                  Colors.grey.shade700,
-                                                ],
-                                                stops: [0.3, 1.0],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                              ),
-                                              border: Border.all(
-                                                  color: Colors.transparent),
-                                              borderRadius:
-                                                  BorderRadius.circular(25)),
-                                          child: TextButton(
-                                              onPressed: () {
-                                                radioController.selectedChannel.value=5;
-                                                radioController.selectedRadioLink.value='https://s3.voscast.com:10769/live';
-                                                Get.off(LiveRadioScreen());
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                    'images/Relaks Radio India.png',
-                                                    height: 30.h,
-                                                    width: 35.w,
-                                                  ),
-                                                  Text(
-                                                    'Relaks Radio \nIndia',
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )
-                                                ],
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              240.w,
-                                          decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.grey.shade500,
-                                                  Colors.grey.shade700,
-                                                ],
-                                                stops: [0.3, 1.0],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                              ),
-                                              border: Border.all(
-                                                  color: Colors.transparent),
-                                              borderRadius:
-                                                  BorderRadius.circular(25)),
-                                          child: TextButton(
-                                              onPressed: () {
-                                                radioController.selectedChannel.value=6;
-                                                radioController.selectedRadioLink.value='https://s3.voscast.com:10821/live';
-                                                Get.off(LiveRadioScreen());
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                    'images/Relaks Radio Pakistan.png',
-                                                    height: 30.h,
-                                                    width: 35.w,
-                                                  ),
-                                                  Text(
-                                                    "Relaks Radio \nPakistan",
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )
-                                                ],
-                                              )),
-                                        ),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              235.w,
-                                          decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.grey.shade500,
-                                                  Colors.grey.shade700,
-                                                ],
-                                                stops: [0.3, 1.0],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                              ),
-                                              border: Border.all(
-                                                  color: Colors.transparent),
-                                              borderRadius:
-                                                  BorderRadius.circular(25)),
-                                          child: TextButton(
-                                              onPressed: () {
-                                                radioController.selectedChannel.value=7;
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                    'images/Relaks Tv.png',
-                                                    height: 30,
-                                                    width: 35,
-                                                  ),
-                                                  Text(
-                                                    'Relaks Radio \nTV',
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )
-                                                ],
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              240.w,
-                                          decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.grey.shade500,
-                                                  Colors.grey.shade700,
-                                                ],
-                                                stops: [0.3, 1.0],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                              ),
-                                              border: Border.all(
-                                                  color: Colors.transparent),
-                                              borderRadius:
-                                                  BorderRadius.circular(25)),
-                                          child: TextButton(
-                                              onPressed: () {
-                                                radioController.selectedChannel.value=8;
-                                                radioController.selectedRadioLink.value='https://s3.voscast.com:10071/live';
-                                                Get.off(LiveRadioScreen());
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                    'images/Relaks Radio Music.png',
-                                                    height: 30,
-                                                    width: 35,
-                                                  ),
-                                                  Text(
-                                                    'Relaks Radio \nMusic',
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )
-                                                ],
-                                              )),
-                                        ),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              235.w,
-                                          decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.grey.shade500,
-                                                  Colors.grey.shade700,
-                                                ],
-                                                stops: [0.3, 1.0],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                              ),
-                                              border: Border.all(
-                                                  color: Colors.transparent),
-                                              borderRadius:
-                                                  BorderRadius.circular(25)),
-                                          child: TextButton(
-                                              onPressed: () {
-                                                radioController.selectedChannel.value=9;
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                    'images/Relaks News 24.png',
-                                                    height: 30.h,
-                                                    width: 35.w,
-                                                  ),
-                                                  Text(
-                                                    'Relaks News \n24',
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )
-                                                ],
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              240.w,
-                                          decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.grey.shade500,
-                                                  Colors.grey.shade700,
-                                                ],
-                                                stops: [0.3, 1.0],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                              ),
-                                              border: Border.all(
-                                                  color: Colors.transparent),
-                                              borderRadius:
-                                                  BorderRadius.circular(25)),
-                                          child: TextButton(
-                                              onPressed: () {
-                                                radioController.selectedChannel.value=10;
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                    'images/Relaks Star.png',
-                                                    height: 30.h,
-                                                    width: 35.w,
-                                                  ),
-                                                  Text(
-                                                    'Relaks Star',
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )
-                                                ],
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-                                    Container(
-                                      height: 40.h,
-                                      width: 287.w,
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.transparent),
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      child: ElevatedButton(
-                                          onPressed: () {
-                                            if(radioController.selectedChannel.value==0 ||radioController.selectedChannel.value==7
-                                            || radioController.selectedChannel.value==9 || radioController.selectedChannel.value==10)
-                                              {
-                                                Navigator.pushNamed(context,
-                                                    MaintainceScreen.routeName);
-                                              }
-                                            else{
-                                              Get.back();
-                                            }
-
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(25),
-                                              ),
-                                              backgroundColor:
-                                                  Color(0xffffEA1C24)),
-                                          child: Text(
-                                            'Switch your Station',
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Text(
+                                            'Switch Your Station',
                                             style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 18.sp),
-                                          )),
+                                                fontFamily: 'Poppins',
+                                                fontSize: 25.sp),
+                                          ),
+                                                  SizedBox(
+                                                    width: 15.w,
+                                                  ),
+                                                  Container(
+                                                    height: 30.h,
+                                                    width: 30.w,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.grey.shade700,
+                                                        border: Border.all(
+                                                            color: Colors.transparent),
+                                                        borderRadius:
+                                                            BorderRadius.circular(5)),
+                                                    child: IconButton(
+                                                      icon: ImageIcon(
+                                                        AssetImage('images/close.png'),
+                                                        color: Colors.white,
+                                                        size: 20.sp,
+                                                      ),
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
+                                                      },
+                                                    ),
+                                                  )
+                                        ]),
+                                    SizedBox(
+                                            width: 15.w,
+                                          ),
+                                    SizedBox(
+                                      height:
+                                      MediaQuery.of(context).size.height - 480.h,
+                                      width: MediaQuery.of(context).size.width - 70.w,
+                                      child: GridView.builder(
+                                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          mainAxisSpacing: 0.sp,
+                                          crossAxisSpacing: 0.sp,
+                                        ),
+                                        itemCount: radioController.stations.length,
+                                        itemBuilder: (context, index) {
+                                          return   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                                  children: [
+                                                    Container(
+                                                      width: MediaQuery.of(context)
+                                                              .size
+                                                              .width -
+                                                          250.w,
+                                                      height: 50.h,
+                                                      decoration: BoxDecoration(
+                                                          gradient: LinearGradient(
+                                                            colors: [
+                                                              Colors.grey.shade500,
+                                                              Colors.grey.shade700,
+                                                            ],
+                                                            stops: [0.3, 1.0],
+                                                            begin: Alignment.topLeft,
+                                                            end: Alignment.bottomRight,
+                                                          ),
+                                                          border: Border.all(
+                                                              color: Colors.transparent),
+                                                          borderRadius:
+                                                              BorderRadius.circular(25)),
+                                                      child: TextButton(
+                                                          onPressed: () {
+                                                            radioController.selectedstationIndex.value=index;
+                                                            radioController.selectedRadioLink.value=radioController.stations[index].channelLiveUrl;
+                                                            // radioController.selectedChannel.value=0;
+                                                            // radioController.selectedRadioLink.value='https://s3.voscast.com:9893/live';
+                                                             Get.off(LiveRadioScreen(),
+                                                             transition:
+                                                                 Transition.noTransition);
+                                                          },
+                                                           child: Row(
+                                                            children: [
+                                                               Image.network(
+                                                                 radioController.stations[index].channelImage,
+                                                                 height: 30.h,
+                                                               width: 35.w,
+                                                               ),
+                                                              Expanded(
+                                                                child: Text(
+                                                                  radioController.stations[index].name,
+                                                                style: TextStyle(
+                                                                      color: Colors.white),
+                                                                ),
+                                                              )
+                                                            ],
+                                                           )),
+                                                    )]),
+                                          );
+                                        }),
                                     ),
+                                    SizedBox(
+                                      width: 15.w,
+                                    ),
+                                        Container(
+                                          height: 40.h,
+                                          width: 287.w,
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.transparent),
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          child: ElevatedButton(
+                                              onPressed: () {
+                                                if(radioController.selectedChannel.value==0 ||radioController.selectedChannel.value==7
+                                                || radioController.selectedChannel.value==9 || radioController.selectedChannel.value==10)
+                                                  {
+                                                    Navigator.pushNamed(context,
+                                                        MaintainceScreen.routeName);
+                                                  }
+                                                else{
+                                                  Get.back();
+                                                }
+
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(25),
+                                                  ),
+                                                  backgroundColor:
+                                                      Color(0xffffEA1C24)),
+                                              child: Text(
+                                                'Switch your Station',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 18.sp),
+                                              )),
+                                        ),
                                   ],
-                                )),
+                                )
+                                // child: Column(
+                                //   children: [
+                                //     Row(
+                                //       mainAxisAlignment:
+                                //           MainAxisAlignment.spaceAround,
+                                //       children: [
+                                //         Text(
+                                //           'Switch Your Station',
+                                //           style: TextStyle(
+                                //               color: Colors.white,
+                                //               fontFamily: 'Poppins',
+                                //               fontSize: 25.sp),
+                                //         ),
+                                //         SizedBox(
+                                //           width: 15.w,
+                                //         ),
+                                //         Container(
+                                //           height: 30.h,
+                                //           width: 30.w,
+                                //           decoration: BoxDecoration(
+                                //             color: Colors.grey.shade700,
+                                //               border: Border.all(
+                                //                   color: Colors.transparent),
+                                //               borderRadius:
+                                //                   BorderRadius.circular(5)),
+                                //           child: IconButton(
+                                //             icon: ImageIcon(
+                                //               AssetImage('images/close.png'),
+                                //               color: Colors.white,
+                                //               size: 20.sp,
+                                //             ),
+                                //             onPressed: () {
+                                //               Navigator.pop(context);
+                                //             },
+                                //           ),
+                                //         )
+                                //       ],
+                                //     ),
+                                //     SizedBox(
+                                //       height: 30.h,
+                                //     ),
+                                //     Row(
+                                //       children: [
+                                //         Container(
+                                //           width: MediaQuery.of(context)
+                                //                   .size
+                                //                   .width -
+                                //               240.w,
+                                //           height: 50.h,
+                                //           decoration: BoxDecoration(
+                                //               gradient: LinearGradient(
+                                //                 colors: [
+                                //                   Colors.grey.shade500,
+                                //                   Colors.grey.shade700,
+                                //                 ],
+                                //                 stops: [0.3, 1.0],
+                                //                 begin: Alignment.topLeft,
+                                //                 end: Alignment.bottomRight,
+                                //               ),
+                                //               border: Border.all(
+                                //                   color: Colors.transparent),
+                                //               borderRadius:
+                                //                   BorderRadius.circular(25)),
+                                //           child: TextButton(
+                                //               onPressed: () {
+                                //                 radioController.selectedChannel.value=0;
+                                //                 radioController.selectedRadioLink.value='https://s3.voscast.com:9893/live';
+                                //                  Get.off(LiveRadioScreen(),
+                                //                 transition:
+                                //                     Transition.noTransition);
+                                //               },
+                                //               child: Row(
+                                //                 children: [
+                                //                   Image.asset(
+                                //                     'images/Relaks Radio.png',
+                                //                     height: 30.h,
+                                //                     width: 35.w,
+                                //                   ),
+                                //                   Text(
+                                //                     'Relaks Radio',
+                                //                     style: TextStyle(
+                                //                         color: Colors.white),
+                                //                   )
+                                //                 ],
+                                //               )),
+                                //         ),
+                                //         SizedBox(
+                                //           width: 5.w,
+                                //         ),
+                                //         Container(
+                                //           width: MediaQuery.of(context)
+                                //                   .size
+                                //                   .width -
+                                //               240.w,
+                                //           decoration: BoxDecoration(
+                                //               gradient: LinearGradient(
+                                //                 colors: [
+                                //                   Colors.grey.shade500,
+                                //                   Colors.grey.shade700,
+                                //                 ],
+                                //                 stops: [0.3, 1.0],
+                                //                 begin: Alignment.topLeft,
+                                //                 end: Alignment.bottomRight,
+                                //               ),
+                                //               border: Border.all(
+                                //                   color: Colors.transparent),
+                                //               borderRadius:
+                                //                   BorderRadius.circular(25)),
+                                //           child: TextButton(
+                                //               onPressed: () {
+                                //                 radioController.selectedChannel.value=1;
+                                //                 radioController.selectedRadioLink.value='https://s3.voscast.com:9893/live';
+                                //                 Get.off(LiveRadioScreen());
+                                //               },
+                                //               child: Row(
+                                //                 children: [
+                                //                   Image.asset(
+                                //                     'images/Relaks Radio Bangla.png',
+                                //                     height: 30.h,
+                                //                     width: 35.w,
+                                //                   ),
+                                //                   Text(
+                                //                     'Relaks Radio \nBangla',
+                                //                     style: TextStyle(
+                                //                         color: Colors.white),
+                                //                   )
+                                //                 ],
+                                //               )),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //     SizedBox(
+                                //       height: 5.h,
+                                //     ),
+                                //     Row(
+                                //       children: [
+                                //         Container(
+                                //           width: MediaQuery.of(context)
+                                //                   .size
+                                //                   .width -
+                                //               240.w,
+                                //           decoration: BoxDecoration(
+                                //               gradient: LinearGradient(
+                                //                 colors: [
+                                //                   Colors.grey.shade500,
+                                //                   Colors.grey.shade700,
+                                //                 ],
+                                //                 stops: [0.3, 1.0],
+                                //                 begin: Alignment.topLeft,
+                                //                 end: Alignment.bottomRight,
+                                //               ),
+                                //               border: Border.all(
+                                //                   color: Colors.transparent),
+                                //               borderRadius:
+                                //                   BorderRadius.circular(25)),
+                                //           child: TextButton(
+                                //               onPressed: () {
+                                //                 radioController.selectedChannel.value=2;
+                                //                 radioController.selectedRadioLink.value='https://s1.voscast.com:11349/live';
+                                //                 Get.off(LiveRadioScreen());
+                                //               },
+                                //               child: Row(
+                                //                 children: [
+                                //                   Image.asset(
+                                //                     'images/Relaks Radio Lanka.png',
+                                //                     height: 30.h,
+                                //                     width: 35.w,
+                                //                   ),
+                                //                   Text(
+                                //                     'Relaks Radio \nLanka',
+                                //                     style: TextStyle(
+                                //                         color: Colors.white),
+                                //                   )
+                                //                 ],
+                                //               )),
+                                //         ),
+                                //         SizedBox(
+                                //           width: 5.w,
+                                //         ),
+                                //         Container(
+                                //           width: MediaQuery.of(context)
+                                //                   .size
+                                //                   .width -
+                                //               240.w,
+                                //           decoration: BoxDecoration(
+                                //               gradient: LinearGradient(
+                                //                 colors: [
+                                //                   Colors.grey.shade500,
+                                //                   Colors.grey.shade700,
+                                //                 ],
+                                //                 stops: [0.3, 1.0],
+                                //                 begin: Alignment.topLeft,
+                                //                 end: Alignment.bottomRight,
+                                //               ),
+                                //               border: Border.all(
+                                //                   color: Colors.transparent),
+                                //               borderRadius:
+                                //                   BorderRadius.circular(25)),
+                                //           child: TextButton(
+                                //               onPressed: () {
+                                //                 radioController.selectedChannel.value=3;
+                                //                 radioController.selectedRadioLink.value='https://s3.voscast.com:10859/live';
+                                //                 Get.off(LiveRadioScreen());
+                                //               },
+                                //               child: Row(
+                                //                 children: [
+                                //                   Image.asset(
+                                //                     'images/Relaks Radio EU.png',
+                                //                     height: 30.h,
+                                //                     width: 35.w,
+                                //                   ),
+                                //                   Text(
+                                //                     'Relaks Radio \nEU',
+                                //                     style: TextStyle(
+                                //                         color: Colors.white),
+                                //                   )
+                                //                 ],
+                                //               )),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //     SizedBox(
+                                //       height: 5.h,
+                                //     ),
+                                //     Row(
+                                //       children: [
+                                //         Container(
+                                //           width: MediaQuery.of(context)
+                                //                   .size
+                                //                   .width -
+                                //               240.w,
+                                //           decoration: BoxDecoration(
+                                //               gradient: LinearGradient(
+                                //                 colors: [
+                                //                   Colors.grey.shade500,
+                                //                   Colors.grey.shade700,
+                                //                 ],
+                                //                 stops: [0.3, 1.0],
+                                //                 begin: Alignment.topLeft,
+                                //                 end: Alignment.bottomRight,
+                                //               ),
+                                //               border: Border.all(
+                                //                   color: Colors.transparent),
+                                //               borderRadius:
+                                //                   BorderRadius.circular(25)),
+                                //           child: TextButton(
+                                //               onPressed: () {
+                                //                 radioController.selectedChannel.value=4;
+                                //                 radioController.selectedRadioLink.value='https://s3.voscast.com:10885/live';
+                                //                 Get.off(LiveRadioScreen());
+                                //               },
+                                //               child: Row(
+                                //                 children: [
+                                //                   Image.asset(
+                                //                     'images/Relaks Radio Tamil.png',
+                                //                     height: 30.h,
+                                //                     width: 35.w,
+                                //                   ),
+                                //                   Text(
+                                //                     'Relaks Radio \nTamil',
+                                //                     style: TextStyle(
+                                //                         color: Colors.white),
+                                //                   )
+                                //                 ],
+                                //               )),
+                                //         ),
+                                //         SizedBox(
+                                //           width: 5.w,
+                                //         ),
+                                //         Container(
+                                //           width: MediaQuery.of(context)
+                                //                   .size
+                                //                   .width -
+                                //               240.w,
+                                //           decoration: BoxDecoration(
+                                //               gradient: LinearGradient(
+                                //                 colors: [
+                                //                   Colors.grey.shade500,
+                                //                   Colors.grey.shade700,
+                                //                 ],
+                                //                 stops: [0.3, 1.0],
+                                //                 begin: Alignment.topLeft,
+                                //                 end: Alignment.bottomRight,
+                                //               ),
+                                //               border: Border.all(
+                                //                   color: Colors.transparent),
+                                //               borderRadius:
+                                //                   BorderRadius.circular(25)),
+                                //           child: TextButton(
+                                //               onPressed: () {
+                                //                 radioController.selectedChannel.value=5;
+                                //                 radioController.selectedRadioLink.value='https://s3.voscast.com:10769/live';
+                                //                 Get.off(LiveRadioScreen());
+                                //               },
+                                //               child: Row(
+                                //                 children: [
+                                //                   Image.asset(
+                                //                     'images/Relaks Radio India.png',
+                                //                     height: 30.h,
+                                //                     width: 35.w,
+                                //                   ),
+                                //                   Text(
+                                //                     'Relaks Radio \nIndia',
+                                //                     style: TextStyle(
+                                //                         color: Colors.white),
+                                //                   )
+                                //                 ],
+                                //               )),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //     SizedBox(
+                                //       height: 5.h,
+                                //     ),
+                                //     Row(
+                                //       children: [
+                                //         Container(
+                                //           width: MediaQuery.of(context)
+                                //                   .size
+                                //                   .width -
+                                //               240.w,
+                                //           decoration: BoxDecoration(
+                                //               gradient: LinearGradient(
+                                //                 colors: [
+                                //                   Colors.grey.shade500,
+                                //                   Colors.grey.shade700,
+                                //                 ],
+                                //                 stops: [0.3, 1.0],
+                                //                 begin: Alignment.topLeft,
+                                //                 end: Alignment.bottomRight,
+                                //               ),
+                                //               border: Border.all(
+                                //                   color: Colors.transparent),
+                                //               borderRadius:
+                                //                   BorderRadius.circular(25)),
+                                //           child: TextButton(
+                                //               onPressed: () {
+                                //                 radioController.selectedChannel.value=6;
+                                //                 radioController.selectedRadioLink.value='https://s3.voscast.com:10821/live';
+                                //                 Get.off(LiveRadioScreen());
+                                //               },
+                                //               child: Row(
+                                //                 children: [
+                                //                   Image.asset(
+                                //                     'images/Relaks Radio Pakistan.png',
+                                //                     height: 30.h,
+                                //                     width: 35.w,
+                                //                   ),
+                                //                   Text(
+                                //                     "Relaks Radio \nPakistan",
+                                //                     style: TextStyle(
+                                //                         color: Colors.white),
+                                //                   )
+                                //                 ],
+                                //               )),
+                                //         ),
+                                //         SizedBox(
+                                //           width: 5.w,
+                                //         ),
+                                //         Container(
+                                //           width: MediaQuery.of(context)
+                                //                   .size
+                                //                   .width -
+                                //               235.w,
+                                //           decoration: BoxDecoration(
+                                //               gradient: LinearGradient(
+                                //                 colors: [
+                                //                   Colors.grey.shade500,
+                                //                   Colors.grey.shade700,
+                                //                 ],
+                                //                 stops: [0.3, 1.0],
+                                //                 begin: Alignment.topLeft,
+                                //                 end: Alignment.bottomRight,
+                                //               ),
+                                //               border: Border.all(
+                                //                   color: Colors.transparent),
+                                //               borderRadius:
+                                //                   BorderRadius.circular(25)),
+                                //           child: TextButton(
+                                //               onPressed: () {
+                                //                 radioController.selectedChannel.value=7;
+                                //               },
+                                //               child: Row(
+                                //                 children: [
+                                //                   Image.asset(
+                                //                     'images/Relaks Tv.png',
+                                //                     height: 30,
+                                //                     width: 35,
+                                //                   ),
+                                //                   Text(
+                                //                     'Relaks Radio \nTV',
+                                //                     style: TextStyle(
+                                //                         color: Colors.white),
+                                //                   )
+                                //                 ],
+                                //               )),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //     SizedBox(
+                                //       height: 5.h,
+                                //     ),
+                                //     Row(
+                                //       children: [
+                                //         Container(
+                                //           width: MediaQuery.of(context)
+                                //                   .size
+                                //                   .width -
+                                //               240.w,
+                                //           decoration: BoxDecoration(
+                                //               gradient: LinearGradient(
+                                //                 colors: [
+                                //                   Colors.grey.shade500,
+                                //                   Colors.grey.shade700,
+                                //                 ],
+                                //                 stops: [0.3, 1.0],
+                                //                 begin: Alignment.topLeft,
+                                //                 end: Alignment.bottomRight,
+                                //               ),
+                                //               border: Border.all(
+                                //                   color: Colors.transparent),
+                                //               borderRadius:
+                                //                   BorderRadius.circular(25)),
+                                //           child: TextButton(
+                                //               onPressed: () {
+                                //                 radioController.selectedChannel.value=8;
+                                //                 radioController.selectedRadioLink.value='https://s3.voscast.com:10071/live';
+                                //                 Get.off(LiveRadioScreen());
+                                //               },
+                                //               child: Row(
+                                //                 children: [
+                                //                   Image.asset(
+                                //                     'images/Relaks Radio Music.png',
+                                //                     height: 30,
+                                //                     width: 35,
+                                //                   ),
+                                //                   Text(
+                                //                     'Relaks Radio \nMusic',
+                                //                     style: TextStyle(
+                                //                         color: Colors.white),
+                                //                   )
+                                //                 ],
+                                //               )),
+                                //         ),
+                                //         SizedBox(
+                                //           width: 5.w,
+                                //         ),
+                                //         Container(
+                                //           width: MediaQuery.of(context)
+                                //                   .size
+                                //                   .width -
+                                //               235.w,
+                                //           decoration: BoxDecoration(
+                                //               gradient: LinearGradient(
+                                //                 colors: [
+                                //                   Colors.grey.shade500,
+                                //                   Colors.grey.shade700,
+                                //                 ],
+                                //                 stops: [0.3, 1.0],
+                                //                 begin: Alignment.topLeft,
+                                //                 end: Alignment.bottomRight,
+                                //               ),
+                                //               border: Border.all(
+                                //                   color: Colors.transparent),
+                                //               borderRadius:
+                                //                   BorderRadius.circular(25)),
+                                //           child: TextButton(
+                                //               onPressed: () {
+                                //                 radioController.selectedChannel.value=9;
+                                //               },
+                                //               child: Row(
+                                //                 children: [
+                                //                   Image.asset(
+                                //                     'images/Relaks News 24.png',
+                                //                     height: 30.h,
+                                //                     width: 35.w,
+                                //                   ),
+                                //                   Text(
+                                //                     'Relaks News \n24',
+                                //                     style: TextStyle(
+                                //                         color: Colors.white),
+                                //                   )
+                                //                 ],
+                                //               )),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //     SizedBox(
+                                //       height: 5.h,
+                                //     ),
+                                //     Row(
+                                //       children: [
+                                //         Container(
+                                //           width: MediaQuery.of(context)
+                                //                   .size
+                                //                   .width -
+                                //               240.w,
+                                //           decoration: BoxDecoration(
+                                //               gradient: LinearGradient(
+                                //                 colors: [
+                                //                   Colors.grey.shade500,
+                                //                   Colors.grey.shade700,
+                                //                 ],
+                                //                 stops: [0.3, 1.0],
+                                //                 begin: Alignment.topLeft,
+                                //                 end: Alignment.bottomRight,
+                                //               ),
+                                //               border: Border.all(
+                                //                   color: Colors.transparent),
+                                //               borderRadius:
+                                //                   BorderRadius.circular(25)),
+                                //           child: TextButton(
+                                //               onPressed: () {
+                                //                 radioController.selectedChannel.value=10;
+                                //               },
+                                //               child: Row(
+                                //                 children: [
+                                //                   Image.asset(
+                                //                     'images/Relaks Star.png',
+                                //                     height: 30.h,
+                                //                     width: 35.w,
+                                //                   ),
+                                //                   Text(
+                                //                     'Relaks Star',
+                                //                     style: TextStyle(
+                                //                         color: Colors.white),
+                                //                   )
+                                //                 ],
+                                //               )),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //     SizedBox(
+                                //       height: 20.h,
+                                //     ),
+                                //     Container(
+                                //       height: 40.h,
+                                //       width: 287.w,
+                                //       decoration: BoxDecoration(
+                                //           border: Border.all(
+                                //               color: Colors.transparent),
+                                //           borderRadius:
+                                //               BorderRadius.circular(20)),
+                                //       child: ElevatedButton(
+                                //           onPressed: () {
+                                //             if(radioController.selectedChannel.value==0 ||radioController.selectedChannel.value==7
+                                //             || radioController.selectedChannel.value==9 || radioController.selectedChannel.value==10)
+                                //               {
+                                //                 Navigator.pushNamed(context,
+                                //                     MaintainceScreen.routeName);
+                                //               }
+                                //             else{
+                                //               Get.back();
+                                //             }
+                                //
+                                //           },
+                                //           style: ElevatedButton.styleFrom(
+                                //               shape: RoundedRectangleBorder(
+                                //                 borderRadius:
+                                //                     BorderRadius.circular(25),
+                                //               ),
+                                //               backgroundColor:
+                                //                   Color(0xffffEA1C24)),
+                                //           child: Text(
+                                //             'Switch your Station',
+                                //             style: TextStyle(
+                                //                 color: Colors.white,
+                                //                 fontSize: 18.sp),
+                                //           )),
+                                //     ),
+                                //   ],
+                                // )
+                            ),
                           ),
                         ),
                       ),

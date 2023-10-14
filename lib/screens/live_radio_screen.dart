@@ -55,8 +55,9 @@ class LiveRadioScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Obx(()=>Text(
-                            radioController.getSelectedChName().length>17?radioController.getSelectedChName().substring(0,17)+'..':
-                            radioController.getSelectedChName(),
+                            radioController.stations[radioController.selectedstationIndex.value].name.length>21?
+                            radioController.stations[radioController.selectedstationIndex.value].name.substring(0,21)+'..':
+                            radioController.stations[radioController.selectedstationIndex.value].name,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.sp,
@@ -90,7 +91,7 @@ class LiveRadioScreen extends StatelessWidget {
                         border: Border.all(color: Colors.transparent),
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child: Image.asset('images/radio_screen_image.png'),
+                      child: Image.network(radioController.stations[radioController.selectedstationIndex.value].channelLiveImage),
                     ),
                     // Small image overlay - Positioned 1
                     Positioned(

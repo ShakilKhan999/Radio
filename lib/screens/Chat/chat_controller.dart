@@ -46,6 +46,11 @@ catch(e){
   }
 //final channel = IOWebSocketChannel.connect('http://16.171.2.83');
 
+  Future<void> sendmessagetoAPI(String senderId, String receiverId, String mssg)async{
+ await ChatRepo().sendMessagetoApi(senderId, receiverId, mssg);
+getChats(int.parse(receiverId));
+  }
+
 void sendMessage2(int id) async {
   print("userId: "+id.toString());
   final channel = await IOWebSocketChannel.connect('ws://16.171.2.83/ws/chat/${id}/?token=0b104116364581cc372075ca1ed028f6903c0036');
@@ -74,7 +79,7 @@ Future<void> getuserList() async{
 
 Future<void> getChats(int id) async{
   chatList.clear();
-  chatList.add(await ChatRepo().fetchChatData(2));
+  chatList.add(await ChatRepo().fetchChatData(id));
   print("chatdata:"+ chatList.length.toString());
 }
 }
