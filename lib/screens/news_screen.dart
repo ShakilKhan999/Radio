@@ -268,7 +268,7 @@ class _NewsScreenState extends State<NewsScreen> {
                                     },
                                   ),
                                 )
-                              : Expanded(child: CircularProgressIndicator())
+                              : Expanded(child: Center(child: CircularProgressIndicator()))
                         ],
                       ),
                     );

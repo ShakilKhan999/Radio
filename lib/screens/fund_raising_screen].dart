@@ -9,10 +9,16 @@ import 'package:relaks_media/utils/main_drawer.dart';
 
 import '../controller/home_controller.dart';
 import '../utils/glass_box.dart';
+import '../utils/payment_way.dart';
 
-class FundRaisingScreen extends StatelessWidget {
+class FundRaisingScreen extends StatefulWidget {
   FundRaisingScreen({super.key});
 
+  @override
+  State<FundRaisingScreen> createState() => _FundRaisingScreenState();
+}
+
+class _FundRaisingScreenState extends State<FundRaisingScreen> {
   final List<String> country = [
     'United States',
     'Bangladesh',
@@ -24,12 +30,39 @@ class FundRaisingScreen extends StatelessWidget {
   ];
 
   String? selectedCountry;
+
   String? selectedCurrency;
+
+  int price = 100;
+  TextEditingController manualAmountController = TextEditingController();
+
+  void increasePrice() {
+    setState(() {
+      price += 1;
+      manualAmountController.text =
+          price.toString(); // Update the manual input field
+    });
+  }
+
+  void decreasePrice() {
+    setState(() {
+      price -= 1;
+      manualAmountController.text =
+          price.toString(); // Update the manual input field
+    });
+  }
+
+  void updatePriceManually() {
+    setState(() {
+      price = int.tryParse(manualAmountController.text) ?? 0;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.put(HomeController());
     RadioController radioController = Get.put(RadioController());
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: myAppBar(context, radioController),
@@ -49,7 +82,6 @@ class FundRaisingScreen extends StatelessWidget {
                     },
                     child: Icon(
                       Icons.arrow_back,
-                      
                       color: Colors.white,
                     ),
                   ),
@@ -105,95 +137,129 @@ class FundRaisingScreen extends StatelessWidget {
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width -
-                                              60,
+                                              60.w,
                                           // color: Colors.red,
                                           child: Padding(
-                                            padding: EdgeInsets.all(5.0),
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  width: 190.w,
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 10.0),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    border: Border.all(
-                                                        color: Colors.grey),
-                                                  ),
-                                                  child:
-                                                      DropdownButtonHideUnderline(
-                                                    child:
-                                                        DropdownButton<String>(
-                                                      icon: Icon(Icons
-                                                          .keyboard_arrow_down),
-                                                      items: country
-                                                          .map((String value) {
-                                                        return DropdownMenuItem<
+                                              padding: EdgeInsets.all(5.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Container(
+                                                    width: 190.0.w,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 10.0),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      border: Border.all(
+                                                          color: Colors.grey),
+                                                    ),
+                                                    child: Theme(
+                                                      data: ThemeData(
+                                                        canvasColor: Colors
+                                                            .black
+                                                            .withOpacity(
+                                                                0.7), // Set the background color here
+                                                      ),
+                                                      child:
+                                                          DropdownButtonHideUnderline(
+                                                        child: DropdownButton<
                                                             String>(
-                                                          value: value,
-                                                          child: Text(value),
-                                                        );
-                                                      }).toList(),
-                                                      onChanged: (value) {},
-                                                      hint: Text(
-                                                        'Select an option',
-                                                        style: TextStyle(
-                                                            color: Colors.grey),
+                                                          icon: Icon(Icons
+                                                              .keyboard_arrow_down),
+                                                          items: country.map(
+                                                              (String value) {
+                                                            return DropdownMenuItem<
+                                                                String>(
+                                                              value: value,
+                                                              child: Text(value,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white)),
+                                                            );
+                                                          }).toList(),
+                                                          onChanged: (String?
+                                                              selectedCountry) {
+                                                            setState(() {
+                                                              this.selectedCountry =
+                                                                  selectedCountry!;
+                                                            });
+                                                          },
+                                                          value:
+                                                              selectedCountry,
+                                                          hint: Text(
+                                                              'Select a country',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey)),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  width: 10.w,
-                                                ),
-                                                Container(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 5.0),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    border: Border.all(
-                                                        color: Colors.grey),
+                                                  SizedBox(
+                                                    width: 10.0,
                                                   ),
-                                                  child:
-                                                      DropdownButtonHideUnderline(
-                                                    child:
-                                                        DropdownButton<String>(
-                                                      icon: Icon(Icons
-                                                          .keyboard_arrow_down),
-                                                      // Custom dropdown icon
-                                                      items: currency
-                                                          .map((String value) {
-                                                        return DropdownMenuItem<
+                                                  Container(
+                                                    width: 120.0,
+                                                    // Adjust the width as needed
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 5.0),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      border: Border.all(
+                                                          color: Colors.grey),
+                                                    ),
+                                                    child: Theme(
+                                                      data: ThemeData(
+                                                        canvasColor: Colors
+                                                            .black
+                                                            .withOpacity(
+                                                                0.7), // Set the background color here
+                                                      ),
+                                                      child:
+                                                          DropdownButtonHideUnderline(
+                                                        child: DropdownButton<
                                                             String>(
-                                                          value: value,
-                                                          child: Row(
-                                                            children: [
-                                                              Text(value),
-                                                              SizedBox(
-                                                                width: 3.w,
-                                                              ),
-                                                              Icon(Icons
-                                                                  .arrow_downward),
-                                                            ],
-                                                          ),
-                                                        );
-                                                      }).toList(),
-                                                      onChanged:
-                                                          (String? newValue) {},
-                                                      hint: Text('choice',
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.grey)),
+                                                          icon: Icon(Icons
+                                                              .keyboard_arrow_down),
+                                                          items: currency.map(
+                                                              (String value) {
+                                                            return DropdownMenuItem<
+                                                                String>(
+                                                              value: value,
+                                                              child: Text(value,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white)),
+                                                            );
+                                                          }).toList(),
+                                                          onChanged: (String?
+                                                              selectedCurrency) {
+                                                            // Handle the selected currency here
+                                                            setState(() {
+                                                              this.selectedCurrency =
+                                                                  selectedCurrency!;
+                                                            });
+                                                          },
+                                                          value:
+                                                              selectedCurrency,
+                                                          hint: Text('Currency',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey)),
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                                                ],
+                                              )),
                                         ),
                                         Positioned(
                                             left: 20,
@@ -242,11 +308,11 @@ class FundRaisingScreen extends StatelessWidget {
                                       children: [
                                         ClipRRect(
                                           borderRadius:
-                                              BorderRadius.circular(15.sp),
+                                              BorderRadius.circular(15),
                                           child: Container(
                                             color: Colors.grey.shade800,
                                             child: Padding(
-                                              padding: EdgeInsets.all(10.0.sp),
+                                              padding: EdgeInsets.all(10.0),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
@@ -256,12 +322,12 @@ class FundRaisingScreen extends StatelessWidget {
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .height -
-                                                            700.h,
+                                                            700,
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width -
-                                                            100.w,
+                                                            100,
                                                     child: Column(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -272,72 +338,85 @@ class FundRaisingScreen extends StatelessWidget {
                                                               MainAxisAlignment
                                                                   .center,
                                                           children: [
-                                                            Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color:
-                                                                    Colors.grey,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                border: Border.all(
-                                                                    color: Colors
-                                                                        .grey),
-                                                              ),
-                                                              child: Icon(
-                                                                Icons.remove,
-                                                                color: Colors
-                                                                    .white,
-                                                                size: 30.sp,
-                                                              ),
-                                                            ),
-                                                            SizedBox(
-                                                              width: 15.w,
-                                                            ),
-                                                            Text(
-                                                              '\$100',
-                                                              style: TextStyle(
+                                                            GestureDetector(
+                                                              onTap:
+                                                                  decreasePrice,
+                                                              child: Container(
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                  border: Border.all(
+                                                                      color: Colors
+                                                                          .grey),
+                                                                ),
+                                                                child: Icon(
+                                                                  Icons.remove,
                                                                   color: Colors
                                                                       .white,
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  fontSize:
-                                                                      32.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
+                                                                  size: 30,
+                                                                ),
+                                                              ),
                                                             ),
                                                             SizedBox(
-                                                              width: 15.w,
+                                                              width: 15,
                                                             ),
-                                                            Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color:
-                                                                    Colors.grey,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                border: Border.all(
+                                                            Row(
+                                                              children: [
+                                                                Image.asset('images/taka.png',height: 30.h,width: 30.w,color: Colors.white,),
+                                                                Text(
+                                                                  '$price',
+                                                                  style: TextStyle(
                                                                     color: Colors
-                                                                        .grey),
-                                                              ),
-                                                              child: const Icon(
-                                                                Icons.add,
-                                                                color: Colors
-                                                                    .white,
-                                                                size: 30,
+                                                                        .white,
+                                                                    fontFamily:
+                                                                        'Poppins',
+                                                                    fontSize: 32,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            SizedBox(
+                                                              width: 15,
+                                                            ),
+                                                            GestureDetector(
+                                                              onTap:
+                                                                  increasePrice,
+                                                              child: Container(
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                  border: Border.all(
+                                                                      color: Colors
+                                                                          .grey),
+                                                                ),
+                                                                child: Icon(
+                                                                  Icons.add,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  size: 30,
+                                                                ),
                                                               ),
                                                             ),
                                                           ],
                                                         ),
                                                         SizedBox(
-                                                          height: 20.h,
+                                                          height: 20,
                                                         ),
                                                         Container(
-                                                          width: 150.w,
+                                                          width: 150,
                                                           decoration:
                                                               BoxDecoration(
                                                             borderRadius:
@@ -351,25 +430,40 @@ class FundRaisingScreen extends StatelessWidget {
                                                           child: Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                    .only(
+                                                                        .only(
                                                                     left: 20.0),
-                                                            child: TextField(
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                hintText:
-                                                                    'Enter Manual Amount',
-                                                                hintStyle: TextStyle(
-                                                                    color: Colors
-                                                                            .grey[
-                                                                        500],
-                                                                    fontFamily:
-                                                                        'Poppins',
-                                                                    fontSize:
-                                                                        12.sp),
-                                                                border:
-                                                                    InputBorder
-                                                                        .none,
-                                                              ),
+                                                            child: Row(
+                                                              children: [
+                                                                Expanded(
+                                                                  child:
+                                                                      TextField(
+                                                                    controller:
+                                                                        manualAmountController,style: TextStyle(color: Colors.white),
+                                                                    decoration:
+                                                                        InputDecoration(
+                                                                      hintText:
+                                                                          'Enter Manual Amount',
+                                                                      hintStyle:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .grey[500],
+                                                                        fontFamily:
+                                                                            'Poppins',
+                                                                        fontSize:
+                                                                            12,
+                                                                      ),
+                                                                      border: InputBorder
+                                                                          .none,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                IconButton(
+                                                                  icon: Icon(Icons
+                                                                      .check),
+                                                                  onPressed:
+                                                                      updatePriceManually,
+                                                                ),
+                                                              ],
                                                             ),
                                                           ),
                                                         ),
@@ -454,7 +548,7 @@ class FundRaisingScreen extends StatelessWidget {
                                               BorderRadius.circular(20)),
                                       child: ElevatedButton(
                                           onPressed: () {
-                                            Navigator.of(context).pop();
+
                                           },
                                           style: ElevatedButton.styleFrom(
                                               shape: RoundedRectangleBorder(
@@ -464,7 +558,7 @@ class FundRaisingScreen extends StatelessWidget {
                                               backgroundColor:
                                                   Color(0xffffEA1C24)),
                                           child: Text(
-                                            'Donate \$100',
+                                            'Donate \$$price',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 20.sp),
