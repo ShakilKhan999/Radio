@@ -16,6 +16,8 @@ import 'package:relaks_media/screens/downlode_screen.dart';
 import 'package:relaks_media/screens/live_radio_screen.dart';
 import 'package:relaks_media/screens/others_services_screen.dart';
 import 'package:relaks_media/utils/glass_box.dart';
+import 'package:relaks_media/utils/payment_way.dart';
+import 'package:relaks_media/utils/relaks_premium.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -398,8 +400,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                                 audioIndex = index;
                                                                                 setState(() {});
                                                                               } else {
-                                                                                paymentForSong(audioId: data.id!);
-                                                                                log(DateTime.now().microsecondsSinceEpoch.toString());
+                                                                                showDialog(
+                                                                                  context: context,
+                                                                                  builder: (BuildContext context) {
+                                                                                    return RelaksPremium(audioId: data.id!);
+                                                                                  },
+                                                                                );
+                                                                                // paymentForSong(audioId: data.id!);
+                                                                                // log(DateTime.now().microsecondsSinceEpoch.toString());
                                                                               }
                                                                             } else {
                                                                               homeController.homestate.value = 9;
@@ -1542,64 +1550,5 @@ class _HomeScreenState extends State<HomeScreen> {
             scale: 1.5),
       );
 
-  paymentForSong({required int audioId}) async {
-    final flutterBkash = FlutterBkash(
-      bkashCredentials: BkashCredentials(
-        username: "01704840427",
-        password: "#ApsP+VS-W6",
-        appKey: "zi7YGziyr0UadbSjjU5YGVoJtc",
-        appSecret: "Ej7f0MuFG0TtQ0cdztpWXMBuI6bvVbFcLDqZcKYJHCLjGUTlppOE",
-        isSandbox: false,
-      ),
-    );
-    try {
-      /// call pay method to pay without agreement as parameter pass the context, amount, merchantInvoiceNumber
-      final result = await flutterBkash.pay(
-        context: context,
-        // need the context as BuildContext
-        amount: double.parse('20'),
-        // need it double type
-        merchantInvoiceNumber: DateTime.now().microsecondsSinceEpoch.toString(),
-      );
 
-      /// if the payment is success then show the log
-      log('123456 : ' + result.toString());
-
-      /// if the payment is success then show the snack-bar
-      Fluttertoast.showToast(
-        msg: 'Success',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.grey,
-        textColor: Colors.white,
-      );
-
-      HomeController homeController = Get.find();
-      homeController.audioSubscribe(audioId: audioId);
-    } on BkashFailure catch (e, st) {
-      /// if something went wrong then show the log
-      log(e.message, error: e, stackTrace: st);
-
-      /// if something went wrong then show the snack-bar
-      Fluttertoast.showToast(
-        msg: e.message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.grey,
-        textColor: Colors.white,
-      );
-    } catch (e, st) {
-      /// if something went wrong then show the log
-      log("Something went wrong", error: e, stackTrace: st);
-
-      /// if something went wrong then show the snack-bar
-      Fluttertoast.showToast(
-        msg: 'Something went wrong',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.grey,
-        textColor: Colors.white,
-      );
-    }
-  }
 }
