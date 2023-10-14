@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:relaks_media/global/shared_preference_helper.dart';
+import '../../../global/constants.dart';
 import '../chat_controller.dart';
 import 'chat_screen.dart';
 
@@ -179,9 +180,10 @@ class _ConversationScreenState extends State<ConversationScreen> {
                           child: IconButton(
                             icon: const Icon(Icons.send_outlined),
                             color: Colors.white,
-                            onPressed: () {
+                            onPressed: () async{
+                              int? userId = await SharedPreferenceHelper().getInt(key: id);
                               chatController.sendmessagetoAPI(
-                                  '1',
+                                  userId.toString(),
                                   chatController.chatuserlist[chatController.selecteduserIndex.value].id.toString(),
                                   chatController.messageController.text);
                              // chatController.sendMessage2(chatController.chatuserlist[chatController.selecteduserIndex.value].id);

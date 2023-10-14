@@ -1,6 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bkash/flutter_bkash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:relaks_media/controller/fund_rise_controller.dart';
 import 'package:relaks_media/controller/radio_controller.dart';
 import 'package:relaks_media/global/my_app_bar.dart';
 import 'package:relaks_media/global/my_bottom_nav_bat.dart';
@@ -8,6 +13,8 @@ import 'package:relaks_media/screens/bottomnevigation.dart';
 import 'package:relaks_media/utils/main_drawer.dart';
 
 import '../controller/home_controller.dart';
+import '../global/constants.dart';
+import '../global/shared_preference_helper.dart';
 import '../utils/glass_box.dart';
 import '../utils/payment_way.dart';
 
@@ -62,7 +69,8 @@ class _FundRaisingScreenState extends State<FundRaisingScreen> {
   Widget build(BuildContext context) {
     HomeController homeController = Get.put(HomeController());
     RadioController radioController = Get.put(RadioController());
-
+    FundRiseController fundRiseController = Get.put(FundRiseController());
+    fundRiseController.getallfundriser();
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: myAppBar(context, radioController),
@@ -547,7 +555,23 @@ class _FundRaisingScreenState extends State<FundRaisingScreen> {
                                           borderRadius:
                                               BorderRadius.circular(20)),
                                       child: ElevatedButton(
-                                          onPressed: () {
+                                          onPressed: () async{
+                                            String? userToken = await SharedPreferenceHelper().getString(key: token);
+                                            if(userToken==null)
+                                            {
+                                              Fluttertoast.showToast(
+                                                msg: 'Please Login or Sign Up then try again',
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.BOTTOM,
+                                                backgroundColor: Colors.grey,
+                                                textColor: Colors.white,
+                                              );
+                                            }
+                                            else
+                                              {
+                                                //fundRiseController.addfundraiser('12');
+                                                paymentForFund(amount: price.toString());
+                                              }
 
                                           },
                                           style: ElevatedButton.styleFrom(
@@ -607,54 +631,64 @@ class _FundRaisingScreenState extends State<FundRaisingScreen> {
                                     SizedBox(
                                       height: 30.h,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CircleAvatar(
-                                                    child: Image.asset(
-                                                        'images/chat1.png')),
-                                                SizedBox(
-                                                  width: 15.w,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Donated \$34',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontFamily: 'Poppins',
-                                                          fontSize: 15.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                    ),
-                                                    Text(
-                                                      'William Rude From',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontFamily: 'Poppins',
-                                                          fontSize: 12.sp),
-                                                    )
-                                                  ],
-                                                ),
-                                              ],
+                                    Obx(()=>SizedBox(
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: fundRiseController.fundriserList[0].results.length,
+                                        itemBuilder: (context, index) {
+                                          return  Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Container(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      CircleAvatar(
+                                                          child: Image.network(
+                                                              '${fundRiseController.fundriserList[0].results[index].user.avatar??
+                                                              'https://cdn-icons-png.flaticon.com/512/147/147142.png'}')),
+                                                      SizedBox(
+                                                        width: 15.w,
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                        children: [
+                                                          Obx(()=>Text(
+                                                            'Donated ${fundRiseController.fundriserList[0].results[index].amount}',
+                                                            style: TextStyle(
+                                                                color: Colors.white,
+                                                                fontFamily: 'Poppins',
+                                                                fontSize: 15.sp,
+                                                                fontWeight:
+                                                                FontWeight.w600),
+                                                          )),
+                                                          Text(
+                                                            '${fundRiseController.fundriserList[0].results[index].category}',
+                                                            style: TextStyle(
+                                                                color: Colors.white,
+                                                                fontFamily: 'Poppins',
+                                                                fontSize: 12.sp),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Image.asset(
+                                                    'images/flag.png',
+                                                    height: 30.h,
+                                                    width: 30.w,
+                                                  )
+                                                ],
+                                              ),
                                             ),
-                                            Image.asset(
-                                              'images/flag.png',
-                                              height: 30.h,
-                                              width: 30.w,
-                                            )
-                                          ],
-                                        ),
+                                          );
+                                        },
                                       ),
-                                    ),
+                                    )),
+
                                   ],
                                 ),
                               ),
@@ -670,5 +704,65 @@ class _FundRaisingScreenState extends State<FundRaisingScreen> {
       ),
       bottomNavigationBar: myBottomNavBar(radioController),
     );
+  }
+  paymentForFund({required String amount}) async {
+    final flutterBkash = FlutterBkash(
+      bkashCredentials: BkashCredentials(
+        username: "01704840427",
+        password: "#ApsP+VS-W6",
+        appKey: "zi7YGziyr0UadbSjjU5YGVoJtc",
+        appSecret: "Ej7f0MuFG0TtQ0cdztpWXMBuI6bvVbFcLDqZcKYJHCLjGUTlppOE",
+        isSandbox: false,
+      ),
+    );
+    try {
+      /// call pay method to pay without agreement as parameter pass the context, amount, merchantInvoiceNumber
+      final result = await flutterBkash.pay(
+        context: context,
+        // need the context as BuildContext
+        amount: double.parse(amount),
+        // need it double type
+        merchantInvoiceNumber: DateTime.now().microsecondsSinceEpoch.toString(),
+      );
+
+      /// if the payment is success then show the log
+      log('123456 : ' + result.toString());
+
+      /// if the payment is success then show the snack-bar
+      Fluttertoast.showToast(
+        msg: 'Success',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.grey,
+        textColor: Colors.white,
+      );
+
+      FundRiseController fundRiseController = Get.find();
+      fundRiseController.addfundraiser(amount);
+    } on BkashFailure catch (e, st) {
+      /// if something went wrong then show the log
+      log(e.message, error: e, stackTrace: st);
+
+      /// if something went wrong then show the snack-bar
+      Fluttertoast.showToast(
+        msg: e.message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.grey,
+        textColor: Colors.white,
+      );
+    } catch (e, st) {
+      /// if something went wrong then show the log
+      log("Something went wrong", error: e, stackTrace: st);
+
+      /// if something went wrong then show the snack-bar
+      Fluttertoast.showToast(
+        msg: 'Something went wrong',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.grey,
+        textColor: Colors.white,
+      );
+    }
   }
 }

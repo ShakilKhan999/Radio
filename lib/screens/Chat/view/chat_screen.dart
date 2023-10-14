@@ -67,15 +67,15 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                         child: CircleAvatar(
                           backgroundColor: Colors.transparent,
-                          child: Text(
-                            '${chatAccounts.length}',
+                          child:Obx(()=> Text(
+                            '${chatController.chatuserlist.length}',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Poppins',
                               fontSize: 18.0.sp,
                               color: Colors.white,
                             ),
-                          ),
+                          )),
                         ),
                       ),
                     ],
@@ -112,7 +112,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           child: CircleAvatar(
                             backgroundColor: Colors.transparent,
                             child: Text(
-                              '2',
+                              '0',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'Poppins',

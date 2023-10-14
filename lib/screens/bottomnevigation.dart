@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:relaks_media/controller/fund_rise_controller.dart';
 import 'package:relaks_media/controller/home_controller.dart';
 import 'package:relaks_media/controller/radio_controller.dart';
 import 'package:relaks_media/screens/Chat/view/chat_screen.dart';
@@ -44,6 +45,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     HomeController homeController = Get.put(HomeController());
     RadioController radioController = Get.put(RadioController());
+    FundRiseController fundRiseController = Get.put(FundRiseController());
+    fundRiseController.getallfundriser();
     radioController.getstations();
     homeController.getUserData();
     return Obx(
