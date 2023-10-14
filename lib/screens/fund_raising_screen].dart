@@ -150,9 +150,7 @@ class _FundRaisingScreenState extends State<FundRaisingScreen> {
                                           child: Padding(
                                               padding: EdgeInsets.all(5.0),
                                               child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+
                                                 children: [
                                                   Container(
                                                     width: 190.0.w,
@@ -213,7 +211,7 @@ class _FundRaisingScreenState extends State<FundRaisingScreen> {
                                                   ),
                                                   Container(
                                                     width: 120.0,
-                                                    // Adjust the width as needed
+
                                                     padding:
                                                         EdgeInsets.symmetric(
                                                             horizontal: 5.0),
@@ -330,12 +328,12 @@ class _FundRaisingScreenState extends State<FundRaisingScreen> {
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .height -
-                                                            700,
+                                                            700.h,
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width -
-                                                            100,
+                                                            100.w,
                                                     child: Column(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -421,7 +419,7 @@ class _FundRaisingScreenState extends State<FundRaisingScreen> {
                                                           ],
                                                         ),
                                                         SizedBox(
-                                                          height: 20,
+                                                          height: 10.h,
                                                         ),
                                                         Container(
                                                           width: 150,
