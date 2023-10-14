@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -15,11 +17,21 @@ class ConversationScreen extends StatefulWidget {
 
 class _ConversationScreenState extends State<ConversationScreen> {
   final List<Message> _messages = [];
+  Timer? timer;
+  void startTimer() {
+    const duration = const Duration(seconds: 3);
+    timer = Timer.periodic(duration, (Timer timer) {
+      ChatController chatController = Get.put(ChatController());
+      chatController.getChats(chatController.chatuserlist[chatController.selecteduserIndex.value].id);
+      print("calledafterperiod");
+    });
+  }
+
 
   @override
   void initState() {
     super.initState();
-
+    startTimer();
     _messages.addAll([
       Message(content: 'Hi', isMe: false, time: '10:00 AM'),
       Message(content: 'Hello', isMe: true, time: '10:01 AM'),
@@ -27,6 +39,13 @@ class _ConversationScreenState extends State<ConversationScreen> {
       Message(content: 'I\'m good. How about you?', isMe: true, time: '10:03 AM'),
     ]);
   }
+
+  @override
+  void dispose() {
+    timer?.cancel(); // Cancel the timer when the page is disposed.
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
