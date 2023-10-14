@@ -10,6 +10,7 @@ import 'package:relaks_media/global/shared_preference_helper.dart';
 import 'package:relaks_media/screens/bottomnevigation.dart';
 import 'package:relaks_media/screens/downlode_screen.dart';
 import 'package:relaks_media/screens/fund_raising.dart';
+import 'package:relaks_media/screens/fund_raising_screen%5D.dart';
 import 'package:relaks_media/screens/job/view/career_screen.dart';
 import 'package:relaks_media/screens/launcherpage.dart';
 import 'package:relaks_media/screens/login/view/login_screen.dart';
@@ -147,7 +148,7 @@ class _MainDrawerState extends State<MainDrawer> {
                   onTap: () {
                     // homeController.homestate.value = 4;
                     // Navigator.pop(context);
-                    Get.offAll(FundRaising(),
+                    Get.offAll(FundRaisingScreen(),
                         transition: Transition.noTransition);
                   },
                   leading: ImageIcon(

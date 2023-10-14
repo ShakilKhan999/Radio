@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:relaks_media/utils/earn_coin.dart';
 
 import '../controller/radio_controller.dart';
 import '../screens/station_screen.dart';
@@ -44,7 +45,14 @@ AppBar myAppBar(BuildContext context, RadioController radioController) {
               ),
             ),
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return EarCoins();
+                    },
+                  );
+                },
                 icon: Image.asset(
                   'images/Referral Icon.png',
                 )),
