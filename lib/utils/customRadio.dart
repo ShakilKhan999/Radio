@@ -31,12 +31,8 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
           ),
         ),
         child: widget.isSelected
-            ?
-            null:Icon(
-          Icons.check,
-          size: 16.0,
-          color: Colors.white,
-        ),
+            ? Icon(Icons.check, size: 16.0, color: Colors.white)
+            : null,
       ),
     );
   }
