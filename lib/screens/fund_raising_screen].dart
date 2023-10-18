@@ -150,13 +150,12 @@ class _FundRaisingScreenState extends State<FundRaisingScreen> {
                                           child: Padding(
                                               padding: EdgeInsets.all(5.0),
                                               child: Row(
-
                                                 children: [
                                                   Container(
-                                                    width: 190.0.w,
+                                                    width: 180.0.w,
                                                     padding:
                                                         EdgeInsets.symmetric(
-                                                            horizontal: 10.0),
+                                                            horizontal: 10.0.sp),
                                                     decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -207,14 +206,13 @@ class _FundRaisingScreenState extends State<FundRaisingScreen> {
                                                     ),
                                                   ),
                                                   SizedBox(
-                                                    width: 10.0,
+                                                    width: 10.w
                                                   ),
                                                   Container(
-                                                    width: 120.0,
-
+                                                    width: 120.0.w,
                                                     padding:
                                                         EdgeInsets.symmetric(
-                                                            horizontal: 5.0),
+                                                            horizontal: 10.0),
                                                     decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(

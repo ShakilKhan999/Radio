@@ -10,6 +10,9 @@ class RadioController extends GetxController{
   var selectedstationIndex=0.obs;
   var stations=[].obs;
 
+  var initialchnnaleimg='images/Relaks Radio.png'.obs;
+  var initialchnnalename='Relaks Radio'.obs;
+
   final AudioPlayer _audioPlayer = AudioPlayer();
 
   @override

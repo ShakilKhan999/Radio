@@ -7,6 +7,7 @@ import 'package:relaks_media/global/my_app_bar.dart';
 import 'package:relaks_media/global/my_bottom_nav_bat.dart';
 import 'package:relaks_media/screens/bottomnevigation.dart';
 import 'package:relaks_media/utils/main_drawer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../controller/home_controller.dart';
 // import '../utils/glass_box.dart';
@@ -164,318 +165,321 @@ class LiveRadioScreen extends StatelessWidget {
                       child: GlassBox(
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
-                          child: SizedBox(
-                            height: MediaQuery.of(context).size.height - 520.h,
-                            width: MediaQuery.of(context).size.width - 80.w,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Row(
-                                    children: [
-                                      Image.asset(
-                                        'images/radio_screen_chat_image.png',
-                                        height: 45.h,
-                                        width: 45.w,
-                                      ),
-                                      SizedBox(
-                                        width: 5.w,
-                                      ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                height: 30.h,
-                                                width: 90.w,
-                                                decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      Colors.grey,
-                                                      Colors.black
-                                                    ],
-                                                    begin: Alignment.centerLeft,
-                                                    end: Alignment.centerRight,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(15),
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    'John Pierce',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Poppins',
-                                                      fontSize: 15.sp,
-                                                      color: Colors.white,
+                          child: SingleChildScrollView(
+                            child: SizedBox(
+                              height: MediaQuery.of(context).size.height - 520.h,
+                              width: MediaQuery.of(context).size.width - 80.w,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            'images/radio_screen_chat_image.png',
+                                            height: 45.h,
+                                            width: 45.w,
+                                          ),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          Expanded(
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    height: 30.h,
+                                                    width: 90.w,
+                                                    decoration: BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                        colors: [
+                                                          Colors.grey,
+                                                          Colors.black
+                                                        ],
+                                                        begin: Alignment.centerLeft,
+                                                        end: Alignment.centerRight,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(15),
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        'John Pierce',
+                                                        style: TextStyle(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 15.sp,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.all(5.0),
-                                                child: FittedBox(
-                                                  child: Text(
-                                                    'Thanks for being so awesome. High',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 15.sp,
-                                                       ),
-                                                    maxLines: 2,
-                                                    overflow: TextOverflow.ellipsis,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Row(
-                                    children: [
-                                      Image.asset(
-                                        'images/radio_screen_chat_image.png',
-                                        height: 45.h,
-                                        width: 45.w,
-                                      ),
-                                      SizedBox(
-                                        width: 5.w,
-                                      ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                height: 30.h,
-                                                width: 90.w,
-                                                decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      Colors.grey,
-                                                      Colors.black
-                                                    ],
-                                                    begin: Alignment.centerLeft,
-                                                    end: Alignment.centerRight,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(15),
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    'John Pierce',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Poppins',
-                                                      fontSize: 15.sp,
-                                                      color: Colors.white,
+                                                  Padding(
+                                                    padding: const EdgeInsets.all(5.0),
+                                                    child: FittedBox(
+                                                      child: Text(
+                                                        'Thanks for being so awesome. High',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 15.sp,
+                                                           ),
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow.ellipsis,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
+                                                ],
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.all(5.0),
-                                                child: FittedBox(
-                                                  child: Text(
-                                                    'Thanks for being so awesome. High',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 15.sp,
-                                                        fontWeight: FontWeight.bold),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Row(
-                                    children: [
-                                      Image.asset(
-                                        'images/radio_screen_chat_image.png',
-                                        height: 45.h,
-                                        width: 45.w,
-                                      ),
-                                      SizedBox(
-                                        width: 5.w,
-                                      ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                height: 30.h,
-                                                width: 90.w,
-                                                decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      Colors.grey,
-                                                      Colors.black
-                                                    ],
-                                                    begin: Alignment.centerLeft,
-                                                    end: Alignment.centerRight,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(15),
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    'John Pierce',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Poppins',
-                                                      fontSize: 15.sp,
-                                                      color: Colors.white,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            'images/radio_screen_chat_image.png',
+                                            height: 45.h,
+                                            width: 45.w,
+                                          ),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          Expanded(
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    height: 30.h,
+                                                    width: 90.w,
+                                                    decoration: BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                        colors: [
+                                                          Colors.grey,
+                                                          Colors.black
+                                                        ],
+                                                        begin: Alignment.centerLeft,
+                                                        end: Alignment.centerRight,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(15),
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        'John Pierce',
+                                                        style: TextStyle(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 15.sp,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.all(5.0),
-                                                child: FittedBox(
-                                                  child: Text(
-                                                    'Thanks for being so awesome. High',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 15.sp,
-                                                        fontWeight: FontWeight.bold),
+                                                  Padding(
+                                                    padding: const EdgeInsets.all(5.0),
+                                                    child: FittedBox(
+                                                      child: Text(
+                                                        'Thanks for being so awesome. High',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 15.sp,
+                                                            fontWeight: FontWeight.bold),
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
+                                                ],
                                               ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(height: 10.h,),
-                                Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 16),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                            hintText: 'Type your comment...',
-                                            hintStyle: TextStyle(
-                                              color: Colors.white,
-                                            ),
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(25),
-                                              borderSide: BorderSide.none,
-                                            ),
-                                            filled: true,
-                                            fillColor: Colors.grey[800],
-                                            contentPadding: EdgeInsets.symmetric(
-                                              vertical: 12,
-                                              horizontal: 20,
-                                            ),
-                                            suffixIcon: Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Container(
-                                                height: 8,
-                                                width: 8,
-                                                decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      Colors.grey,
-                                                      Colors.black
-                                                    ],
-                                                    begin: Alignment.centerLeft,
-                                                    end: Alignment.centerRight,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            'images/radio_screen_chat_image.png',
+                                            height: 45.h,
+                                            width: 45.w,
+                                          ),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          Expanded(
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    height: 30.h,
+                                                    width: 90.w,
+                                                    decoration: BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                        colors: [
+                                                          Colors.grey,
+                                                          Colors.black
+                                                        ],
+                                                        begin: Alignment.centerLeft,
+                                                        end: Alignment.centerRight,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(15),
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        'John Pierce',
+                                                        style: TextStyle(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 15.sp,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
-                                                  border: Border.all(
-                                                      color: Colors.transparent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                child: Icon(
-                                                  Icons.send,
+                                                  Padding(
+                                                    padding: const EdgeInsets.all(5.0),
+                                                    child: FittedBox(
+                                                      child: Text(
+                                                        'Thanks for being so awesome. High',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 15.sp,
+                                                            fontWeight: FontWeight.bold),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(height: 10.h,),
+                                    Container(
+                                      padding: EdgeInsets.symmetric(horizontal: 16),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: TextField(
+                                              decoration: InputDecoration(
+                                                hintText: 'Type your comment...',
+                                                hintStyle: TextStyle(
                                                   color: Colors.white,
                                                 ),
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                  borderSide: BorderSide.none,
+                                                ),
+                                                filled: true,
+                                                fillColor: Colors.grey[800],
+                                                contentPadding: EdgeInsets.symmetric(
+                                                  vertical: 12,
+                                                  horizontal: 20,
+                                                ),
+                                                suffixIcon: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Container(
+                                                    height: 8,
+                                                    width: 8,
+                                                    decoration: BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                        colors: [
+                                                          Colors.grey,
+                                                          Colors.black
+                                                        ],
+                                                        begin: Alignment.centerLeft,
+                                                        end: Alignment.centerRight,
+                                                      ),
+                                                      border: Border.all(
+                                                          color: Colors.transparent),
+                                                      borderRadius:
+                                                          BorderRadius.circular(10),
+                                                    ),
+                                                    child: Icon(
+                                                      Icons.send,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                      SizedBox(width: 5.w),
-    
-                                      Container(
-                                        padding: EdgeInsets.all(4),
-                                        height: 35,
-                                          width: 35,
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              Colors.grey,
-                                              Colors.black.withOpacity(0.7)
-                                            ],
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
+                                          SizedBox(width: 5.w),
+
+                                          Container(
+                                            padding: EdgeInsets.all(4),
+                                            height: 35,
+                                              width: 35,
+                                            decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Colors.grey,
+                                                  Colors.black.withOpacity(0.7)
+                                                ],
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                              ),
+                                              border: Border.all(
+                                                  color: Colors.transparent),
+                                              borderRadius:
+                                              BorderRadius.circular(15),
+                                            ),
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                launch("tel://123456789");
+                                              },
+                                              child: const ImageIcon(
+                                                  AssetImage('images/call.png'),
+                                                  size: 5,color: Colors.white),
+                                            ),
                                           ),
-                                          border: Border.all(
-                                              color: Colors.transparent),
-                                          borderRadius:
-                                          BorderRadius.circular(15),
-                                        ),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            // Add your action here
-                                          },
-                                          child: const ImageIcon(
-                                              AssetImage('images/call.png'),
-                                              size: 5,color: Colors.white),
-                                        ),
-                                      ),
-                                      SizedBox(width: 5.w),
-    
-                                      Container(
-                                        padding: EdgeInsets.all(4),
-                                        height: 35,
-                                        width: 35,
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              Colors.grey,
-                                              Colors.black
-                                            ],
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
+                                          SizedBox(width: 5.w),
+                                          Container(
+                                            padding: EdgeInsets.all(4),
+                                            height: 35,
+                                            width: 35,
+                                            decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Colors.grey,
+                                                  Colors.black
+                                                ],
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                              ),
+                                              border: Border.all(
+                                                  color: Colors.transparent),
+                                              borderRadius:
+                                              BorderRadius.circular(15),
+                                            ),
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                launch("https://wa.me/123456789");
+                                              },
+                                              child: ImageIcon(
+                                                  AssetImage('images/whatsapp.png'),
+                                                  size: 5.sp,color: Colors.white,),
+                                            ),
                                           ),
-                                          border: Border.all(
-                                              color: Colors.transparent),
-                                          borderRadius:
-                                          BorderRadius.circular(15),
-                                        ),
-                                        child: GestureDetector(
-                                          onTap: () {
-    
-                                          },
-                                          child: ImageIcon(
-                                              AssetImage('images/whatsapp.png'),
-                                              size: 5.sp,color: Colors.white,),
-                                        ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         ),

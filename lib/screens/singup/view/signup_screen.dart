@@ -108,7 +108,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                 SizedBox(
                                                   height: 50.h,
                                                   child: TextFormField(
-                                                    controller: emailController,
+                                                    controller: emailController,style: TextStyle(color: Colors.white),
                                                     decoration:
                                                         const InputDecoration(
                                                       hintText:
@@ -155,7 +155,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                 SizedBox(
                                                   height: 50.h,
                                                   child: TextFormField(
-                                                    controller: phoneController,
+                                                    controller: phoneController,style: TextStyle(color: Colors.white),
                                                     decoration:
                                                         const InputDecoration(
                                                       hintText: '+88154654654',
@@ -202,7 +202,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                   height: 50.h,
                                                   child: TextFormField(
                                                     controller:
-                                                        passwordController,
+                                                        passwordController,style: TextStyle(color: Colors.white),
                                                     obscureText: !visiblepass,
                                                     decoration: InputDecoration(
                                                       hintText: '*************',
@@ -283,7 +283,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                   height: 50.h,
                                                   child: TextFormField(
                                                     controller:
-                                                        conPasswordController,
+                                                        conPasswordController,style: TextStyle(color: Colors.white),
                                                     obscureText: !visiblepass,
                                                     decoration: InputDecoration(
                                                       hintText: '*************',
@@ -366,7 +366,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                   height: 50.h,
                                                   child: TextFormField(
                                                     controller:
-                                                        referralController,
+                                                        referralController,style: TextStyle(color: Colors.white),
                                                     decoration:
                                                         const InputDecoration(
                                                       hintText: '536gdgdtj',

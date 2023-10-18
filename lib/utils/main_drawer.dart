@@ -7,6 +7,7 @@ import 'package:relaks_media/Repo/authServiece.dart';
 import 'package:relaks_media/controller/radio_controller.dart';
 import 'package:relaks_media/global/constants.dart';
 import 'package:relaks_media/global/shared_preference_helper.dart';
+import 'package:relaks_media/screens/about_screen.dart';
 import 'package:relaks_media/screens/bottomnevigation.dart';
 import 'package:relaks_media/screens/downlode_screen.dart';
 import 'package:relaks_media/screens/fund_raising.dart';
@@ -19,6 +20,7 @@ import 'package:relaks_media/screens/others_services_screen.dart';
 
 import '../controller/authController.dart';
 import '../controller/home_controller.dart';
+import '../screens/my_store_screen.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -32,6 +34,7 @@ class _MainDrawerState extends State<MainDrawer> {
   GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
+    RadioController radioController = Get.put(RadioController());
     AuthController authController = Get.put(AuthController());
     HomeController homeController = Get.put(HomeController());
     return Padding(
@@ -51,30 +54,30 @@ class _MainDrawerState extends State<MainDrawer> {
                       AssetImage('images/close.png'),
                       color: Colors.white,
                     )),
-                ListTile(
-                  minLeadingWidth: 0,
-                  onTap: () {
-                    // homeController.homestate.value = 0;
-                    // Navigator.pop(context);
-                    RadioController radioController = Get.find();
-                    radioController.bottomNavigationSelectedIndex.value = 0;
-                    Get.offAll(BottomNavigation(),
-                        transition: Transition.noTransition);
-                  },
-                  leading: Image.asset(
-                    'images/menu_top_image.png',
-                    height: 50.h,
-                    width: 30.w,
-                  ),
-                  title: Text(
-                    'Relaks Radio',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16.sp),
-                  ),
-                ),
+               Obx(() =>  ListTile(
+                 minLeadingWidth: 0,
+                 onTap: () {
+                   // homeController.homestate.value = 0;
+                   // Navigator.pop(context);
+                   RadioController radioController = Get.find();
+                   radioController.bottomNavigationSelectedIndex.value = 0;
+                   Get.offAll(BottomNavigation(),
+                       transition: Transition.noTransition);
+                 },
+                 leading: radioController.stations==null|| radioController.stations.isEmpty?
+                 Image.asset(radioController.initialchnnaleimg.value,height: 20,):
+                 Image.network(radioController.stations[radioController.selectedstationIndex.value].channelImage,height: 30,),
+                 title: Text(
+                   radioController.stations==null|| radioController.stations.isEmpty?
+                   radioController.initialchnnalename.value:
+                   radioController.stations[radioController.selectedstationIndex.value].name,
+                   style: TextStyle(
+                       color: Colors.white,
+                       fontFamily: 'Poppins',
+                       fontWeight: FontWeight.w600,
+                       fontSize: 16.sp),
+                 ),
+               ),),
                 ListTile(
                   minLeadingWidth: 0,
                   onTap: () {
@@ -123,12 +126,20 @@ class _MainDrawerState extends State<MainDrawer> {
                 ),
                 ListTile(
                   minLeadingWidth: 0,
-                  onTap: () {
+                  onTap: () async{
+                    bool? isLogedin =
+                        await SharedPreferenceHelper().getBool(key: isLogin);
+                    if (isLogedin!) {
+                      Get.offAll(MyStoreScreen(),
+                          transition: Transition.noTransition);
+                    } else {
+                      Get.to(LauncherPage());
+                    }
                     // Navigator.pop(context);
-                    RadioController radioController = Get.find();
-                    radioController.bottomNavigationSelectedIndex.value = 3;
-                    Get.offAll(BottomNavigation(),
-                        transition: Transition.noTransition);
+                    // RadioController radioController = Get.find();
+                    // radioController.bottomNavigationSelectedIndex.value = 3;
+                    // Get.offAll(BottomNavigation(),
+                    //     transition: Transition.noTransition);
                   },
                   leading: ImageIcon(
                     AssetImage('images/store_icon.png'),
@@ -236,13 +247,17 @@ class _MainDrawerState extends State<MainDrawer> {
                   onTap: () {
                     // homeController.homestate.value = 0;
                     // Navigator.pop(context);
-                    RadioController radioController = Get.find();
-                    radioController.bottomNavigationSelectedIndex.value = 0;
-                    Navigator.pop(context);
+                    // RadioController radioController = Get.find();
+                    // radioController.bottomNavigationSelectedIndex.value = 0;
+                    // Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AboutScreen()),
+                    );
                   },
                   leading: Icon(Icons.info_rounded, color: Colors.white),
                   title: Text(
-                    'Relaks Radio',
+                    'About Relaks Radio',
                     style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Poppins',

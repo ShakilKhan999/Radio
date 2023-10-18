@@ -178,7 +178,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                             horizontal: 12.0.h,
                           ),
                           child: TextField(
-                            controller: chatController.messageController,
+                            controller: chatController.messageController,style: TextStyle(color: Colors.white),
                             decoration: InputDecoration(
                               hintText: 'Type your message here...',
                               hintStyle: const TextStyle(

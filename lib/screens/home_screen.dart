@@ -15,6 +15,7 @@ import 'package:relaks_media/screens/job/view/career_screen.dart';
 import 'package:relaks_media/screens/downlode_screen.dart';
 import 'package:relaks_media/screens/live_radio_screen.dart';
 import 'package:relaks_media/screens/others_services_screen.dart';
+import 'package:relaks_media/screens/relacks_station_info.dart';
 import 'package:relaks_media/utils/glass_box.dart';
 import 'package:relaks_media/utils/payment_way.dart';
 import 'package:relaks_media/utils/relaks_premium.dart';
@@ -293,20 +294,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           .styleFrom(
                                                               backgroundColor:
                                                                   Colors.white),
-                                                      child: Row(
-                                                        children: [
-                                                          Image.asset(
-                                                            'images/info.png',
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                          SizedBox(width: 3.w),
-                                                          const Text(
-                                                            'More Info',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black),
-                                                          ),
-                                                        ],
+                                                      child: GestureDetector(
+                                                        onTap: (){
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>RelaksStationInfoScreen()));
+                                                        },
+                                                        child: Row(
+                                                          children: [
+                                                            Image.asset(
+                                                              'images/info.png',
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                            SizedBox(width: 3.w),
+                                                            const Text(
+                                                              'More Info',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   ],

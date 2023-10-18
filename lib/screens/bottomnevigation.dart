@@ -107,9 +107,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
                             Navigator.pushNamed(
                                 context, StationScreen.routeName);
                           },
-                          icon:
-                              Image.asset(radioController.getSelectedChImg())),
-                    )
+                          icon: radioController.stations.isEmpty?
+                              Image.asset(radioController.initialchnnaleimg.value):
+                        Image.network(radioController.stations[radioController.selectedstationIndex.value].channelImage),
+                    ))
                   ],
                 ),
               ),

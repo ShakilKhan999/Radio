@@ -38,15 +38,15 @@ class EarCoins extends StatelessWidget {
                             child: Image.asset('images/earncoins.png',
                                 height: 150.h, width: 200.w),
                           ),
-                          SizedBox(height: 10.h),
+                          SizedBox(height: 5.h),
                           Container(
-                            height: 50.h,
+                            height: 55.h,
                             width: 200.w,
                             child: Text(
                               'Earn Coins by \nreferring your friends',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 20.sp,
+                                  fontSize: 18.sp,
                                   fontWeight: FontWeight.w600,
                                   fontFamily: 'Poppins'),
                               textAlign: TextAlign.center,

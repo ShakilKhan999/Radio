@@ -92,7 +92,7 @@ class StationScreen extends StatelessWidget {
                                       child: GridView.builder(
                                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
-                                          mainAxisExtent: 70,
+                                          mainAxisExtent: 65,
                                           mainAxisSpacing: 0.sp,
                                           crossAxisSpacing: 0.sp,
                                         ),
@@ -107,7 +107,7 @@ class StationScreen extends StatelessWidget {
                                                               .size
                                                               .width -
                                                           250.w,
-                                                      height: 50.h,
+                                                      height: 60.h,
                                                       decoration: BoxDecoration(
                                                           gradient: LinearGradient(
                                                             colors: [

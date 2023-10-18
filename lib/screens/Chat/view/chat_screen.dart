@@ -128,49 +128,52 @@ class _ChatScreenState extends State<ChatScreen> {
                 ],
               ),
             ),
-            Obx(()=>SizedBox(
-              height: MediaQuery.of(context).size.height-250.w,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: chatController.chatuserlist.length,
-                itemBuilder: (context, index) {
-                  final chatAccount = chatController.chatuserlist[index];
-                  return GestureDetector(
-                    onTap: () {
-                      chatController.selecteduserIndex.value=index;
-                      chatController.getChats(chatAccount.id).then((value) =>
-                          Navigator.pushNamed(
-                            context,
-                            ConversationScreen.routeName,
-                            arguments: chatAccount,
-                          )
-                      );
-                      // Navigate to the conversation screen
-                    },
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            chatAccount.avatar==null?"https://cdn-icons-png.flaticon.com/512/3135/3135715.png":
-                        chatAccount.avatar),
-                      ),
-                      title: Text(
-                        chatAccount.name==null?'':chatAccount.name,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(
-                        'Tap to start conversation',
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontFamily: 'Poppins',
+            Obx(()=>SingleChildScrollView(
+              child: Container(
+                // color: Colors.red,
+                height: MediaQuery.of(context).size.height-250.w,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: chatController.chatuserlist.length,
+                  itemBuilder: (context, index) {
+                    final chatAccount = chatController.chatuserlist[index];
+                    return GestureDetector(
+                      onTap: () {
+                        chatController.selecteduserIndex.value=index;
+                        chatController.getChats(chatAccount.id).then((value) =>
+                            Navigator.pushNamed(
+                              context,
+                              ConversationScreen.routeName,
+                              arguments: chatAccount,
+                            )
+                        );
+                        // Navigate to the conversation screen
+                      },
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                              chatAccount.avatar==null?"https://cdn-icons-png.flaticon.com/512/3135/3135715.png":
+                          chatAccount.avatar),
                         ),
-                      ),
+                        title: Text(
+                          chatAccount.name==null?'':chatAccount.name,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text(
+                          'Tap to start conversation',
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            fontFamily: 'Poppins',
+                          ),
+                        ),
 
-                    ),
-                  );
-                },
+                      ),
+                    );
+                  },
+                ),
               ),
             )),
           ],

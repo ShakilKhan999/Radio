@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               controller:
                                                   emailController,
                                               style: TextStyle(
-                                                  color: Colors.grey,
+                                                  color: Colors.white,
                                                   fontFamily: 'Poppins',
                                                   fontSize: 15.sp),
                                               decoration: const InputDecoration(
@@ -148,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 controller:
                                                     passwordController,
                                                 style: TextStyle(
-                                                    color: Colors.grey,
+                                                    color: Colors.white,
                                                     fontFamily: 'Poppins',
                                                     fontSize: 15.sp),
                                                 obscureText: !visiblepass,
