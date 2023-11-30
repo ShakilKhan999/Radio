@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:relaks_media/screens/live_radio_screen.dart';
 import 'package:relaks_media/screens/maintaince_screen.dart';
+import 'package:relaks_media/screens/tv_screen.dart';
 
 import '../controller/home_controller.dart';
 import '../controller/radio_controller.dart';
@@ -21,10 +22,11 @@ class StationScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          decoration:  BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(homeController.bgImage.value==''?'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Black_colour.jpg/640px-Black_colour.jpg'
-                  :homeController.bgImage.value),
+              image: NetworkImage(homeController.bgImage.value == ''
+                  ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Black_colour.jpg/640px-Black_colour.jpg'
+                  : homeController.bgImage.value),
               fit: BoxFit.cover,
             ),
           ),
@@ -45,11 +47,11 @@ class StationScreen extends StatelessWidget {
                                 height:
                                     MediaQuery.of(context).size.height - 380.h,
                                 width: MediaQuery.of(context).size.width - 70.w,
-                                child:Column(
+                                child: Column(
                                   children: [
                                     Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                            MainAxisAlignment.spaceAround,
                                         children: [
                                           Text(
                                             'Switch Your Station',
@@ -58,138 +60,241 @@ class StationScreen extends StatelessWidget {
                                                 fontFamily: 'Poppins',
                                                 fontSize: 25.sp),
                                           ),
-                                                  SizedBox(
-                                                    width: 15.w,
-                                                  ),
-                                                  Container(
-                                                    height: 30.h,
-                                                    width: 30.w,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.grey.shade700,
-                                                        border: Border.all(
-                                                            color: Colors.transparent),
-                                                        borderRadius:
-                                                            BorderRadius.circular(5)),
-                                                    child: IconButton(
-                                                      icon: ImageIcon(
-                                                        AssetImage('images/close.png'),
-                                                        color: Colors.white,
-                                                        size: 20.sp,
-                                                      ),
-                                                      onPressed: () {
-                                                        Navigator.pop(context);
-                                                      },
-                                                    ),
-                                                  )
-                                        ]),
-                                    SizedBox(
+                                          SizedBox(
                                             width: 15.w,
                                           ),
+                                          Container(
+                                            height: 30.h,
+                                            width: 30.w,
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey.shade700,
+                                                border: Border.all(
+                                                    color: Colors.transparent),
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            child: IconButton(
+                                              icon: ImageIcon(
+                                                AssetImage('images/close.png'),
+                                                color: Colors.white,
+                                                size: 20.sp,
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                            ),
+                                          )
+                                        ]),
+                                    SizedBox(
+                                      width: 15.w,
+                                    ),
                                     SizedBox(
                                       height:
-                                      MediaQuery.of(context).size.height - 480.h,
-                                      width: MediaQuery.of(context).size.width - 70.w,
+                                          MediaQuery.of(context).size.height -
+                                              480.h,
+                                      width: MediaQuery.of(context).size.width -
+                                          70.w,
                                       child: GridView.builder(
-                                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
                                           mainAxisExtent: 65,
                                           mainAxisSpacing: 0.sp,
                                           crossAxisSpacing: 0.sp,
                                         ),
-                                        itemCount: radioController.stations.length,
+                                        itemCount:
+                                            radioController.stations.length +
+                                                1, // Add 1 for the static item
                                         itemBuilder: (context, index) {
-                                          return   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(
-                                                  children: [
-                                                    Container(
-                                                      width: MediaQuery.of(context)
-                                                              .size
-                                                              .width -
-                                                          250.w,
-                                                      height: 60.h,
-                                                      decoration: BoxDecoration(
-                                                          gradient: LinearGradient(
-                                                            colors: [
-                                                              Colors.grey.shade500,
-                                                              Colors.grey.shade700,
-                                                            ],
-                                                            stops: [0.3, 1.0],
-                                                            begin: Alignment.topLeft,
-                                                            end: Alignment.bottomRight,
+                                          if (index <
+                                              radioController.stations.length) {
+                                            // Render regular items
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width -
+                                                            250.w,
+                                                    height: 60.h,
+                                                    decoration: BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                        colors: [
+                                                          Colors.grey.shade500,
+                                                          Colors.grey.shade700
+                                                        ],
+                                                        stops: [0.3, 1.0],
+                                                        begin:
+                                                            Alignment.topLeft,
+                                                        end: Alignment
+                                                            .bottomRight,
+                                                      ),
+                                                      border: Border.all(
+                                                          color: Colors
+                                                              .transparent),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              25),
+                                                    ),
+                                                    child: TextButton(
+                                                      onPressed: () {
+                                                        radioController
+                                                            .selectedstationIndex
+                                                            .value = index;
+                                                        radioController
+                                                                .selectedRadioLink
+                                                                .value =
+                                                            radioController
+                                                                .stations[index]
+                                                                .channelLiveUrl;
+                                                        Get.off(
+                                                            LiveRadioScreen(),
+                                                            transition: Transition
+                                                                .noTransition);
+                                                      },
+                                                      child: Row(
+                                                        children: [
+                                                          Image.network(
+                                                            radioController
+                                                                .stations[index]
+                                                                .channelImage,
+                                                            height: 30.h,
+                                                            width: 35.w,
                                                           ),
-                                                          border: Border.all(
-                                                              color: Colors.transparent),
-                                                          borderRadius:
-                                                              BorderRadius.circular(25)),
-                                                      child: TextButton(
-                                                          onPressed: () {
-                                                            radioController.selectedstationIndex.value=index;
-                                                            radioController.selectedRadioLink.value=radioController.stations[index].channelLiveUrl;
-                                                            // radioController.selectedChannel.value=0;
-                                                            // radioController.selectedRadioLink.value='https://s3.voscast.com:9893/live';
-                                                             Get.off(LiveRadioScreen(),
-                                                             transition:
-                                                                 Transition.noTransition);
-                                                          },
-                                                           child: Row(
-                                                            children: [
-                                                               Image.network(
-                                                                 radioController.stations[index].channelImage,
-                                                                 height: 30.h,
-                                                               width: 35.w,
-                                                               ),
-                                                              Expanded(
-                                                                child: Text(
-                                                                  radioController.stations[index].name,
-                                                                style: TextStyle(
-                                                                      color: Colors.white),
-                                                                ),
-                                                              )
-                                                            ],
-                                                           )),
-                                                    )]),
-                                          );
-                                        }),
+                                                          Expanded(
+                                                            child: Text(
+                                                              radioController
+                                                                  .stations[
+                                                                      index]
+                                                                  .name,
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          } else {
+                                            // Render the static item as the last item
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width -
+                                                            250.w,
+                                                    height: 60.h,
+                                                    decoration: BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                        colors: [
+                                                          Colors.grey.shade500,
+                                                          Colors.grey.shade700
+                                                        ],
+                                                        stops: [0.3, 1.0],
+                                                        begin:
+                                                            Alignment.topLeft,
+                                                        end: Alignment
+                                                            .bottomRight,
+                                                      ),
+                                                      border: Border.all(
+                                                          color: Colors
+                                                              .transparent),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              25),
+                                                    ),
+                                                    child: TextButton(
+                                                      onPressed: () {
+                                                        Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    TvScreen(),
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: Row(
+                                                        children: [
+                                                          Image.asset(
+                                                            'images/Relaks Tv.png',
+                                                            height: 30.h,
+                                                            width: 35.w,
+                                                          ),
+                                                          Expanded(
+                                                            child: Text(
+                                                              'Relaks TV',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          }
+                                        },
+                                      ),
                                     ),
                                     SizedBox(
                                       width: 15.w,
                                     ),
-                                        Container(
-                                          height: 40.h,
-                                          width: 287.w,
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.transparent),
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          child: ElevatedButton(
-                                              onPressed: () {
-                                                if(radioController.selectedChannel.value==0 ||radioController.selectedChannel.value==7
-                                                || radioController.selectedChannel.value==9 || radioController.selectedChannel.value==10)
-                                                  {
-                                                    Navigator.pushNamed(context,
-                                                        MaintainceScreen.routeName);
-                                                  }
-                                                else{
-                                                  Get.back();
-                                                }
-
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(25),
-                                                  ),
-                                                  backgroundColor:
-                                                      Color(0xffffEA1C24)),
-                                              child: Text(
-                                                'Switch your Station',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 18.sp),
-                                              )),
-                                        ),
+                                    Container(
+                                      height: 40.h,
+                                      width: 287.w,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.transparent),
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: ElevatedButton(
+                                          onPressed: () {
+                                            if (radioController.selectedChannel.value == 0 ||
+                                                radioController.selectedChannel
+                                                        .value ==
+                                                    7 ||
+                                                radioController.selectedChannel
+                                                        .value ==
+                                                    9 ||
+                                                radioController.selectedChannel
+                                                        .value ==
+                                                    10) {
+                                              Navigator.pushNamed(context,
+                                                  MaintainceScreen.routeName);
+                                            } else {
+                                              Get.back();
+                                            }
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(25),
+                                              ),
+                                              backgroundColor:
+                                                  Color(0xffffEA1C24)),
+                                          child: Text(
+                                            'Switch your Station',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18.sp),
+                                          )),
+                                    ),
                                   ],
                                 )
                                 // child: Column(
@@ -764,7 +869,7 @@ class StationScreen extends StatelessWidget {
                                 //     ),
                                 //   ],
                                 // )
-                            ),
+                                ),
                           ),
                         ),
                       ),
